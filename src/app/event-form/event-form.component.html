@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="d-flex justify-content-around">
+    <div class="card-body">
+
+      <div [hidden]="submitted" style="width: 400px;">
+        <form [formGroup]="eventForm" (ngSubmit)="saveEvent(saveEvent)">
+          <!-- <input formControlName="id" type="hidden" class="form-control"> -->
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="material-icons">perm_identity</i></div>
+              </div>
+              <input formControlName="description" type="text" class="form-control" placeholder="Miesto akcie"
+                [ngClass]="(submitted || f.description.touched) && f['description'].invalid ? 'is-invalid': ''" />
+              <div *ngIf="f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Popis is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="material-icons">alternate_email</i></div>
+              </div>
+              <input formControlName="startDate" type="datetime-local" class="form-control" placeholder="startDate"
+                [ngClass]="(submitted || f.startDate.touched) && f['startDate'].invalid ? 'is-invalid': ''" />
+              <div *ngIf="f.startDate.errors" class="invalid-feedback">
+                <div *ngIf="f.startDate.errors.required">StartDate is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input"  id="checkbox" formControlName="visible">
+            <label class="custom-control-label" for="checkbox">Visible</label>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="!submitted">
+      <h4>Event Added SuccessFully!</h4>
+      <button (click)="addEventForm()" class='btn btn-primary'>Add Next Event</button>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

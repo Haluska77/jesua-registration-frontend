@@ -1,0 +1,11 @@
+.error{
+    background-color: rgb(167, 167, 167);
+}
+
+.warn{
+    background-color: rgb(238, 214, 134);
+}
+
+.active{
+    background-color: lightgreen;
+}

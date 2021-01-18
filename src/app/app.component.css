@@ -1,0 +1,17 @@
+
+.app-bg{
+    background-color: rgb(224, 213, 208);
+    font-family: 'Numans';
+    }
+
+    .loading-overlay{
+        background-color:rgba(0, 0, 0, 0);
+        
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+
+      :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: #6f634d;
+}
