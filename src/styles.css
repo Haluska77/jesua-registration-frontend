@@ -1,1 +1,136 @@
 html, body { height: 100%; }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.red-icon {
+  color: red;
+}
+
+.error-background{
+  background-color: rgb(167, 167, 167);
+}
+
+.warn-background{
+  background-color: rgb(238, 214, 134);
+}
+
+.active-background{
+  background-color: lightgreen;
+}
+
+.response-dialog-container .mat-dialog-container {
+  background-color: white;
+  color: grey;
+  text-align: center;
+}
+
+.response-dialog-container #x-icon {
+  width: 100%;
+  text-align: right;
+  font-weight: bolder;
+  color: grey;
+}
+
+.response-dialog-container #check_circle_outline {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+  color:   rgb(64, 194, 64);;
+}
+
+.response-dialog-container #x-icon:hover {
+  cursor: pointer;
+}
+
+.confirm-dialog-container .mat-dialog-container {
+    padding: 10px;
+}
+
+.confirm-dialog-container #error_outline {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+  color: orange
+}
+
+.confirm-dialog-container #close-icon {
+  width: 100%;
+  text-align: right;
+  font-weight: bolder;
+  color: grey;
+}
+
+.confirm-dialog-container #close-icon:hover {
+    cursor: pointer;
+}
+
+.confirm-dialog-container .content-container {
+  margin: 25px 5px 25px 5px;
+  color: grey;
+  text-align: center;
+  display: block;
+}
+
+.confirm-dialog-container #yes-but {
+    height: 40px;
+    width: 30%;
+    background-color: red;
+    color: white;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.confirm-dialog-container #no-but {
+    height: 40px;
+    width: 30%;
+    background-color: lightgray;
+    color: white;
+    border-radius: 4px;
+    margin: 5px;
+    border: grey;
+}
+
+simple-snack-bar {
+    font-size: 20px !important;
+}
+
+.mat-simple-snackbar-action  {
+    color: yellow;
+  }
+
+snack-bar-container.success  {
+    background-color: rgb(57, 161, 57);
+    color: white;
+    font-weight: bold;
+    /* animation: snackbarIn 1s; */
+    /* animation: snackbarOut 1s; */
+    
+}
+
+@keyframes snackbarIn {
+    from {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(100px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes snackbarOut {
+    to {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+  }
+  
+  snack-bar-container.warn {
+    background-color: orange;
+    color: white;
+}
+
+snack-bar-container.error {
+    background-color: red;
+    color: white;
+}

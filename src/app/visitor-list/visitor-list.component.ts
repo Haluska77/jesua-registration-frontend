@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../_models/event';
 import { Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
 import { VisitorService } from '../_services/visitor.service';
+import { DialogService } from '../_services/dialog.service';
 
 @Component({
   selector: 'app-visitor-list',
@@ -12,16 +12,15 @@ import { VisitorService } from '../_services/visitor.service';
 })
 export class VisitorListComponent implements OnInit {
 
-  constructor(private visitorservice: VisitorService) { }
+  constructor(private visitorservice: VisitorService,
+    private dialogService: DialogService,
+  ) { }
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-
-  visitors: any[];
-  event: Event = new Event();
-  isUnregistered = false;
-
+  visitorList: any[];
+  visitor: any;
 
   ngOnInit() {
     this.dtOptions = {
@@ -30,11 +29,11 @@ export class VisitorListComponent implements OnInit {
       lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
       processing: true,
       order: [[3, 'asc']],
-      language:{url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json'}
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
     };
     this.visitorservice.getVisitorList().subscribe(
       data => {
-        this.visitors = data;
+        this.visitorList = data;
         this.dtTrigger.next();
       })
   }
@@ -44,13 +43,17 @@ export class VisitorListComponent implements OnInit {
   }
 
   unsubscribe(email: string, token: string, event: string) {
-    //get event from DB
-    this.visitorservice.unsubscribe(token, event).subscribe(
-      data => {
-        this.visitors = data;
-        this.isUnregistered = true;
-      }),
-      error => console.log(error);
+    this.dialogService.openConfirmDialog("Are you sure to unsubscribe user: '" + email + "'?")
+      .afterClosed().subscribe(response => {
+        if (response) {
+          this.visitorservice.unsubscribe(token, event).subscribe(
+            data => {
+              this.visitor = data;
+              this.dialogService.openResponseDialog(this.visitor.message);
+            }
+          )
+        }
+      }
+      );
   }
-
 }

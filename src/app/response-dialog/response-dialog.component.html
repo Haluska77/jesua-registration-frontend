@@ -1,0 +1,13 @@
+<mat-icon id="x-icon" (click)="closeDialog()">close</mat-icon>
+<div><h3 mat-dialog-title>
+    <mat-icon id="check_circle_outline">check_circle_outline</mat-icon><br>
+    Odhlásený
+</h3>
+
+<hr>
+<mat-dialog-content>
+    <div class="content-container">
+        <span class="content-span full-width" [innerHTML]="data.message"></span>
+    </div>
+</mat-dialog-content>
+</div>

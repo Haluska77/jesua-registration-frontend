@@ -39,7 +39,7 @@
                 [ngClass]="(submitted || f.course.touched) && f['course'].invalid ? 'is-invalid': ''">
                 <option value="" disabled>Select event</option>
                 <option *ngFor="let item of activeEvents " value="{{item.id}}">
-                  {{item.description}}, {{item.startDate | date: 'dd.MM.yyyy HH:mm'}}
+                  {{item.description}}, {{item.startDate | date: 'dd.MM.yyyy HH:mm' : 'UTC'}}
                 </option>
               </select>
               <div *ngIf="f.course.errors" class="invalid-feedback">

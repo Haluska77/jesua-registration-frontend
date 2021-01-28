@@ -7,7 +7,6 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
-import { EventFormComponent } from './event-form/event-form.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { DataTablesModule } from 'angular-datatables';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -20,8 +19,14 @@ import { UserListComponent } from './user-list/user-list.component';
 import { GlobalErrorHandlerService } from './_services/global-error-handler.service';
 import { ErrorComponent } from './error/error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { MaterialModule } from './material/material.module';
+import { EventDialogFormComponent } from './event-dialog-form/event-dialog-form.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { from } from 'rxjs';
+import { EventService } from './_services/event.service';
+import { DatePipe } from '@angular/common';
+import { ResponseDialogComponent } from './response-dialog/response-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,25 +34,27 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RegistrationFormComponent,
     HomeComponent,
     FooterComponent,
-    EventFormComponent,
     EventListComponent,
     LoginFormComponent,
     UserProfileComponent,
     UserComponent,
     VisitorListComponent,
     UserListComponent,
-    ErrorComponent
+    ErrorComponent,
+    EventDialogFormComponent,
+    ConfirmDialogComponent,
+    ResponseDialogComponent
   ],
   imports: [
+    MaterialModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
   ],
-  providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService],
-  bootstrap: [AppComponent]
+  providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService, EventService, DatePipe],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

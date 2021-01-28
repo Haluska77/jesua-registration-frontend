@@ -1,33 +1,76 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventService } from '../_services/event.service';
 import { Event } from '../_models/event';
 import { Observable, Subject } from "rxjs";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { EventDialogFormComponent } from '../event-dialog-form/event-dialog-form.component';
+import { DialogService } from '../_services/dialog.service';
+import { NotificationService } from '../_services/notification.service';
+
 
 @Component({
   selector: 'event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
-  providers: [DatePipe]
+  // providers: [DatePipe]
 })
+
 export class EventListComponent implements OnInit {
 
-  constructor(private eventservice: EventService,
-    private datePipe: DatePipe) { }
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+
+  constructor(
+    public eventservice: EventService,
+    private dialogService: DialogService,
+    private notificationService: NotificationService,
+    // private datePipe: DatePipe,
+    public dialog: MatDialog) { }
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-
   events: Observable<Event[]>;
-  event: Event = new Event();
-  deleteMessage = false;
-  isupdated = false;
+  // event: Event = new Event();
 
+
+  openDialog(title: string) {
+    this.dialog.open(EventDialogFormComponent, {
+      width: '40%',
+      disableClose: true,
+      autoFocus: true,
+      panelClass: 'myapp-dialog',
+      data: { action: title }
+    })
+
+  }
+  onCreate() {
+    this.openDialog('Add');
+  }
+
+  onEdit(row: any) {
+    this.eventservice.fillEvent(row);
+    this.openDialog('Update');
+  }
+
+  onDelete(id: number) {
+    this.dialogService.openConfirmDialog("Are you sure to delete id: '" + id + "' record?")
+      .afterClosed().subscribe(response => {
+        if (response) {
+          // delete event in DB
+          this.eventservice.deleteEvent(id)
+            .subscribe(
+              data => {
+                this.notificationService.success("Successfull", "DELETE");
+              }
+            )
+        }
+      }
+      );
+  }
 
   ngOnInit() {
-    this.isupdated = false;
     this.dtOptions = {
       pageLength: 5,
       stateSave: true,
@@ -39,72 +82,5 @@ export class EventListComponent implements OnInit {
         this.events = data;
         this.dtTrigger.next();
       })
-  }
-
-  eventupdateform = new FormGroup({
-    id: new FormControl(),
-    description: new FormControl(),
-    startDate: new FormControl(),
-    visible: new FormControl()
-  });
-
-  getCurrentEvent(id: number) {
-    //get event from DB
-    this.eventservice.getEvent(id).subscribe(
-      // fill in the form by retrieved event
-      data => {
-        this.fillUpdateForm(data)
-      },
-      error => console.log(error));
-  }
-
-  fillUpdateForm(event: Event) {
-    this.eventupdateform.patchValue({
-      id: event.id,
-      description: event.description,
-      startDate: this.datePipe.transform(event.startDate, 'yyyy-MM-ddTHH:mm'),
-      visible: event.visible
-    })
-    console.log("ID: " + event.id);
-    console.log("Date: " + event.startDate);
-  }
-
-  updateStu(updstu) {
-    //set 'event' from Form
-    this.event = new Event();
-    this.event.id = this.eventupdateform.get('id').value;
-    this.event.description = this.eventupdateform.get('description').value;
-    this.event.startDate = this.eventupdateform.get('startDate').value;
-    this.event.visible = this.eventupdateform.get('visible').value;
-
-    // update event in DB
-    this.eventservice.updateEvent(this.event.id, this.event).subscribe(
-      data => {
-        this.isupdated = true;
-        //reload updated event list from DB
-        this.eventservice.getEventList().subscribe(data => {
-          this.events = data
-        })
-      },
-      error => console.log(error));
-  }
-
-  deleteEvent(id: number) {
-    //delete event in DB
-    this.eventservice.deleteEvent(id)
-      .subscribe(
-        data => {
-          this.deleteMessage = true;
-          //reload updated event list from DB
-          this.eventservice.getEventList().subscribe(data => {
-            this.events = data
-          })
-        },
-        error => console.log(error));
-  }
-
-
-  changeisUpdate() {
-    this.isupdated = false;
   }
 }
