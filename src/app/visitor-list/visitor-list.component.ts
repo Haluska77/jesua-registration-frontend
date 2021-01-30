@@ -38,10 +38,6 @@ export class VisitorListComponent implements OnInit {
       })
   }
 
-  exit() {
-    window.location.reload();
-  }
-
   unsubscribe(email: string, token: string, event: string) {
     this.dialogService.openConfirmDialog("Are you sure to unsubscribe user: '" + email + "'?")
       .afterClosed().subscribe(response => {

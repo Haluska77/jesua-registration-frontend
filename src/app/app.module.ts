@@ -23,10 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { EventDialogFormComponent } from './event-dialog-form/event-dialog-form.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { from } from 'rxjs';
 import { EventService } from './_services/event.service';
 import { DatePipe } from '@angular/common';
 import { ResponseDialogComponent } from './response-dialog/response-dialog.component';
+import { UserDialogFormComponent } from './user-dialog-form/user-dialog-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { ResponseDialogComponent } from './response-dialog/response-dialog.compo
     ErrorComponent,
     EventDialogFormComponent,
     ConfirmDialogComponent,
-    ResponseDialogComponent
+    ResponseDialogComponent,
+    UserDialogFormComponent
   ],
   imports: [
     MaterialModule,

@@ -1,7 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { EventService } from '../_services/event.service';
 import { NotificationService } from '../_services/notification.service';
 
@@ -9,7 +7,6 @@ import { NotificationService } from '../_services/notification.service';
   selector: 'app-event-dialog-form',
   templateUrl: './event-dialog-form.component.html',
   styleUrls: ['./event-dialog-form.component.css'],
-  providers: [DatePipe]
 
 })
 

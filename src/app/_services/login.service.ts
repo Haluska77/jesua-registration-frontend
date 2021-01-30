@@ -13,15 +13,15 @@ const httpOptions = {
 
 export class LoginService {
 
-  private baseUrl = environment.baseUrl+'users/';
+  private baseUrl = environment.baseUrl + 'users/';
 
   constructor(private http: HttpClient) { }
 
   signIn(login: object): Observable<object> {
-    return this.http.post(`${this.baseUrl}`+'signin', login, httpOptions);
+    return this.http.post(`${this.baseUrl}` + 'signin', login, httpOptions);
   }
 
-  
+
   signUp(user): Observable<any> {
     return this.http.post(`${this.baseUrl}` + 'signup', {
       name: user.name,
@@ -31,8 +31,11 @@ export class LoginService {
     }, httpOptions);
   }
 
-  userForm(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`+'userForm', {responseType: 'text'});
+  updateUser(id: number, user: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}` + 'update?id=' + id, {
+      user
+    });
+
   }
 
   getUsers(): Observable<any> {
@@ -40,7 +43,7 @@ export class LoginService {
   }
 
   makeActive(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}`+'makeActive?userId='+id);
+    return this.http.get(`${this.baseUrl}` + 'makeActive?userId=' + id);
   }
 
   loggedIn() {

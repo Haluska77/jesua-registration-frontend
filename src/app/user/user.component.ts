@@ -30,17 +30,7 @@ export class UserComponent implements OnInit {
   passwordUpperCasePattern = new RegExp("[A-Z]");
 
   ngOnInit() {
-    this.authService.userForm().subscribe(
-      data => {
-        this.isAuthorized = true;
-      },
-      err => {
-        this.errorMessage = err.message;
-        this.isAuthorized = false;
-        console.log(err.message);
-      }
-    );
-
+  
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required,

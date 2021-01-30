@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventService } from '../_services/event.service';
 import { Event } from '../_models/event';
 import { Observable, Subject } from "rxjs";
-import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { EventDialogFormComponent } from '../event-dialog-form/event-dialog-form.component';
@@ -14,7 +13,6 @@ import { NotificationService } from '../_services/notification.service';
   selector: 'event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
-  // providers: [DatePipe]
 })
 
 export class EventListComponent implements OnInit {
@@ -25,15 +23,12 @@ export class EventListComponent implements OnInit {
     public eventservice: EventService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
-    // private datePipe: DatePipe,
     public dialog: MatDialog) { }
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   events: Observable<Event[]>;
-  // event: Event = new Event();
-
 
   openDialog(title: string) {
     this.dialog.open(EventDialogFormComponent, {
@@ -75,7 +70,9 @@ export class EventListComponent implements OnInit {
       pageLength: 5,
       stateSave: true,
       lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
-      processing: true
+      processing: true,
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
+
     };
     this.eventservice.getEventList().subscribe(
       data => {
