@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomValidators } from '../custom-validators';
+import { DialogService } from '../_services/dialog.service';
 import { EventService } from '../_services/event.service';
 import { VisitorService } from "../_services/visitor.service";
 
@@ -29,6 +30,7 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(private userService: VisitorService,
     private eventService: EventService,
+    private dialogService: DialogService,
     private router: Router,
     private fb: FormBuilder) { }
 
@@ -59,10 +61,12 @@ export class RegistrationFormComponent implements OnInit {
           data => {
             this.visitors = data;
             this.isUnsubscribed = true;
+            this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitors.message);
             console.log("UNSUBSCRIBED: " + this.visitors.follower.email);
           },
           error => {
             this.visitors = error;
+            this.dialogService.openResponseDialog('highlight_off', 'Error!', this.visitors.error.message);
             this.isError = true;
           }
         )

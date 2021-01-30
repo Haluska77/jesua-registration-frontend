@@ -35,7 +35,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 48px;
   width: 48px;
   font-size: 48px;
-  color:   rgb(64, 194, 64);;
+  color:   rgb(64, 194, 64);
+}
+
+.response-dialog-container #highlight_off {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+  color: red;
 }
 
 .response-dialog-container #x-icon:hover {

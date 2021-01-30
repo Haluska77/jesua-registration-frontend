@@ -45,7 +45,7 @@ export class VisitorListComponent implements OnInit {
           this.visitorservice.unsubscribe(token, event).subscribe(
             data => {
               this.visitor = data;
-              this.dialogService.openResponseDialog(this.visitor.message);
+              this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitor.message);
             }
           )
         }

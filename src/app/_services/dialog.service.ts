@@ -22,13 +22,15 @@ export class DialogService {
     });
   }
 
-  openResponseDialog(message) {
+  openResponseDialog(icon, title, message) {
     return this.dialog.open(ResponseDialogComponent, {
       width: '300px',
       panelClass:'response-dialog-container',
       disableClose: true,
       position:{top:"20px"},
       data: {
+        icon: icon,
+        title: title,
         message : message
       }
     });

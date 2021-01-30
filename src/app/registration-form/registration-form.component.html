@@ -69,27 +69,9 @@
 </div>
 
 <div [ngClass]="{'alert alert-success': visitors.follower.accepted, 'alert alert-warning': !visitors.follower.accepted, 'alert alert-danger': !visitors.follower}" style="padding: 20px;" *ngIf="isRegistered">
-  <!-- <i class="material-icons"></i> -->
   <h4 class="alert-heading">{{!visitors.follower ? 'Failure' : (visitors.follower.accepted ? 'Prihlásený' : 'V poradí...')}} !</h4>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "exit()">
     <span aria-hidden="true">&times;</span>
   </button>
   <div [innerHTML]="visitors.message"></div>
-</div>
-
-<div class="alert alert-success" style="padding: 20px;" *ngIf="isUnsubscribed">
-  <h4 class="alert-heading">{{visitors.follower ? 'Odhlásený !' : 'Not found !'}}</h4>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "exitOnUnsubscribed()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div [innerHTML]="visitors.message"></div>
-</div>
-
-<div class="alert alert-danger" style="padding: 20px;" *ngIf="isError">
-  <h4 class="alert-heading">Error !</h4>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "exit()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div>{{errorMessage}}</div>
-  <div [innerHTML]="visitors.error.message"></div>
 </div>
