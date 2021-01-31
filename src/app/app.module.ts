@@ -27,6 +27,7 @@ import { EventService } from './_services/event.service';
 import { DatePipe } from '@angular/common';
 import { ResponseDialogComponent } from './response-dialog/response-dialog.component';
 import { UserDialogFormComponent } from './user-dialog-form/user-dialog-form.component';
+import { RegistrationUnsubscribeComponent } from './registration-unsubscribe/registration-unsubscribe.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserDialogFormComponent } from './user-dialog-form/user-dialog-form.com
     EventDialogFormComponent,
     ConfirmDialogComponent,
     ResponseDialogComponent,
-    UserDialogFormComponent
+    UserDialogFormComponent,
+    RegistrationUnsubscribeComponent
   ],
   imports: [
     MaterialModule,

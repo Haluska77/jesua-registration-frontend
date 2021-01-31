@@ -22,7 +22,7 @@ export class DialogService {
     });
   }
 
-  openResponseDialog(icon, title, message) {
+  openResponseDialog(icon, title, message, navigation) {
     return this.dialog.open(ResponseDialogComponent, {
       width: '300px',
       panelClass:'response-dialog-container',
@@ -31,7 +31,8 @@ export class DialogService {
       data: {
         icon: icon,
         title: title,
-        message : message
+        message: message,
+        navigation: navigation
       }
     });
   }

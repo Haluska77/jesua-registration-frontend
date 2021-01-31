@@ -9,11 +9,12 @@ import { AuthGuard } from './_guard/auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { ErrorComponent } from './error/error.component';
+import { RegistrationUnsubscribeComponent } from './registration-unsubscribe/registration-unsubscribe.component';
 
 const routes: Routes = [
   { path: "", redirectTo:"registration", pathMatch:"full"},
   { path: "registration", component:RegistrationFormComponent},
-  { path: "registration/unsubscribe", component:RegistrationFormComponent},
+  { path: "registration/unsubscribe", component:RegistrationUnsubscribeComponent},
   { path: "home", component: HomeComponent },
   { path: "events", component: EventListComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginFormComponent },

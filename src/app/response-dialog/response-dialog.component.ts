@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-response-dialog',
@@ -9,13 +10,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ResponseDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-  public dialogRef: MatDialogRef<ResponseDialogComponent>) { }
+    public dialogRef: MatDialogRef<ResponseDialogComponent>,
+  private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  closeDialog() {
+  closeDialog(navigation: string) {
     this.dialogRef.close(false);
-    window.location.reload();
+    this.router.navigate([navigation])
+    // window.location.reload();
   }
 }
