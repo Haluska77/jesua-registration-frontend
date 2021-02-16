@@ -56,7 +56,7 @@ export class LoginFormComponent implements OnInit {
       },
       (err) => {
         this.isLoginFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error.error.message;
       }
     );
   }

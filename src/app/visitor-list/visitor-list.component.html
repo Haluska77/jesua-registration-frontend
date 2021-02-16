@@ -16,16 +16,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let event of visitorList " [ngClass]="{'active-background': event.accepted,
-        'warn-background': !event.unregistered,
-        'error-background': event.unregistered && !event.accepted}">
-          <td>{{event.name}}</td>
-          <td>{{event.email}}</td>
-          <td>{{event.jesuaEventId}}</td>
-          <td>{{event.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
-          <td>{{event.unregistered ? 'Odhlásený' : (event.accepted ? 'Prihlásený' : 'Waiting')}}</td>
-          <td *ngIf="event.unregistered">{{event.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
-          <td *ngIf="!event.unregistered"><button (click)="unsubscribe(event.email, event.token, event.jesuaEventId)"
+        <tr *ngFor="let follower of followerList " [ngClass]="{'active-background': follower.accepted,
+        'warn-background': !follower.unregistered && !follower.accepted,
+        'error-background': follower.unregistered }">
+          <td>{{follower.name}}</td>
+          <td>{{follower.email}}</td>
+          <td>{{follower.course.id}}</td>
+          <td>{{follower.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
+          <td>{{follower.unregistered ? 'Odhlásený' : (follower.accepted ? 'Prihlásený' : 'Waiting')}}</td>
+          <td *ngIf="follower.unregistered">{{follower.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+          <td *ngIf="!follower.unregistered"><button (click)="unsubscribe(follower.email, follower.token, follower.course.id)"
               class='btn btn-warning'>
 
               <i class="material-icons">edit</i>unregister</button></td>

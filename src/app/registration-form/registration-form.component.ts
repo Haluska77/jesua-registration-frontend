@@ -20,7 +20,7 @@ export class RegistrationFormComponent implements OnInit {
   url: string;
   urlParams: string[];
   params: string[];
-  visitors: any;
+  visitor: any;
   isError = false;
   errorMessage: string;
   isUnsubscribed = false;
@@ -72,14 +72,13 @@ export class RegistrationFormComponent implements OnInit {
       return;
     }
     this.userService.register(this.registerForm.value).subscribe(
-      response => {
-        this.visitors = response;
-        // console.log('RESPONSE: ', response);
+      data => {
+        this.visitor = data.response;
+        console.log('RESPONSE: ', data.response);
         this.isRegistered = true;
       },
       error => {
-        this.visitors = error;
-        // console.log('ERROR ON RESPONSE', error);
+        this.visitor = error.error.error.message;
         this.isError = true;
       }
     );

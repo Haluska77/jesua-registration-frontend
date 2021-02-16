@@ -66,13 +66,13 @@
 </div>
 
 <div
-  [ngClass]="{'alert alert-success': visitors.follower.accepted, 'alert alert-warning': !visitors.follower.accepted, 'alert alert-danger': !visitors.follower}"
+  [ngClass]="{'alert alert-success': visitor.body.accepted, 'alert alert-warning': !visitor.body.accepted, 'alert alert-danger': !visitor.body}"
   style="padding: 20px;" *ngIf="isRegistered">
   <h4
-    class="alert-heading">{{!visitors.follower ? 'Failure' : (visitors.follower.accepted ? 'Prihlásený' : 'V poradí...')}}
+    class="alert-heading">{{!visitor.body ? 'Failure' : (visitor.body.accepted ? 'Prihlásený' : 'V poradí...')}}
     !</h4>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="exit()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div [innerHTML]="visitors.message"></div>
+  <div [innerHTML]="visitor.message"></div>
 </div>

@@ -16,10 +16,9 @@ export class RegistrationUnsubscribeComponent implements OnInit {
 
   urlToken: string;
   urlEvent: string;
-  visitors: any;
+  visitor: any;
 
   ngOnInit() {
-    // this.queries = this.route.snapshot.queryParamMap;
     this.route.queryParams.subscribe(query => {
       this.urlToken = query['token'];
       this.urlEvent = query['event'];
@@ -28,12 +27,12 @@ export class RegistrationUnsubscribeComponent implements OnInit {
     if (this.urlToken && this.urlEvent) {
       this.userService.unsubscribe(this.urlToken, this.urlEvent).subscribe(
         data => {
-          this.visitors = data;
-          this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitors.message, '/registration');
+          this.visitor = data.response;
+          this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitor.message, '/registration');
         },
         error => {
-          this.visitors = error;
-          this.dialogService.openResponseDialog('highlight_off', 'Error!', this.visitors.error.message, '/registration');
+          this.visitor = error.error;
+          this.dialogService.openResponseDialog('highlight_off', 'Error!', this.visitor.error.message, '/registration');
         }
       )
     } else {

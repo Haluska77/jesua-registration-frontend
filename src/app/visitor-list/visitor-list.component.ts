@@ -19,8 +19,8 @@ export class VisitorListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  visitorList: any[];
-  visitor: any;
+  followerList: any[];
+  follower: any;
 
   ngOnInit() {
     this.dtOptions = {
@@ -33,7 +33,7 @@ export class VisitorListComponent implements OnInit {
     };
     this.visitorservice.getVisitorList().subscribe(
       data => {
-        this.visitorList = data.response.body;
+        this.followerList = data.response.body;
         this.dtTrigger.next();
       })
   }
@@ -44,8 +44,12 @@ export class VisitorListComponent implements OnInit {
         if (response) {
           this.visitorservice.unsubscribe(token, event).subscribe(
             data => {
-              this.visitor = data;
-              this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitor.message, '/visitors');
+              this.follower = data.response;
+              this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.follower.message, '/visitors');
+            },
+            error => {
+              this.follower = error.error.error.message;
+              console.log(error.error.error.message);
             }
           )
         }

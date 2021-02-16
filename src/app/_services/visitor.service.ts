@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export interface RegisterForm {
-  fname: string;
-  email: string;
-};
+// export interface RegisterForm {
+//   fname: string;
+//   email: string;
+// };
 
 @Injectable({
   providedIn: 'root'
