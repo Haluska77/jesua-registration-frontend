@@ -48,15 +48,15 @@ import { RegistrationUnsubscribeComponent } from './registration-unsubscribe/reg
     UserDialogFormComponent,
     RegistrationUnsubscribeComponent
   ],
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    DataTablesModule,
-    BrowserAnimationsModule,
-  ],
+    imports: [
+        MaterialModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DataTablesModule,
+        BrowserAnimationsModule,
+    ],
   providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService, EventService, DatePipe],
   bootstrap: [AppComponent],
 })

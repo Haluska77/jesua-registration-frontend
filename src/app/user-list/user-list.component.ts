@@ -30,7 +30,7 @@ export class UserListComponent implements OnInit {
 
   openDialog(title: string) {
     this.dialog.open(UserDialogFormComponent, {
-      width: '40%',
+      width: '30%',
       disableClose: true,
       autoFocus: true,
       panelClass: 'myapp-dialog',

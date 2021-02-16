@@ -1,0 +1,19 @@
+.mat-form-field{
+  width: 100%;
+}
+.mat-form-field.short-form-field{
+  width: 50%;
+}
+
+.mat-form-field.wider-form-field{
+  height: 100px;
+}
+
+#check1 {
+  padding-left: 20px;
+}
+.myapp-dialog {
+  width: 100%;
+  height: 400px;
+  padding: 20px;
+}

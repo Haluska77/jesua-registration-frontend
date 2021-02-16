@@ -1,142 +1,44 @@
 <h1 mat-dialog-title>User :: {{data.action}}</h1>
 <div mat-dialog-content [formGroup]="userForm">
 
-    <input type="hidden" formControlName="id">
-    <mat-form-field>
-        <input matInput formControlName="name" placeholder="Name*" />
-        <mat-error *ngIf="f.name.touched && f.name.errors?.required">Name is required</mat-error>
-        <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Name must be at least
-            {{f.name.errors?.minlength.requiredLength}}
-            characters</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput formControlName="startDate" type="datetime-local" placeholder="startDate*" />
-        <mat-error *ngIf="f.startDate.errors?.required">StartDate is required</mat-error>
-    </mat-form-field>
-    <mat-checkbox formControlName="open" color="primary" [checked]="true">Viditelny</mat-checkbox>
+  <input type="hidden" formControlName="id">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" placeholder="Hugo"/>
+    <mat-error *ngIf="f.name.touched && f.name.errors?.required">Name is required</mat-error>
+    <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Name must be at least
+      {{f.name.errors?.minlength.requiredLength}} characters
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input matInput formControlName="email" placeholder="jesua@example.com"/>
+    <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email is required</mat-error>
+    <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email is not valid</mat-error>
+  </mat-form-field>
+  <mat-form-field class="wider-form-field" appearance="fill">
+    <input matInput formControlName="password" placeholder="Password*" [type]="hide ? 'password' : 'text'"/>
+    <button mat-icon-button matSuffix (click)="hide = !hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="f.password.touched && f.password.errors?.required">Password is required</mat-error>
+    <mat-error *ngIf="f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must contain at least 1 number!</mat-error>
+    <mat-error *ngIf="f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.minlength ? 'text-danger' :'text-success'">Must have at least 8 chars!</mat-error>
+  </mat-form-field>
+  <mat-form-field class="short-form-field" appearance="fill">
+    <mat-label>Role</mat-label>
+    <mat-select matInput formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{role.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>You can pick up your role here</mat-hint>
+  </mat-form-field>
+
+  <mat-checkbox id="check1" formControlName="active" color="primary" [checked]="true">Aktivny</mat-checkbox>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="onSubmit(data.action)" color="primary" [disabled]="userForm.invalid">Submit</button>
-    <button mat-raised-button (click)="onClose()" color="warn">Cancel</button>
+  <button mat-raised-button (click)="onSubmit(data.action)" color="primary" [disabled]="userForm.invalid">Submit
+  </button>
+  <button mat-raised-button (click)="onClose()" color="warn">Cancel</button>
 </div>
-<!--
-
-<div class="col-md-4">
-    <form [formGroup]="userForm" (submit)="signup()">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="material-icons">perm_identity</i></div>
-                </div>
-                <input formControlName="name" type="text" class="form-control" placeholder="Name"
-                    [ngClass]="(submitted || f.name.touched) && f['name'].invalid ? 'is-invalid': ''" />
-                <div *ngIf="f.name.errors" class="invalid-feedback">
-                    <div *ngIf="f.name.errors.required">Name is required</div>
-                    <div *ngIf="f.name.errors.minlength">Name must be at least
-                        {{f.name.errors.minlength.requiredLength}}
-                        characters</div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="material-icons">alternate_email</i></div>
-                </div>
-                <input formControlName="email" type="text" class="form-control" placeholder="Email"
-                    [ngClass]="(submitted || f.email.touched) && f['email'].invalid ? 'is-invalid': ''" />
-                <div *ngIf="f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="material-icons">lock</i></div>
-                </div>
-                <input type="password" formControlName="password" class="form-control" placeholder="Password"
-                    [ngClass]="submitted && f['password'].invalid ? 'is-invalid': ''" />
-            </div>
-            <label class="col" [ngClass]="f['password'].hasError('required') ||
-                      f['password'].hasError('hasNumber') ? 'text-danger small' :'text-success small'">
-                <i class="material-icons">
-                    {{
-                              f['password'].hasError('required') ||
-                        f['password'].hasError('hasNumber') ? 'highlight_off' : 'check_circle_outline' }}
-                </i>
-                Must contain at least 1 number!
-            </label>
-
-            <label class="col" [ngClass]="f['password'].hasError('required') ||
-                        f['password'].hasError('hasSmallChars') ? 'text-danger small' :'text-success small'">
-                <i class="material-icons">
-                    {{
-                              f['password'].hasError('required') ||
-                        f['password'].hasError('hasSmallChars') ? 'highlight_off' : 'check_circle_outline' }}
-                </i>
-                Must contain at least 1 lower character!
-            </label>
-
-            <label class="col" [ngClass]="f['password'].hasError('required') ||
-                        f['password'].hasError('hasBigChars') ? 'text-danger small' :'text-success small'">
-                <i class="material-icons">
-                    {{
-                              f['password'].hasError('required') ||
-                        f['password'].hasError('hasBigChars') ? 'highlight_off' : 'check_circle_outline' }}
-                </i>
-                Must contain at least 1 UPPER character!
-            </label>
-
-            <label class="col" [ngClass]="f['password'].hasError('required') ||
-                        f['password'].hasError('minlength') ? 'text-danger small' :'text-success small'">
-                <i class="material-icons">
-                    {{
-                              f['password'].hasError('required') ||
-                      f['password'].hasError('minlength') ? 'highlight_off' : 'check_circle_outline' }}
-                </i>
-                Must have at least 8 chars!
-            </label>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="material-icons">lock</i></div>
-                </div>
-                <input type="password" formControlName="confirmPassword" class="form-control"
-                    placeholder="Confirm Password"
-                    [ngClass]="(submitted || f.confirmPassword.touched) && f['confirmPassword'].invalid ? 'is-invalid': ''" />
-                <div *ngIf="f.confirmPassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.confirmPassword.errors.required">Password is required</div>
-                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords do not match</div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <select class="custom-select" formControlName="role">
-                <option value="" disabled>Role</option>
-                <option>ADMIN</option>
-                <option>MODERATOR</option>
-                <option>USER</option>
-            </select>
-            <div *ngIf="f.role.errors" class="invalid-feedback">
-                <div *ngIf="f.role.errors.required">Role is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-
-        <div class="alert alert-warning" *ngIf="submitted && isSignUpFailed">
-            Signup failed!<br />{{ errorMessage }}
-        </div>
-    </form> -->
-
-    <!-- <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
-    </div> -->
-<!-- </div> -->
-<!-- <div class="alert alert-danger" *ngIf="!isAuthorized">
-    {{ errorMessage }}
-</div> -->

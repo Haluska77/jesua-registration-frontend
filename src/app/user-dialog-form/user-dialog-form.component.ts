@@ -5,6 +5,11 @@ import { CustomValidators } from '../custom-validators';
 import { LoginService } from '../_services/login.service';
 import { NotificationService } from '../_services/notification.service';
 
+interface Role {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-user-dialog-form',
   templateUrl: './user-dialog-form.component.html',
@@ -21,14 +26,16 @@ export class UserDialogFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: any)
 { }
 
-  emailPattern = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
+  emailPattern = new RegExp("^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
   passwordDigitPattern = new RegExp("[0-9]");
   passwordLowerCasePattern = new RegExp("[a-z]");
   passwordUpperCasePattern = new RegExp("[A-Z]");
 
   snack: any;
+  hide = true;
 
   userForm = this.fb.group({
+    id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required,
     CustomValidators.patternValidator(this.emailPattern, { emailValid: true })]],
@@ -36,15 +43,17 @@ export class UserDialogFormComponent {
       Validators.required,
       Validators.minLength(8),
       CustomValidators.patternValidator(this.passwordDigitPattern, { hasNumber: true }),
-      CustomValidators.patternValidator(this.passwordLowerCasePattern, { hasSmallChars: true }),
-      CustomValidators.patternValidator(this.passwordUpperCasePattern, { hasBigChars: true })
+
     ]],
-    confirmPassword: ['', [Validators.required]],
-    role: ['', [Validators.required]]
-  }, {
-    validator: CustomValidators.mustMatch('password', 'confirmPassword')
+    role: ['', [Validators.required]],
+    active: ['']
   });
 
+  roles: Role[] = [
+    {value: 'ROLE_ADMIN', viewValue: 'ADMIN'},
+    {value: 'ROLE_MODERATOR', viewValue: 'MODERATOR'},
+    {value: 'ROLE_USER', viewValue: 'USER'}
+  ];
 
   get f() { return this.userForm.controls; }
 

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerComponent } from '@angular-material-components/datetime-picker';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerCom
     MatSnackBarModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerCom
     MatSnackBarModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    MatSelectModule
   ]
 
 })
