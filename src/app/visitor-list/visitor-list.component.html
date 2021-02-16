@@ -22,7 +22,7 @@
           <td>{{event.name}}</td>
           <td>{{event.email}}</td>
           <td>{{event.jesuaEventId}}</td>
-          <td>{{event.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'UTC'}}</td>
+          <td>{{event.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
           <td>{{event.unregistered ? 'Odhlásený' : (event.accepted ? 'Prihlásený' : 'Waiting')}}</td>
           <td *ngIf="event.unregistered">{{event.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
           <td *ngIf="!event.unregistered"><button (click)="unsubscribe(event.email, event.token, event.jesuaEventId)"

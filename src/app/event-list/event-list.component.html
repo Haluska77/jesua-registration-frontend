@@ -9,19 +9,19 @@
         <thead class="thead-light">
           <tr>
             <th>ID</th>
-            <th>Description</th>
-            <th>Start</th>
-            <th>Aktívny</th>
-            <th>Action</th>
+            <th>Miesto akcie</th>
+            <th>Začiatok</th>
+            <th>Otvorené</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let event of events "
-            [ngClass]="{'active-background': event.visible, 'error-background': !event.visible}">
+            [ngClass]="{'active-background': event.open, 'error-background': !event.open}">
             <td>{{event.id}}</td>
             <td>{{event.description}}</td>
-            <td>{{event.startDate | date: 'dd.MM.yyyy HH:mm' : 'UTC'}}</td>
-            <td>{{event.visible ? 'Aktívny' : 'Neaktívny'}}</td>
+            <td>{{event.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{event.open ? 'Otvorené' : 'Zatvorené'}}</td>
             <td>
               <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
                 <mat-icon>edit</mat-icon>

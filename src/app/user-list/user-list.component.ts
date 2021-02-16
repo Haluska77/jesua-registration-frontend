@@ -74,7 +74,7 @@ export class UserListComponent implements OnInit {
     };
     this.loginService.getUsers().subscribe(
       data => {
-        this.users = data;
+        this.users = data.response.body;
         this.dtTrigger.next();
       })
   }
@@ -88,7 +88,7 @@ export class UserListComponent implements OnInit {
       dat => {
         this.loginService.getUsers().subscribe(
           data => {
-            this.users = data;
+            this.users = data.response.body;
           })
       }
     )

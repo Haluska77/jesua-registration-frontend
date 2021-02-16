@@ -20,15 +20,15 @@ export class EventService {
     id: new FormControl('', ),
     description: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
-    visible: new FormControl()
+    open: new FormControl()
   });
 
   fillEvent(event: any) {
-    event.startDate = this.datePipe.transform(event.startDate, 'yyyy-MM-ddTHH:mm', 'UTC');
+    event.startDate = this.datePipe.transform(event.startDate, 'yyyy-MM-ddTHH:mm', 'Europe/Bratislava');
     this.eventForm.setValue(event);
 
   }
-  
+
   getEventList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`+'eventList');
   }
@@ -42,7 +42,7 @@ export class EventService {
     return this.http.post(`${this.baseUrl}`+'addEvent', {
       description: course.description,
       startDate: course.startDate,
-      visible: course.visible
+      open: course.open
     });
   }
 
@@ -50,12 +50,8 @@ export class EventService {
     return this.http.delete(`${this.baseUrl}`+'deleteEvent/'+`${id}`);
   }
 
-  // getEvent(id: number): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}`+'event/'+`${id}`);
-  // }
-
   updateEvent(id: number, value: object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`+'updateEvent/'+`${id}`, value);
   }
-  
-}                                           
+
+}

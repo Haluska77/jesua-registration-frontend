@@ -1,1 +1,11 @@
-  
+.active-background{
+  background-color: rgb(150, 230, 180);
+}
+
+.error-background{
+  background-color: rgb(167, 167, 167);
+}
+
+.warn-background{
+  background-color: rgb(238, 214, 134);
+}

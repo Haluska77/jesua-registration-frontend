@@ -1,4 +1,7 @@
-.custom-control-label::before { 
-  border-color: orangered !important; 
-  background-color: orangered !important;  
-} 
+.active-background{
+  background-color: rgb(150, 230, 180);
+}
+
+.error-background{
+  background-color: rgb(167, 167, 167);
+}

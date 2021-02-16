@@ -1,5 +1,4 @@
 html, body { height: 100%; }
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .red-icon {
@@ -111,7 +110,7 @@ snack-bar-container.success  {
     font-weight: bold;
     /* animation: snackbarIn 1s; */
     /* animation: snackbarOut 1s; */
-    
+
 }
 
 @keyframes snackbarIn {
@@ -124,14 +123,14 @@ snack-bar-container.success  {
       opacity: 1;
     }
   }
-  
+
   @keyframes snackbarOut {
     to {
       transform: translateY(-100px);
       opacity: 0;
     }
   }
-  
+
   snack-bar-container.warn {
     background-color: orange;
     color: white;

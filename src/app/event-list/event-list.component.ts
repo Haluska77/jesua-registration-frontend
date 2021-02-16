@@ -76,7 +76,7 @@ export class EventListComponent implements OnInit {
     };
     this.eventservice.getEventList().subscribe(
       data => {
-        this.events = data;
+        this.events = data.response.body;
         this.dtTrigger.next();
       })
   }

@@ -33,7 +33,7 @@ export class VisitorListComponent implements OnInit {
     };
     this.visitorservice.getVisitorList().subscribe(
       data => {
-        this.visitorList = data;
+        this.visitorList = data.response.body;
         this.dtTrigger.next();
       })
   }

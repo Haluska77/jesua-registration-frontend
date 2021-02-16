@@ -44,7 +44,7 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit() {
       this.eventService.getActiveEventList().subscribe(
         data => {
-          this.activeEvents = data;
+          this.activeEvents = data.response.body;
         }
       );
 

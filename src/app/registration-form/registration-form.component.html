@@ -13,11 +13,12 @@
                   <div class="input-group-text"><i class="material-icons">perm_identity</i></div>
                 </div>
                 <input formControlName="name" type="text" class="form-control" placeholder="Name"
-                  [ngClass]="(submitted || f.name.touched) && f['name'].invalid ? 'is-invalid': ''" />
+                       [ngClass]="(submitted || f.name.touched) && f['name'].invalid ? 'is-invalid': ''"/>
                 <div *ngIf="f.name.errors" class="invalid-feedback">
                   <div *ngIf="f.name.errors.required">Name is required</div>
                   <div *ngIf="f.name.errors.minlength">Name must be at least {{f.name.errors.minlength.requiredLength}}
-                    characters</div>
+                    characters
+                  </div>
                 </div>
               </div>
             </div>
@@ -27,7 +28,7 @@
                   <div class="input-group-text"><i class="material-icons">alternate_email</i></div>
                 </div>
                 <input formControlName="email" type="text" class="form-control" placeholder="Email"
-                  [ngClass]="(submitted || f.email.touched) && f['email'].invalid ? 'is-invalid': ''" />
+                       [ngClass]="(submitted || f.email.touched) && f['email'].invalid ? 'is-invalid': ''"/>
                 <div *ngIf="f.email.errors" class="invalid-feedback">
                   <div *ngIf="f.email.errors.required">Email is required</div>
                   <div *ngIf="f.email.errors.emailValid">Email is invalid</div>
@@ -36,10 +37,10 @@
             </div>
             <div class="form-group">
               <select class="custom-select" formControlName="course"
-                [ngClass]="(submitted || f.course.touched) && f['course'].invalid ? 'is-invalid': ''">
+                      [ngClass]="(submitted || f.course.touched) && f['course'].invalid ? 'is-invalid': ''">
                 <option value="" disabled>Select event</option>
                 <option *ngFor="let item of activeEvents " value="{{item.id}}">
-                  {{item.description}}, {{item.startDate | date: 'dd.MM.yyyy HH:mm' : 'UTC'}}
+                  {{item.description}}, {{item.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}
                 </option>
               </select>
               <div *ngIf="f.course.errors" class="invalid-feedback">
@@ -47,12 +48,7 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="switch" for="checkbox">
-                <input type="checkbox" id="checkbox" formControlName="gdpr" />
-                <div class="slider round"></div>
-              </label>
-            </div>
+            <input type="hidden" formControlName="gdpr" value="true"/>
             <div class="form-group">
               <button type="submit" class="btn float-right login_btn">Submit</button>
             </div>
@@ -61,16 +57,21 @@
       </div>
       <div class="card card2">
         <div class="my-auto mx-md-5 px-md-5">
-          <h3 class="text-white">JEŠUA - Ježišova škola učeníctva</h3> <small class="text-white">informácie v súvislosti s obmedzeniami COVID....</small>
+          <h3 class="text-white">JEŠUA - Ježišova škola učeníctva</h3> <small class="text-white">informácie v súvislosti
+          s obmedzeniami COVID....</small>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div [ngClass]="{'alert alert-success': visitors.follower.accepted, 'alert alert-warning': !visitors.follower.accepted, 'alert alert-danger': !visitors.follower}" style="padding: 20px;" *ngIf="isRegistered">
-  <h4 class="alert-heading">{{!visitors.follower ? 'Failure' : (visitors.follower.accepted ? 'Prihlásený' : 'V poradí...')}} !</h4>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "exit()">
+<div
+  [ngClass]="{'alert alert-success': visitors.follower.accepted, 'alert alert-warning': !visitors.follower.accepted, 'alert alert-danger': !visitors.follower}"
+  style="padding: 20px;" *ngIf="isRegistered">
+  <h4
+    class="alert-heading">{{!visitors.follower ? 'Failure' : (visitors.follower.accepted ? 'Prihlásený' : 'V poradí...')}}
+    !</h4>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="exit()">
     <span aria-hidden="true">&times;</span>
   </button>
   <div [innerHTML]="visitors.message"></div>

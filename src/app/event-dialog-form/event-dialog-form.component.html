@@ -10,7 +10,7 @@
         <input matInput formControlName="startDate" type="datetime-local" placeholder="startDate*" />
         <mat-error *ngIf="f.startDate.errors?.required">StartDate is required</mat-error>
     </mat-form-field>
-    <mat-checkbox formControlName="visible" color="primary" [checked]="true">Viditelny</mat-checkbox>
+    <mat-checkbox formControlName="open" color="primary" [checked]="true">Viditelny</mat-checkbox>
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button (click)="onSubmit(data.action)" color="primary" [disabled]="eventService.eventForm.invalid">Submit</button>
