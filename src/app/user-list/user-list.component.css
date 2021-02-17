@@ -1,2 +1,17 @@
+.custom-control-input:checked~.custom-control-label::before {
+  cursor: pointer;
+  border-color: #6f634d !important;
+  background-color: #6f634d !important;
+}
 
+.custom-control-input:not(:checked)~.custom-control-label::before {
+  cursor: pointer;
+  border-color: lightgray !important;
+  background-color: lightgray !important;
+}
+
+.custom-control-input~.custom-control-label::after {
+  cursor: pointer;
+  background-color: white !important;
+}
 

@@ -24,8 +24,8 @@
           <td>
             <div class="custom-control custom-switch">
               <input type="checkbox" class="custom-control-input" id="active{{user.id}}" [checked]="user.active"
-                (click)="makeActive(user.id)">
-              <label class="custom-control-label" for="active{{user.id}}">{{user.active ? 'Aktívny' :
+                (click)="makeActive(user.id, user.userName)">
+              <label class="custom-control-label pointer" for="active{{user.id}}">{{user.active ? 'Aktívny' :
                 'Neaktívny'}}</label>
             </div>
           </td>
@@ -35,10 +35,3 @@
     </table>
   </div>
 </div>
-<!-- <div class="alert alert-success" style="padding: 20px;" *ngIf="isChanged">
-  <h4 class="alert-heading">Odhlásený !</h4>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="exit()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div [innerHTML]="visitors.message"></div>
-</div> -->

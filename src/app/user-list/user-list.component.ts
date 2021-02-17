@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Subject } from "rxjs";
-import { DialogService } from '../_services/dialog.service';
-import { EventService } from '../_services/event.service';
-import { LoginService } from '../_services/login.service';
-import { NotificationService } from '../_services/notification.service';
-import { UserDialogFormComponent } from '../user-dialog-form/user-dialog-form.component'
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {Subject} from "rxjs";
+import {DialogService} from '../_services/dialog.service';
+import {EventService} from '../_services/event.service';
+import {LoginService} from '../_services/login.service';
+import {NotificationService} from '../_services/notification.service';
+import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component'
 
 @Component({
   selector: 'app-user-list',
@@ -20,7 +20,8 @@ export class UserListComponent implements OnInit {
     private dialogService: DialogService,
     private notificationService: NotificationService,
     public dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -34,10 +35,11 @@ export class UserListComponent implements OnInit {
       disableClose: true,
       autoFocus: true,
       panelClass: 'myapp-dialog',
-      data: { action: title }
+      data: {action: title}
     })
 
   }
+
   onCreate() {
     this.openDialog('Add');
   }
@@ -60,7 +62,7 @@ export class UserListComponent implements OnInit {
             )
         }
       }
-      );
+    );
   }
 
   ngOnInit() {
@@ -70,7 +72,7 @@ export class UserListComponent implements OnInit {
       lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
       processing: true,
       order: [[0, 'asc']],
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
+      language: {url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json'}
     };
     this.loginService.getUsers().subscribe(
       data => {
@@ -83,15 +85,14 @@ export class UserListComponent implements OnInit {
     window.location.reload();
   }
 
-  makeActive(id: number) {
-    this.loginService.makeActive(id).subscribe(
-      dat => {
-        this.loginService.getUsers().subscribe(
-          data => {
-            this.users = data.response.body;
-          })
+  makeActive(id: number, userName: string) {
+    this.dialogService.openConfirmDialog("Are you sure to change status for '" + userName + "?")
+      .afterClosed().subscribe(data => {
+        if (data) {
+          this.loginService.makeActive(id).subscribe();
+          window.location.reload();
+        }
       }
     )
-
   }
 }

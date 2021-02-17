@@ -5,7 +5,7 @@
         {{data.message}}
     </div>
     <div class="content-container">
-        <button mat-flat-button id="no-but" [mat-dialog-close]="false">NO</button>
+        <button mat-flat-button id="no-but" [mat-dialog-close]="false" (click)="closeDialog()">NO</button>
         <button mat-flat-button id="yes-but" [mat-dialog-close]="true">YES</button>
     </div>
 </div>
