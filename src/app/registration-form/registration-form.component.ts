@@ -32,9 +32,6 @@ export class RegistrationFormComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-
-  emailPattern = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$');
-
   ngOnInit() {
     this.eventService.getActiveEventList().subscribe(
       data => {
@@ -45,7 +42,7 @@ export class RegistrationFormComponent implements OnInit {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required,
-        CustomValidators.patternValidator(this.emailPattern, {emailValid: true})]],
+        CustomValidators.validateEmailPattern()]],
       course: ['', [Validators.required]],
       gdpr: [''],
     });
@@ -63,10 +60,10 @@ export class RegistrationFormComponent implements OnInit {
       data => {
         this.visitor = data.response;
         if (data.response.body.accepted) {
-          this.dialogService.openSuccessResponseDialog('Prihlásený', data.response.message, '/home');
+          this.dialogService.openWideSuccessResponseDialog('Prihlásený', data.response.message, '/home');
         }
         if (!data.response.body.accepted) {
-          this.dialogService.openWaitingResponseDialog('V poradí', data.response.message, '/home');
+          this.dialogService.openWideWaitingResponseDialog('V poradí', data.response.message, '/home');
         }
       },
       error => {

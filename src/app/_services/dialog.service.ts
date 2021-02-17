@@ -22,9 +22,9 @@ export class DialogService {
     });
   }
 
-  openResponseDialog(icon, style, title, message, navigation) {
+  openResponseDialog(icon, style, wide, title, message, navigation) {
     return this.dialog.open(ResponseDialogComponent, {
-      width: '300px',
+      width: wide,
       panelClass:'response-dialog-container',
       disableClose: true,
       position:{top:"20px"},
@@ -39,15 +39,27 @@ export class DialogService {
   }
 
   openSuccessResponseDialog(title, message, navigation) {
-    return this.openResponseDialog('check_circle_outline', 'success', title, message, navigation);
+    return this.openResponseDialog('check_circle_outline', 'success', '300px', title, message, navigation);
   }
 
   openWaitingResponseDialog(title, message, navigation) {
-    return this.openResponseDialog('check_circle_outline', 'waiting', title, message, navigation);
+    return this.openResponseDialog('check_circle_outline', 'waiting', '300px', title, message, navigation);
   }
 
   openErrorResponseDialog(title, message, navigation) {
-    return this.openResponseDialog('highlight_off', 'error', title, message, navigation);
+    return this.openResponseDialog('highlight_off', 'error', '300px', title, message, navigation);
+  }
+
+  openWideSuccessResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('check_circle_outline', 'success', '500px', title, message, navigation);
+  }
+
+  openWideWaitingResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('check_circle_outline', 'waiting', '500px', title, message, navigation);
+  }
+
+  openWideErrorResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('highlight_off', 'error', '500px', title, message, navigation);
   }
 
 }

@@ -17,9 +17,9 @@
     <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email is not valid</mat-error>
   </mat-form-field>
   <mat-form-field class="wider-form-field" appearance="fill">
-    <input matInput formControlName="password" placeholder="Password*" [type]="hide ? 'password' : 'text'"/>
-    <button mat-icon-button matSuffix (click)="hide = !hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput formControlName="password" placeholder="Password*" [type]="hidePassword ? 'password' : 'text'"/>
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
     <mat-error *ngIf="f.password.touched && f.password.errors?.required">Password is required</mat-error>
     <mat-error *ngIf="f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must contain at least 1 number!</mat-error>

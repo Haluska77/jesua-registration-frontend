@@ -1,9 +1,9 @@
-import { Component, Inject, Optional } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CustomValidators } from '../custom-validators';
-import { LoginService } from '../_services/login.service';
-import { NotificationService } from '../_services/notification.service';
+import {Component, Inject, Optional} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {CustomValidators} from '../custom-validators';
+import {LoginService} from '../_services/login.service';
+import {NotificationService} from '../_services/notification.service';
 
 interface Role {
   value: string;
@@ -26,24 +26,18 @@ export class UserDialogFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: any)
 { }
 
-  emailPattern = new RegExp("^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
-  passwordDigitPattern = new RegExp("[0-9]");
-  passwordLowerCasePattern = new RegExp("[a-z]");
-  passwordUpperCasePattern = new RegExp("[A-Z]");
-
   snack: any;
-  hide = true;
+  hidePassword = true;
 
   userForm = this.fb.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required,
-    CustomValidators.patternValidator(this.emailPattern, { emailValid: true })]],
+    CustomValidators.validateEmailPattern()]],
     password: ['', [
       Validators.required,
       Validators.minLength(8),
-      CustomValidators.patternValidator(this.passwordDigitPattern, { hasNumber: true }),
-
+      CustomValidators.containsAtLeastOneNumber()
     ]],
     role: ['', [Validators.required]],
     active: ['']

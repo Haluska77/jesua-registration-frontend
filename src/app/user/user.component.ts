@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from '../custom-validators';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CustomValidators} from '../custom-validators';
 
-import { LoginService } from '../_services/login.service';
+import {LoginService} from '../_services/login.service';
 
 @Component({
   selector: 'app-user',
@@ -21,26 +21,22 @@ export class UserComponent implements OnInit {
   constructor(private authService: LoginService,
   private fb: FormBuilder) { }
 
-  
+
   get f() { return this.userForm.controls; }
 
-  emailPattern = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
-  passwordDigitPattern = new RegExp("[0-9]");
-  passwordLowerCasePattern = new RegExp("[a-z]");
-  passwordUpperCasePattern = new RegExp("[A-Z]");
 
   ngOnInit() {
-  
+
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required,
-      CustomValidators.patternValidator(this.emailPattern, { emailValid: true })]],
+      CustomValidators.validateEmailPattern()]],
       password: ['', [
         Validators.required,
         Validators.minLength(8),
-        CustomValidators.patternValidator(this.passwordDigitPattern, { hasNumber: true }),
-        CustomValidators.patternValidator(this.passwordLowerCasePattern, { hasSmallChars: true }),
-        CustomValidators.patternValidator(this.passwordUpperCasePattern, { hasBigChars: true })
+        CustomValidators.containsAtLeastOneNumber(),
+        CustomValidators.containsAtLeastOneSmallChar(),
+        CustomValidators.containsAtLeastOneBigChar()
       ]],
       confirmPassword: ['', [Validators.required]],
       role: ['', [Validators.required]]
