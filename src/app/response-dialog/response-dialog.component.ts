@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-response-dialog',
@@ -10,15 +10,16 @@ import { Router } from '@angular/router';
 export class ResponseDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-    public dialogRef: MatDialogRef<ResponseDialogComponent>,
-  private router: Router) { }
+              public dialogRef: MatDialogRef<ResponseDialogComponent>,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   closeDialog(navigation: string) {
     this.dialogRef.close(false);
-    this.router.navigate([navigation])
+    this.router.navigate([navigation]);
     // window.location.reload();
   }
 }

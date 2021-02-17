@@ -30,14 +30,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: grey;
 }
 
-.response-dialog-container #check_circle_outline {
+.response-dialog-container #success {
   height: 48px;
   width: 48px;
   font-size: 48px;
   color:   rgb(64, 194, 64);
 }
 
-.response-dialog-container #highlight_off {
+.response-dialog-container #waiting {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+  color:   orange;
+}
+
+.response-dialog-container #error {
   height: 48px;
   width: 48px;
   font-size: 48px;

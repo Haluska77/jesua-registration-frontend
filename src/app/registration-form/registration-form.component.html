@@ -1,4 +1,5 @@
-<div class="bg" *ngIf="!isUnsubscribed && !isError && !isRegistered">
+<mat-progress-bar color="warn" mode="indeterminate" *ngIf="spinnerService.visibility | async"></mat-progress-bar>
+<div class="bg">
   <div class="container">
     <div class="d-flex justify-content-around">
       <div class="card card1">
@@ -13,7 +14,7 @@
                   <div class="input-group-text"><i class="material-icons">perm_identity</i></div>
                 </div>
                 <input formControlName="name" type="text" class="form-control" placeholder="Name"
-                       [ngClass]="(submitted || f.name.touched) && f['name'].invalid ? 'is-invalid': ''"/>
+                       [ngClass]="f.name.touched && f['name'].invalid ? 'is-invalid': ''"/>
                 <div *ngIf="f.name.errors" class="invalid-feedback">
                   <div *ngIf="f.name.errors.required">Name is required</div>
                   <div *ngIf="f.name.errors.minlength">Name must be at least {{f.name.errors.minlength.requiredLength}}
@@ -28,7 +29,7 @@
                   <div class="input-group-text"><i class="material-icons">alternate_email</i></div>
                 </div>
                 <input formControlName="email" type="text" class="form-control" placeholder="Email"
-                       [ngClass]="(submitted || f.email.touched) && f['email'].invalid ? 'is-invalid': ''"/>
+                       [ngClass]="f.email.touched && f['email'].invalid ? 'is-invalid': ''"/>
                 <div *ngIf="f.email.errors" class="invalid-feedback">
                   <div *ngIf="f.email.errors.required">Email is required</div>
                   <div *ngIf="f.email.errors.emailValid">Email is invalid</div>
@@ -37,7 +38,7 @@
             </div>
             <div class="form-group">
               <select class="custom-select" formControlName="course"
-                      [ngClass]="(submitted || f.course.touched) && f['course'].invalid ? 'is-invalid': ''">
+                      [ngClass]="f.course.touched && f['course'].invalid ? 'is-invalid': ''">
                 <option value="" disabled>Select event</option>
                 <option *ngFor="let item of activeEvents " value="{{item.id}}">
                   {{item.description}}, {{item.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}
@@ -63,16 +64,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div
-  [ngClass]="{'alert alert-success': visitor.body.accepted, 'alert alert-warning': !visitor.body.accepted, 'alert alert-danger': !visitor.body}"
-  style="padding: 20px;" *ngIf="isRegistered">
-  <h4
-    class="alert-heading">{{!visitor.body ? 'Failure' : (visitor.body.accepted ? 'Prihlásený' : 'V poradí...')}}
-    !</h4>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="exit()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div [innerHTML]="visitor.message"></div>
 </div>

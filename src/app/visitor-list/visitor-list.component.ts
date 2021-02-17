@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject } from "rxjs";
-import { DatePipe } from '@angular/common';
-import { VisitorService } from '../_services/visitor.service';
-import { DialogService } from '../_services/dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {Subject} from "rxjs";
+import {DatePipe} from '@angular/common';
+import {VisitorService} from '../_services/visitor.service';
+import {DialogService} from '../_services/dialog.service';
 
 @Component({
   selector: 'app-visitor-list',
@@ -45,7 +45,7 @@ export class VisitorListComponent implements OnInit {
           this.visitorservice.unsubscribe(token, event).subscribe(
             data => {
               this.follower = data.response;
-              this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.follower.message, '/visitors');
+              this.dialogService.openSuccessResponseDialog('Odhlásený', this.follower.message, '/visitors');
             },
             error => {
               this.follower = error.error.error.message;

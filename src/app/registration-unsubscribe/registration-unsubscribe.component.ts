@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DialogService } from '../_services/dialog.service';
-import { VisitorService } from '../_services/visitor.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {DialogService} from '../_services/dialog.service';
+import {VisitorService} from '../_services/visitor.service';
 
 @Component({
   selector: 'app-registration-unsubscribe',
@@ -28,16 +28,16 @@ export class RegistrationUnsubscribeComponent implements OnInit {
       this.userService.unsubscribe(this.urlToken, this.urlEvent).subscribe(
         data => {
           this.visitor = data.response;
-          this.dialogService.openResponseDialog('check_circle_outline', 'Odhlásený', this.visitor.message, '/registration');
+          this.dialogService.openSuccessResponseDialog('Odhlásený', this.visitor.message, '/registration');
         },
         error => {
           this.visitor = error.error;
-          this.dialogService.openResponseDialog('highlight_off', 'Error!', this.visitor.error.message, '/registration');
+          this.dialogService.openErrorResponseDialog('Error!', this.visitor.error.message, '/registration');
         }
       )
     } else {
       //not valid URL
-      this.dialogService.openResponseDialog('highlight_off', 'Error!', 'Not valid URL', '/registration');
+      this.dialogService.openErrorResponseDialog('Error!', 'Not valid URL', '/registration');
     }
   }
 }

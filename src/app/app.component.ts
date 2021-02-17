@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { TokenService } from './_services/token.service';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {TokenService} from './_services/token.service';
+import {Observable} from 'rxjs';
 import {
-  Router,
-  // import as RouterEvent to avoid confusion with the DOM Event
   Event as RouterEvent,
-  NavigationStart,
-  NavigationEnd,
   NavigationCancel,
-  NavigationError
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
 } from '@angular/router';
 
 @Component({
@@ -73,7 +72,6 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = !!this.tokenService.getToken();
     if (this.isLoggedIn) {
       this.token = this.tokenService.getToken();
-      // console.log("TOKEN: " + this.token);
 
       var begin = this.tokenService.getTokenExpiration(this.token);
 
@@ -81,8 +79,6 @@ export class AppComponent implements OnInit {
         var logtime = (begin - now) / 1000;
         this.mins = Math.floor(logtime % (60 * 60) / 60);
         this.secs = Math.floor(logtime % 60);
-        // this.expiration = mins + ":" + secs ;
-        // console.log("REMAINING TIME: " + this.expiration);
         if (logtime < 0) {
           obs.unsubscribe();
           this.isLoggedIn = false;

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { ResponseDialogComponent } from '../response-dialog/response-dialog.component';
+import {Injectable} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {ResponseDialogComponent} from '../response-dialog/response-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class DialogService {
     });
   }
 
-  openResponseDialog(icon, title, message, navigation) {
+  openResponseDialog(icon, style, title, message, navigation) {
     return this.dialog.open(ResponseDialogComponent, {
       width: '300px',
       panelClass:'response-dialog-container',
@@ -30,10 +30,24 @@ export class DialogService {
       position:{top:"20px"},
       data: {
         icon: icon,
+        style: style,
         title: title,
         message: message,
-        navigation: navigation
+        navigator: navigation
       }
     });
   }
+
+  openSuccessResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('check_circle_outline', 'success', title, message, navigation);
+  }
+
+  openWaitingResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('check_circle_outline', 'waiting', title, message, navigation);
+  }
+
+  openErrorResponseDialog(title, message, navigation) {
+    return this.openResponseDialog('highlight_off', 'error', title, message, navigation);
+  }
+
 }
