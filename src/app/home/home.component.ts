@@ -60,14 +60,14 @@ export class HomeComponent implements OnInit {
         data.response.body.forEach(item => {
           this.courseState = new CourseState();
 
-          if (item.active === 3 && item.waiting > 0){
+          if (item.active < item.capacity){
+            this.courseState.state = 'free';
+            this.courseState.statusText = 'Voľné';
+            this.courseState.capacity = item.capacity - item.active;
+          } else {
             this.courseState.state = 'full';
             this.courseState.statusText = 'Obsadené';
             this.courseState.capacity = item.waiting;
-          } else {
-            this.courseState.state = 'free';
-            this.courseState.statusText = 'Voľné';
-            this.courseState.capacity = 3 - item.active;
           }
           this.courseStateMap.set(item.id, this.courseState);
 

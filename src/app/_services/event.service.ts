@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,8 @@ export class EventService {
     id: new FormControl('', ),
     description: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
-    open: new FormControl()
+    open: new FormControl(),
+    capacity: new FormControl('', [Validators.required])
   });
 
   fillEvent(event: any) {
@@ -42,7 +43,8 @@ export class EventService {
     return this.http.post(`${this.baseUrl}`+'addEvent', {
       description: course.description,
       startDate: course.startDate,
-      open: course.open
+      open: course.open,
+      capacity: course.capacity
     });
   }
 

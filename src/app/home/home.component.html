@@ -5,7 +5,7 @@
       <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightgrey'">
         {{stat.description}} ({{stat.startDate | date: 'dd.MM.yyyy HH:mm' }})
         <Br>
-        Maximálna kapacita 3 ľudia
+        Maximálna kapacita {{stat.capacity}} ľudia
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="2" class="capacity-tile">
         <div>
