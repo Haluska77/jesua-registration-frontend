@@ -1,0 +1,44 @@
+.mat-grid-list {
+  border: solid 1px grey;
+}
+
+.myCard {
+  width: 50%;
+  padding: 10px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.capacity-tile {
+  color: dimgray;
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.course-tile{
+  font-size: xx-large;
+  font-weight: bolder;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.free{
+  color: #73AD21;
+}
+
+.full {
+  color: #ff3333;
+}
+
+.icon-line{
+  padding: 10px;
+  vertical-align: bottom;
+}
+
+.big-icon {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+}

@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventService } from '../_services/event.service';
-import { Event } from '../_models/event';
-import { Observable, Subject } from "rxjs";
-import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
-import { EventDialogFormComponent } from '../event-dialog-form/event-dialog-form.component';
-import { DialogService } from '../_services/dialog.service';
-import { NotificationService } from '../_services/notification.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {EventService} from '../_services/event.service';
+import {Event} from '../_models/event';
+import {Observable, Subject} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {MatTable} from '@angular/material/table';
+import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
+import {DialogService} from '../_services/dialog.service';
+import {NotificationService} from '../_services/notification.service';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class EventListComponent implements OnInit {
       autoFocus: true,
       panelClass: 'myapp-dialog',
       data: { action: title }
-    })
+    });
 
   }
   onCreate() {
@@ -50,16 +50,16 @@ export class EventListComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.dialogService.openConfirmDialog("Are you sure to delete id: '" + id + "' record?")
+    this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
         if (response) {
           // delete event in DB
           this.eventservice.deleteEvent(id)
             .subscribe(
               data => {
-                this.notificationService.success("Successfull", "DELETE");
+                this.notificationService.success('Successfull', 'DELETE');
               }
-            )
+            );
         }
       }
       );
@@ -69,7 +69,7 @@ export class EventListComponent implements OnInit {
     this.dtOptions = {
       pageLength: 5,
       stateSave: true,
-      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
       processing: true,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
 
@@ -78,6 +78,6 @@ export class EventListComponent implements OnInit {
       data => {
         this.events = data.response.body;
         this.dtTrigger.next();
-      })
+      });
   }
 }
