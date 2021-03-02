@@ -2,9 +2,12 @@
   border: solid 1px grey;
 }
 
+.padding {
+  padding: 20px;
+}
+
 .myCard {
   width: 50%;
-  padding: 10px;
   display: block;
   margin: auto;
   text-align: center;
@@ -32,13 +35,40 @@
   color: #ff3333;
 }
 
-.icon-line{
-  padding: 10px;
+div.icon-line-head{
+  top: 50px;
+  position:absolute;
+  width: 200px;
+}
+
+div.icon-line{
   vertical-align: bottom;
+  position:absolute;
+  bottom:20px;
 }
 
 .big-icon {
   height: 48px;
   width: 48px;
   font-size: 48px;
+}
+
+.bar-tile-head{
+  position:relative;
+  width: 50px;
+  height: 160px;
+}
+
+.bar-tile {
+  /*border: green 1px solid;*/
+  position:absolute;
+  width: 50px;
+  font-weight: bolder;
+  color: green;
+  bottom: 0px;
+}
+
+img {
+  display: flex;
+  align-items: flex-end;
 }
