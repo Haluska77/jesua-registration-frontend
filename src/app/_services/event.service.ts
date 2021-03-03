@@ -11,7 +11,7 @@ import {DatePipe} from '@angular/common';
 
 export class EventService {
 
-  private baseUrl = environment.baseUrl+'events/';
+  private baseUrl = environment.baseUrl + 'events/';
 
   constructor(private http: HttpClient,
        private datePipe: DatePipe) { }
