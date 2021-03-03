@@ -8,10 +8,10 @@
         Maximálna kapacita {{stat.capacity}} ľudia
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="2" class="capacity-tile">
-        <div>
+        <div class="icon-line-head">
         <mat-icon class="material-icons">people_alt</mat-icon>&nbsp;
+        {{courseStateMap.get(stat.id).state=='free' ? "Počet voľných miest: " : "Počet náhradníkov: " }}
         {{courseStateMap.get(stat.id).capacity}}
-        {{courseStateMap.get(stat.id).state=='free' ? "miesta voľné" : "náhradníci" }}
         </div>
 
         <div class="icon-line">

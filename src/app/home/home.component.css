@@ -32,9 +32,16 @@
   color: #ff3333;
 }
 
-.icon-line{
-  padding: 10px;
+div.icon-line-head{
+top: 50px;
+position: absolute;
+width: 200px;
+}
+
+div.icon-line{
   vertical-align: bottom;
+  position: absolute;
+  bottom: 20px;
 }
 
 .big-icon {
