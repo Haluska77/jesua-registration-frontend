@@ -19,10 +19,10 @@ interface Role {
 export class UserDialogFormComponent {
 
   constructor(private fb: FormBuilder,
-    private loginService: LoginService,
-    private notificationService: NotificationService,
-    public dialogRef: MatDialogRef<UserDialogFormComponent>,
-    @Optional()
+              private loginService: LoginService,
+              private notificationService: NotificationService,
+              public dialogRef: MatDialogRef<UserDialogFormComponent>,
+              @Optional()
     @Inject(MAT_DIALOG_DATA) public data: any)
 { }
 
@@ -56,7 +56,7 @@ export class UserDialogFormComponent {
       if (action == 'Add') {
         this.loginService.signUp(this.userForm.value)
           .subscribe(data => {
-            this.notificationService.success("Successfull", "INSERT");
+            this.notificationService.success('Successful', 'INSERT');
           },
             error => console.log(error));
 
@@ -64,12 +64,11 @@ export class UserDialogFormComponent {
         if (action == 'Update') {
           this.loginService.updateUser(this.userForm.get('id').value, this.userForm.value)
             .subscribe(data => {
-              this.snack = this.notificationService.success("Successfull", "UPDATE");
-            },
-              error => console.log(error));
+              this.snack = this.notificationService.success('Successful', 'UPDATE');
+            });
 
         } else {
-          this.notificationService.error("Error: no valid action", "ACTION");
+          this.notificationService.error('Error: no valid action', 'ACTION');
         }
       }
     }

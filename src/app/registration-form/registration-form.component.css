@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 .bg{
-background: url('../../landscape.jpg') fixed;
+background: url('src/assets/landscape.jpg') fixed;
 position: relative;
 background-position: center;
 background-repeat: no-repeat;
@@ -75,11 +75,11 @@ input.ng-invalid.ng-touched{
     position: relative;
     width: 30px;
   }
-  
+
   .switch input {
     display:none;
   }
-  
+
   .slider {
     background-color: #ccc;
     bottom: 0;
@@ -101,19 +101,19 @@ input.ng-invalid.ng-touched{
     transition: .4s;
     width: 13px;
   }
-  
+
   input:checked + .slider {
     background-color:orange;
   }
-  
+
   input:checked + .slider:before {
     transform: translateX(13px);
   }
-  
+
   .slider.round {
     border-radius: 10px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }

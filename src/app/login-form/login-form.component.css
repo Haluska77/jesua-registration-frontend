@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 .bg{
-background-image: url('../../rain01.jpg');
+background-image: url('src/assets/rain01.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;

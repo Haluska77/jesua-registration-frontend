@@ -1,4 +1,4 @@
-import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
@@ -17,9 +17,10 @@ export function patternValidator(regex: RegExp, error: ValidationErrors): Valida
 
 
 export function mustMatch(controlName: string, matchingControlName: string, error: ValidationErrors): ValidatorFn {
-  return (formGroup: FormGroup): { [key: string]: any } => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
+
+  return (abstractControl: AbstractControl): { [key: string]: boolean } => {
+    const control = abstractControl[controlName];
+    const matchingControl = abstractControl[matchingControlName];
 
     if (matchingControl.errors && !matchingControl.errors.error.key) {
       // return if another validator has already found an error on the matchingControl
@@ -33,6 +34,24 @@ export function mustMatch(controlName: string, matchingControlName: string, erro
       matchingControl.setErrors(null);
     }
   };
+}
+
+export function passwordMatcher(abstractControl: AbstractControl, error: ValidationErrors): { [key: string]: boolean } | null {
+  const newPassword = abstractControl.get('newPassword');
+  const confirmPassword = abstractControl.get('confirmPassword');
+
+  if (newPassword.pristine || confirmPassword.pristine) {
+    return null;
+  }
+
+  if (newPassword.value !== confirmPassword.value) {
+    confirmPassword.setErrors(error);
+    return error;
+  } else {
+    confirmPassword.setErrors(null);
+    return null;
+  }
+
 }
 
 export class CustomValidators {
@@ -55,5 +74,9 @@ export class CustomValidators {
 
   static mustMatch(controlName, matchingControlName): ValidatorFn {
     return mustMatch(controlName, matchingControlName, {mustMatch: true});
+  }
+
+  static passwordMatcher(controlName): ValidationErrors {
+    return passwordMatcher(controlName, {mustMatch: true});
   }
 }

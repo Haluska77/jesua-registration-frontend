@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../_services/login.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TokenService } from '../_services/token.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {LoginService} from '../_services/login.service';
+import {Router} from '@angular/router';
+import {TokenService} from '../_services/token.service';
 
 @Component({
   selector: 'app-login-form',
@@ -26,8 +26,8 @@ export class LoginFormComponent implements OnInit {
     if (this.tokenService.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenService.getUser().role;
-      this.router.navigate(["/profile"]);
-  }
+      this.router.navigate(['/profile']);
+    }
   }
 
 

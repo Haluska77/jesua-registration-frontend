@@ -12,17 +12,19 @@ import {ErrorComponent} from './error/error.component';
 import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/registration-unsubscribe.component';
 
 const routes: Routes = [
-  { path: "", redirectTo:"home", pathMatch:"full"},
-  { path: "registration", component:RegistrationFormComponent},
-  { path: "registration/unsubscribe", component:RegistrationUnsubscribeComponent},
-  { path: "home", component: HomeComponent },
-  { path: "events", component: EventListComponent, canActivate: [AuthGuard] },
-  { path: "login", component: LoginFormComponent },
-  { path: "profile", component: UserProfileComponent, canActivate: [AuthGuard] },
-  { path: "users", component: UserListComponent, canActivate: [AuthGuard] },
-  { path: "visitors", component: VisitorListComponent, canActivate: [AuthGuard] },
-  { path: "error", component: ErrorComponent }
-];
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'registration', component: RegistrationFormComponent},
+  { path: 'registration/unsubscribe', component: RegistrationUnsubscribeComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'events', component: EventListComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginFormComponent },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'visitors', component: VisitorListComponent, canActivate: [AuthGuard] },
+  { path: 'error', component: ErrorComponent },
+  { path: 'password',
+    loadChildren: () => import('./password/password.module').then(mod => mod.PasswordModule),
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
