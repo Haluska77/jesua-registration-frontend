@@ -1,3 +1,4 @@
+
 .mat-grid-list {
   border: solid 1px grey;
 }
@@ -8,23 +9,43 @@
   display: block;
   margin: auto;
   text-align: center;
+  box-shadow: 0 0px 10px 2px #ddd;
+}
+
+h2 {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  /*text-transform: uppercase;*/
+  color: #6f634d;
 }
 
 .capacity-tile {
-  color: dimgray;
+  color: #6f634d;
   text-align: center;
   font-size: x-large;
   font-weight: bold;
 }
 
-.course-tile{
+.status-tile {
   font-size: xx-large;
   font-weight: bolder;
   display: inline-block;
   vertical-align: middle;
 }
 
-.free{
+.description-tile {
+  padding: 10px;
+  color: #6f634d;
+  background-color: antiquewhite;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.free {
   color: #73AD21;
 }
 
@@ -32,20 +53,37 @@
   color: #ff3333;
 }
 
-div.icon-line-head{
-top: 50px;
-position: absolute;
-width: 200px;
+div.icon-line-icon {
+  position: absolute;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-div.icon-line{
-  vertical-align: bottom;
+div.icon-line-head {
+  position: absolute;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.icon-line {
   position: absolute;
   bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .big-icon {
   height: 48px;
   width: 48px;
   font-size: 48px;
+  transition: transform 300ms ease-out;
+}
+
+.big-icon:hover {
+  transform: rotate(90deg) scale(1.1);
 }
