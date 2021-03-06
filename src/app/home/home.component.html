@@ -1,30 +1,38 @@
-<div class="myCard"><h2>Aktuálne sa môžte prihlásiť na tieto JEŠUA stretnutia</h2></div>
+<h2>Aktuálne sa môžte prihlásiť na tieto JEŠUA stretnutia</h2>
 <div class="myCard">
   <div style="padding: 10px;" *ngFor="let stat of stats">
     <mat-grid-list cols="4" rowHeight="100px">
-      <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightgrey'">
-        {{stat.description}} ({{stat.startDate | date: 'dd.MM.yyyy HH:mm' }})
-        <Br>
-        Maximálna kapacita {{stat.capacity}} ľudia
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <div class="description-tile">
+          {{stat.description}} ({{stat.startDate | date: 'dd.MM.yyyy HH:mm' }})
+          <Br>
+          Maximálna kapacita: {{stat.capacity}}
+        </div>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="2" class="capacity-tile">
+        <div class="icon-line-icon">
+          <mat-icon class="material-icons">people_alt</mat-icon>&nbsp;
+        </div>
         <div class="icon-line-head">
-        <mat-icon class="material-icons">people_alt</mat-icon>&nbsp;
-        {{courseStateMap.get(stat.id).state=='free' ? "Počet voľných miest: " : "Počet náhradníkov: " }}
-        {{courseStateMap.get(stat.id).capacity}}
+          {{courseStateMap.get(stat.id).state == 'free' ? "Počet voľných miest: " : "Počet náhradníkov: " }}
+          {{courseStateMap.get(stat.id).capacity}}
         </div>
 
         <div class="icon-line">
           <a routerLink="../registration">
-        <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}">add_circle</mat-icon>
+            <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}">add_circle</mat-icon>
           </a>
         </div>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <div class="course-tile {{courseStateMap.get(stat.id).state}}">{{courseStateMap.get(stat.id).statusText}}</div>
+        <div class="status-tile {{courseStateMap.get(stat.id).state}}">{{courseStateMap.get(stat.id).statusText}}</div>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div class="chart-tile-head">
+          <div class="chart-tile">
 
+          </div>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,10 +32,11 @@ export class LoginService {
   }
 
   updateUser(id: number, user: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}` + 'update?id=' + id, {
+    const params = new HttpParams()
+      .set('id', String(id));
+    return this.http.post(`${this.baseUrl}` + 'update', {
       user
-    });
-
+    }, {params});
   }
 
   getUsers(): Observable<any> {
@@ -43,10 +44,12 @@ export class LoginService {
   }
 
   makeActive(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + 'makeActive?userId=' + id);
+    const params = new HttpParams()
+      .set('userId', String(id));
+    return this.http.get(`${this.baseUrl}` + 'makeActive', {params});
   }
 
   loggedIn() {
-    return !!sessionStorage.getItem('auth-token')
+    return !!sessionStorage.getItem('auth-token');
   }
 }

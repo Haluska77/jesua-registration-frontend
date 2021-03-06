@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import jwt_decode from 'jwt-decode';
 
 const TOKEN_KEY = 'auth-token';
@@ -12,44 +10,25 @@ const USER_KEY = 'auth-user';
 })
 export class TokenService {
 
-  user: any;
-  tokenSubscription = new Subscription()
-  timeout;
-  currentTime: any;
+  user: string;
 
   constructor(private router: Router) { }
 
   signOut() {
-    this.tokenSubscription.unsubscribe();
     this.user = null;
     sessionStorage.clear();
-    this.router.navigate(["/home"]);
+    this.router.navigate(['/home']);
   }
-
-  expirationCounter(timeout) {
-    this.tokenSubscription.unsubscribe();
-    this.tokenSubscription = of(null).pipe(delay(timeout)).subscribe((expired) => {
-      console.log('EXPIRED!!');
-
-      this.signOut();
-    });
-  }
-
 
   public isLoggedIn(token): boolean {
-    return (this.getToken() != null && !this.isTokenExpired(token))
-
+    return (this.getToken() != null && !this.isTokenExpired(token));
   }
 
   public isTokenExpired(token): boolean {
-
-    const decodedToken = JSON.stringify(jwt_decode(token));
-    var exp = JSON.parse(decodedToken).exp * 1000;
-    return new Date().getTime() > exp;
-
+    return new Date().getTime() > this.tokenExpirationDateTime(token);
   }
 
-  public getTokenExpiration(token): number {
+  public tokenExpirationDateTime(token): number {
     const decodedToken = JSON.stringify(jwt_decode(token));
     return JSON.parse(decodedToken).exp * 1000;
   }
@@ -69,6 +48,6 @@ export class TokenService {
   }
 
   public getUser() {
-    return JSON.parse(sessionStorage.getItem(USER_KEY))
+    return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
 }

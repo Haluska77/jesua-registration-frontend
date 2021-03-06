@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 import {DialogService} from '../_services/dialog.service';
 import {EventService} from '../_services/event.service';
 import {LoginService} from '../_services/login.service';
 import {NotificationService} from '../_services/notification.service';
-import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component'
+import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
 
 @Component({
   selector: 'app-user-list',
@@ -36,7 +36,7 @@ export class UserListComponent implements OnInit {
       autoFocus: true,
       panelClass: 'myapp-dialog',
       data: {action: title}
-    })
+    });
 
   }
 
@@ -50,16 +50,16 @@ export class UserListComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.dialogService.openConfirmDialog("Are you sure to delete id: '" + id + "' record?")
+    this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
         if (response) {
           // delete event in DB
           this.eventservice.deleteEvent(id)
             .subscribe(
               data => {
-                this.notificationService.success("Successfull", "DELETE");
+                this.notificationService.success('Successfull', 'DELETE');
               }
-            )
+            );
         }
       }
     );
@@ -69,7 +69,7 @@ export class UserListComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       stateSave: true,
-      lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+      lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']],
       processing: true,
       order: [[0, 'asc']],
       language: {url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json'}
@@ -78,7 +78,7 @@ export class UserListComponent implements OnInit {
       data => {
         this.users = data.response.body;
         this.dtTrigger.next();
-      })
+      });
   }
 
   exit() {
@@ -86,13 +86,13 @@ export class UserListComponent implements OnInit {
   }
 
   makeActive(id: number, userName: string) {
-    this.dialogService.openConfirmDialog("Are you sure to change status for '" + userName + "?")
+    this.dialogService.openConfirmDialog('Are you sure to change status for ' + userName + '?')
       .afterClosed().subscribe(data => {
         if (data) {
           this.loginService.makeActive(id).subscribe();
           window.location.reload();
         }
       }
-    )
+    );
   }
 }

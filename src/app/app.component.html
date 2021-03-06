@@ -12,21 +12,21 @@
     </li>
   </ul>
 
-  <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+  <ul class="navbar-nav ml-auto">
     <li class="nav-item">
+      <a href="" class="nav-link" routerLink="">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn">
       <a href="/registration" class="nav-link" routerLink="registration">Register to Jesua Course</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="!isLoggedIn">
       <a href="/login" class="nav-link" routerLink="login">Login</a>
     </li>
-  </ul>
-
-  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isLoggedIn">
       <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
     </li>
-    <li [ngClass]="{'navbar bg-light btn-sm btn-outline-danger': mins < 1, 'nav-link' : mins >= 1}">{{mins | number: '2.0'}}:{{secs | number: '2.0'}}</li>
-    <li class="nav-item">
+    <li *ngIf="isLoggedIn" [ngClass]="{'navbar bg-light btn-sm btn-outline-danger': mins < 1, 'nav-link' : mins >= 1}">{{mins | number: '2.0'}}:{{secs | number: '2.0'}}</li>
+    <li class="nav-item" *ngIf="isLoggedIn">
       <a href class="nav-link" (click)="logout()">LogOut</a>
     </li>
   </ul>

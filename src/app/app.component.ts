@@ -20,8 +20,7 @@ export class AppComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
   email: string;
-  token: string;
-  expiration: string;
+  token = this.tokenService.getToken();
   mins: number;
   secs: number;
 
@@ -69,14 +68,12 @@ export class AppComponent implements OnInit {
 
     });
 
-    this.isLoggedIn = !!this.tokenService.getToken();
-    if (this.isLoggedIn) {
-      this.token = this.tokenService.getToken();
+    if (this.tokenService.isLoggedIn(this.token)) {
+      this.isLoggedIn = true;
+      const expiration = this.tokenService.tokenExpirationDateTime(this.token);
 
-      var begin = this.tokenService.getTokenExpiration(this.token);
-
-      var obs = simpleObservable.subscribe((now: any) => {
-        var logtime = (begin - now) / 1000;
+      let obs = simpleObservable.subscribe((now: any) => {
+        let logtime = (expiration - now) / 1000;
         this.mins = Math.floor(logtime % (60 * 60) / 60);
         this.secs = Math.floor(logtime % 60);
         if (logtime < 0) {
@@ -98,7 +95,6 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.tokenService.signOut();
-    window.location.reload();
   }
 
 }
