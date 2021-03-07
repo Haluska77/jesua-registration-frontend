@@ -1,7 +1,7 @@
 <h2>Aktuálne sa môžte prihlásiť na tieto JEŠUA stretnutia</h2>
 <div class="myCard">
-  <div style="padding: 10px;" *ngFor="let stat of stats">
-    <mat-grid-list cols="4" rowHeight="100px">
+<div style="padding: 10px;" *ngFor="let stat of stats">
+    <mat-grid-list cols="4" rowHeight="100px" class="left-style-{{courseStateMap.get(stat.id).state}}">
       <mat-grid-tile [colspan]="2" [rowspan]="1">
         <div class="description-tile">
           {{stat.description}} ({{stat.startDate | date: 'dd.MM.yyyy HH:mm' }})

@@ -1,9 +1,19 @@
 
 .mat-grid-list {
   border: solid 1px grey;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-.myCard {
+  .left-style-free{
+    border-left: solid 8px #73AD21;
+  }
+  
+  .left-style-full{
+    border-left: solid 8px #ff3333;
+  }
+
+  .myCard {
   width: 50%;
   padding: 10px;
   display: block;
