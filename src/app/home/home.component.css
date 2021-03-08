@@ -3,12 +3,13 @@
   border: solid 1px grey;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+  box-shadow: 0 0px 10px 2px #ddd;
 }
 
   .left-style-free{
     border-left: solid 8px #73AD21;
   }
-  
+
   .left-style-full{
     border-left: solid 8px #ff3333;
   }
@@ -19,7 +20,6 @@
   display: block;
   margin: auto;
   text-align: center;
-  box-shadow: 0 0px 10px 2px #ddd;
 }
 
 h2 {
@@ -50,9 +50,15 @@ h2 {
   background-color: antiquewhite;
   width: 100%;
   height: 100%;
+}
+
+.description-item{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: auto;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: bold;
 }
 
 .free {
