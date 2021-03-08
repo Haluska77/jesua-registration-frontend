@@ -29,6 +29,7 @@ import {DatePipe} from '@angular/common';
 import {ResponseDialogComponent} from './response-dialog/response-dialog.component';
 import {UserDialogFormComponent} from './user-dialog-form/user-dialog-form.component';
 import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/registration-unsubscribe.component';
+import {RegistrationDialogFormComponent} from './registration-dialog-form/registration-dialog-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/regis
     ConfirmDialogComponent,
     ResponseDialogComponent,
     UserDialogFormComponent,
-    RegistrationUnsubscribeComponent
+    RegistrationUnsubscribeComponent,
+    RegistrationDialogFormComponent
   ],
     imports: [
         MaterialModule,

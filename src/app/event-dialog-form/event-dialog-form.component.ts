@@ -28,7 +28,7 @@ export class EventDialogFormComponent {
 
   onSubmit(action: string) {
     if (this.eventService.eventForm.valid) {
-      if (action == 'Add') {
+      if (action === 'Add') {
         this.eventService.createEvent(this.eventService.eventForm.value)
           .subscribe(data => {
               this.notificationService.success('Successfull', 'INSERT');
@@ -36,7 +36,7 @@ export class EventDialogFormComponent {
             error => console.log(error));
 
       } else {
-        if (action == 'Update') {
+        if (action === 'Update') {
           this.eventService.updateEvent(this.eventService.eventForm.get('id').value, this.eventService.eventForm.value)
             .subscribe(data => {
                 this.snack = this.notificationService.success('Successfull', 'UPDATE');

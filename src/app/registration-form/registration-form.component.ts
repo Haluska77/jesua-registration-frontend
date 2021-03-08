@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CustomValidators} from '../custom-validators';
 import {DialogService} from '../_services/dialog.service';
 import {EventService} from '../_services/event.service';
 import {VisitorService} from '../_services/visitor.service';
 import {SpinnerService} from '../_services/spinner.service';
+import {AbstractControl} from '@angular/forms';
 
 
 @Component({
@@ -17,46 +15,33 @@ import {SpinnerService} from '../_services/spinner.service';
 export class RegistrationFormComponent implements OnInit {
   activeEvents: Event[];
   visitor: any;
-  registerForm: FormGroup;
 
-  constructor(private userService: VisitorService,
+  constructor(public visitorService: VisitorService,
               private eventService: EventService,
               private dialogService: DialogService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private fb: FormBuilder,
               public spinnerService: SpinnerService) {
   }
 
-  get f() {
-    return this.registerForm.controls;
+  get f(): {[p: string]: AbstractControl} {
+    return this.visitorService.registerForm.controls;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.eventService.getActiveEventList().subscribe(
       data => {
         this.activeEvents = data.response.body;
       }
     );
-
-    this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required,
-        CustomValidators.validateEmailPattern()]],
-      course: ['', [Validators.required]],
-      gdpr: [''],
-    });
   }
 
-  onSubmit() {
-    console.log(this.registerForm.value);
+  onSubmit(): void {
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.visitorService.registerForm.invalid) {
       console.log('FORM IS INVALID');
       return;
     }
-    this.userService.register(this.registerForm.value).subscribe(
+    this.visitorService.register(this.visitorService.registerForm.value).subscribe(
       data => {
         this.visitor = data.response;
         if (data.response.body.accepted) {

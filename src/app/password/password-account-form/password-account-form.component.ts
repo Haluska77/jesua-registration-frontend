@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PasswordService} from '../password.service';
-import {Router} from '@angular/router';
-import {DialogService} from "../../_services/dialog.service";
+import {DialogService} from '../../_services/dialog.service';
 
 @Component({
   selector: 'app-password-account-form',
@@ -11,8 +10,7 @@ import {DialogService} from "../../_services/dialog.service";
 export class PasswordAccountFormComponent implements OnInit {
 
   constructor(public passwordService: PasswordService,
-              private dialogService: DialogService,
-              private router: Router) { }
+              private dialogService: DialogService) { }
 
   submitted = false;
   isLoginFailed = false;
@@ -28,7 +26,7 @@ export class PasswordAccountFormComponent implements OnInit {
     this.passwordService.getUserAccount(this.passwordService.passwordAccountForm.get('email').value).subscribe(
       (data: any) => {
         this.isLoginFailed = false;
-        this.dialogService.openSuccessResponseDialog('Akceptovaný', data.response.message, '../registration');
+        this.dialogService.openSuccessResponseDialog('Akceptovaný', data.response.message, '../home');
         this.passwordService.passwordAccountForm.reset();
       },
       (err) => {

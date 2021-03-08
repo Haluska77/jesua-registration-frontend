@@ -20,6 +20,5 @@ export class ResponseDialogComponent implements OnInit {
   closeDialog(navigation: string) {
     this.dialogRef.close(false);
     this.router.navigate([navigation]);
-    // window.location.reload();
   }
 }

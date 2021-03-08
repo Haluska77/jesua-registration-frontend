@@ -30,16 +30,16 @@ export class RegistrationUnsubscribeComponent implements OnInit {
       this.userService$ = this.userService.unsubscribe(this.urlToken, this.urlEvent).subscribe(
         data => {
           this.visitor = data.response;
-          this.dialogService.openSuccessResponseDialog('Odhlásený', this.visitor.message, '/registration');
+          this.dialogService.openSuccessResponseDialog('Odhlásený', this.visitor.message, '/home');
         },
         error => {
           this.visitor = error.error;
-          this.dialogService.openErrorResponseDialog('Error!', this.visitor.error.message, '/registration');
+          this.dialogService.openErrorResponseDialog('Error!', this.visitor.error.message, '/home');
         }
       );
     } else {
       // not valid URL
-      this.dialogService.openErrorResponseDialog('Error!', 'Not valid URL', '/registration');
+      this.dialogService.openErrorResponseDialog('Error!', 'Not valid URL', '/home');
     }
   }
 

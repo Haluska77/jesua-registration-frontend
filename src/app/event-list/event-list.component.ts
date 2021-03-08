@@ -32,7 +32,7 @@ export class EventListComponent implements OnInit {
 
   openDialog(title: string) {
     this.dialog.open(EventDialogFormComponent, {
-      width: '40%',
+      width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',

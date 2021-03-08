@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBarConfig, MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import {Injectable} from '@angular/core';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class NotificationService {
   }
 
   success(msg: string, label: string) {
-    this.config['panelClass'] = ['success'];
+    this.config.panelClass = ['success'];
     let snackBarRef = this.snackBar.open(msg, label, this.config);
 
     snackBarRef.afterDismissed().subscribe(() => {
@@ -24,7 +24,7 @@ export class NotificationService {
   }
 
   error(msg: string, label: string) {
-    this.config['panelClass'] = ['error'];
+    this.config.panelClass = ['error'];
     this.snackBar.open(msg, label, this.config);
   }
 }

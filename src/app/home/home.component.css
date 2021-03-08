@@ -1,6 +1,6 @@
 
 .mat-grid-list {
-  border: solid 1px grey;
+  border: solid 1px #6f634d;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   box-shadow: 0 0px 10px 2px #ddd;
@@ -47,7 +47,7 @@ h2 {
 .description-tile {
   padding: 10px;
   color: #6f634d;
-  background-color: antiquewhite;
+  background-color: #f6f6f6;
   width: 100%;
   height: 100%;
 }
@@ -101,5 +101,6 @@ div.icon-line {
 }
 
 .big-icon:hover {
-  transform: rotate(90deg) scale(1.1);
+  transform: rotate(90deg) scale(1.08);
+  cursor: pointer;
 }

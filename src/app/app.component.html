@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand navbar-dark" style="background-color: #6f634d;">
   <a href="http://www.jesua.sk" class="navbar-brand">JEŠUA</a>
   <ul class="navbar-nav mr-auto" routerLinkActive="active">
+    <li class="nav-item">
+      <a href="" class="nav-link" routerLink="" title="Home"><mat-icon>home</mat-icon></a>
+    </li>
     <li class="nav-item" *ngIf="showAdminBoard || showModeratorBoard">
       <a href="/events" class="nav-link" routerLink="events">Events</a>
     </li>
@@ -13,12 +16,6 @@
   </ul>
 
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a href="" class="nav-link" routerLink="" title="Home"><mat-icon>home</mat-icon></a>
-    </li>
-    <li class="nav-item" *ngIf="!isLoggedIn">
-      <a href="/registration" class="nav-link" routerLink="registration">Register to Jesua Course</a>
-    </li>
     <li class="nav-item" *ngIf="!isLoggedIn">
       <a href="/login" class="nav-link" routerLink="login" title="Login"><mat-icon>lock_open</mat-icon></a>
     </li>

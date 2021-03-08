@@ -1,0 +1,28 @@
+.mat-form-field{
+  width: 100%;
+}
+
+.myapp-dialog {
+  width: 100%;
+  height: 400px;
+  padding: 20px;
+}
+.short{
+  width:50%;
+}
+
+.mat-raised-button.mat-primary{
+  background-color: #6f634d;
+  color: #bfb8ab;
+}
+
+.mat-raised-button.mat-primary:disabled {
+  background-color: #eeeeee;
+  color: #aaaaaa;
+}
+
+.mat-stroked-button.mat-primary{
+  background-color: #E3E2DE;
+  color: #6f634d;
+  border-color: #6f634d;
+}

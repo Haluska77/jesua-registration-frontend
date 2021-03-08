@@ -14,7 +14,7 @@ export class EventService {
   private baseUrl = environment.baseUrl + 'events/';
 
   constructor(private http: HttpClient,
-       private datePipe: DatePipe) { }
+              private datePipe: DatePipe) { }
 
   eventForm = new FormGroup({
     id: new FormControl('', ),
@@ -24,23 +24,23 @@ export class EventService {
     capacity: new FormControl('', [Validators.required])
   });
 
-  fillEvent(event: any) {
+  fillEvent(event: any): void {
     event.startDate = this.datePipe.transform(event.startDate, 'yyyy-MM-ddTHH:mm', 'Europe/Bratislava');
     this.eventForm.setValue(event);
 
   }
 
   getEventList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`+'eventList');
+    return this.http.get(`${this.baseUrl}` + 'eventList');
   }
 
   getActiveEventList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`+'activeEventList');
+    return this.http.get(`${this.baseUrl}` + 'activeEventList');
   }
 
   createEvent(course: any): Observable<object> {
     console.log(this.baseUrl);
-    return this.http.post(`${this.baseUrl}`+'addEvent', {
+    return this.http.post(`${this.baseUrl}` + 'addEvent', {
       description: course.description,
       startDate: course.startDate,
       open: course.open,
@@ -49,11 +49,11 @@ export class EventService {
   }
 
   deleteEvent(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}`+'deleteEvent/'+`${id}`);
+    return this.http.delete(`${this.baseUrl}` + 'deleteEvent/' + `${id}`);
   }
 
   updateEvent(id: number, value: object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`+'updateEvent/'+`${id}`, value);
+    return this.http.post(`${this.baseUrl}` + 'updateEvent/' + `${id}`, value);
   }
 
 }

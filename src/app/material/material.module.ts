@@ -14,6 +14,7 @@ import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from '@angular-mater
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NgxMatNativeDateModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
@@ -51,7 +53,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NgxMatNativeDateModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule
   ]
 
 })

@@ -25,9 +25,7 @@
         </div>
 
         <div class="icon-line">
-          <a routerLink="../registration">
-            <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}">add_circle</mat-icon>
-          </a>
+          <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}" (click)="onCreate(stat)">add_circle</mat-icon>
         </div>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">

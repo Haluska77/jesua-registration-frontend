@@ -33,7 +33,7 @@ export class PasswordRegisterFormComponent implements OnInit {
       },
       (err) => {
         this.isValidated = false;
-        this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../registration');
+        this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../home');
         this.errorMessage = err.error.error.message;
       }
     );
@@ -45,7 +45,7 @@ export class PasswordRegisterFormComponent implements OnInit {
         this.dialogService.openSuccessResponseDialog('Zmenený', data.response.message, '../login');
       },
       (err) => {
-        this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../registration');
+        this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../home');
         this.errorMessage = err.error.error.message;
       }
     );
