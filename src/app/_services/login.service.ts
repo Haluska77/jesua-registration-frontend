@@ -4,8 +4,13 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+
+interface Role {
+  value: string;
+  viewValue: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +20,36 @@ export class LoginService {
 
   private baseUrl = environment.baseUrl + 'users/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
+  roles: Role[] = [
+    {value: 'ROLE_ADMIN', viewValue: 'ADMIN'},
+    {value: 'ROLE_MODERATOR', viewValue: 'MODERATOR'},
+    {value: 'ROLE_USER', viewValue: 'USER'}
+  ];
 
   signIn(login: object): Observable<object> {
     return this.http.post(`${this.baseUrl}` + 'signin', login, httpOptions);
   }
-
 
   signUp(user): Observable<any> {
     return this.http.post(`${this.baseUrl}` + 'signup', {
       name: user.name,
       email: user.email,
       password: user.password,
-      role: user.role
+      role: user.role,
+      active: user.active
     }, httpOptions);
   }
 
   updateUser(id: number, user: any): Observable<any> {
-    const params = new HttpParams()
-      .set('id', String(id));
-    return this.http.post(`${this.baseUrl}` + 'update', {
-      user
-    }, {params});
+    return this.http.post(`${this.baseUrl}` + 'update/' + id, {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      active: user.active
+    });
   }
 
   getUsers(): Observable<any> {
@@ -49,7 +62,12 @@ export class LoginService {
     return this.http.get(`${this.baseUrl}` + 'makeActive', {params});
   }
 
-  loggedIn() {
+  // currently not available in backend
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}` + 'deleteUser/' + `${id}`);
+  }
+
+  loggedIn(): boolean {
     return !!sessionStorage.getItem('auth-token');
   }
 }

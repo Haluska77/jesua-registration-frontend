@@ -1,14 +1,9 @@
-import {Component, Inject, Optional} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {CustomValidators} from '../custom-validators';
 import {LoginService} from '../_services/login.service';
 import {NotificationService} from '../_services/notification.service';
-
-interface Role {
-  value: string;
-  viewValue: string;
-}
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CustomValidators} from '../custom-validators';
 
 @Component({
   selector: 'app-user-dialog-form',
@@ -16,52 +11,69 @@ interface Role {
   styleUrls: ['./user-dialog-form.component.css']
 })
 
-export class UserDialogFormComponent {
+export class UserDialogFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private loginService: LoginService,
-              private notificationService: NotificationService,
-              public dialogRef: MatDialogRef<UserDialogFormComponent>,
-              @Optional()
-    @Inject(MAT_DIALOG_DATA) public data: any)
-{ }
+  constructor(
+    private formBuilder: FormBuilder,
+    public loginService: LoginService,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<UserDialogFormComponent>,
+    @Optional()
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   snack: any;
   hidePassword = true;
 
-  userForm = this.fb.group({
-    id: [''],
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required,
-    CustomValidators.validateEmailPattern()]],
-    password: ['', [
-      Validators.required,
-      Validators.minLength(8),
-      CustomValidators.containsAtLeastOneNumber()
-    ]],
-    role: ['', [Validators.required]],
-    active: ['']
-  });
+  userForm: FormGroup;
 
-  roles: Role[] = [
-    {value: 'ROLE_ADMIN', viewValue: 'ADMIN'},
-    {value: 'ROLE_MODERATOR', viewValue: 'MODERATOR'},
-    {value: 'ROLE_USER', viewValue: 'USER'}
-  ];
+  ngOnInit(): void {
+    this.makeForm(this.data);
+  }
 
-  get f() { return this.userForm.controls; }
+  makeForm(data: any) {
+
+    // add
+    this.userForm = this.formBuilder.group({
+      id: [''],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required,
+        CustomValidators.validateEmailPattern()]],
+      password: [{value: '', disabled: false}, [
+        Validators.required,
+        Validators.minLength(8),
+        CustomValidators.containsAtLeastOneNumber(),
+      ]],
+      role: ['', [Validators.required]],
+      active: ['']
+    });
+
+    // update
+    if (data.action === 'Update') {
+      this.userForm.setControl('email', this.formBuilder.control({value: '', disabled: true}));
+      this.userForm.setControl('password', this.formBuilder.control({value: '', disabled: true}));
+
+      this.userForm.patchValue(this.data.user);
+
+    }
+  }
+
+
+  get f() {
+    return this.userForm.controls;
+  }
 
   onSubmit(action: string) {
     if (this.userForm.valid) {
-      if (action == 'Add') {
+      if (action === 'Add') {
         this.loginService.signUp(this.userForm.value)
           .subscribe(data => {
-            this.notificationService.success('Successful', 'INSERT');
-          },
+              this.notificationService.success('Successful', 'INSERT');
+            },
             error => console.log(error));
 
       } else {
-        if (action == 'Update') {
+        if (action === 'Update') {
           this.loginService.updateUser(this.userForm.get('id').value, this.userForm.value)
             .subscribe(data => {
               this.snack = this.notificationService.success('Successful', 'UPDATE');

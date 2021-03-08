@@ -14,11 +14,12 @@
           <th>Role</th>
           <th>Status</th>
           <th>Created</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users ">
-          <td>{{user.userName}}</td>
+          <td>{{user.name}}</td>
           <td>{{user.email}}</td>
           <td>{{user.role}}</td>
           <td>
@@ -30,6 +31,11 @@
             </div>
           </td>
           <td>{{user.created | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
+          <td>
+            <button mat-icon-button (click)="onEdit(user)" mat-flat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          </td>
         </tr>
       </tbody><br>
     </table>

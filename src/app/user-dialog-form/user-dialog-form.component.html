@@ -21,14 +21,14 @@
     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="f.password.touched && f.password.errors?.required">Password is required</mat-error>
-    <mat-error *ngIf="f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must contain at least 1 number!</mat-error>
-    <mat-error *ngIf="f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.minlength ? 'text-danger' :'text-success'">Must have at least 8 chars!</mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && f.password.errors?.required">Password is required</mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must contain at least 1 number!</mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.minlength ? 'text-danger' :'text-success'">Must have at least 8 chars!</mat-error>
   </mat-form-field>
   <mat-form-field class="short-form-field" appearance="fill">
     <mat-label>Role</mat-label>
     <mat-select matInput formControlName="role">
-      <mat-option *ngFor="let role of roles" [value]="role.value">
+      <mat-option *ngFor="let role of loginService.roles" [value]="role.value">
         {{role.viewValue}}
       </mat-option>
     </mat-select>

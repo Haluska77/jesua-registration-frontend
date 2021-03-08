@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Subject} from 'rxjs';
 import {DialogService} from '../_services/dialog.service';
-import {EventService} from '../_services/event.service';
 import {LoginService} from '../_services/login.service';
 import {NotificationService} from '../_services/notification.service';
 import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
@@ -16,7 +15,6 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    public eventservice: EventService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
     public dialog: MatDialog
@@ -29,38 +27,35 @@ export class UserListComponent implements OnInit {
   isChanged = false;
 
 
-  openDialog(title: string) {
+  openDialog(title: string, user: any) {
     this.dialog.open(UserDialogFormComponent, {
       width: '30%',
-      disableClose: true,
+      disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',
-      data: {action: title}
+      data: {action: title, user}
     });
 
   }
 
   onCreate() {
-    this.openDialog('Add');
+    this.openDialog('Add', null);
   }
 
   onEdit(row: any) {
-    this.eventservice.fillEvent(row);
-    this.openDialog('Update');
+    this.openDialog('Update', row);
   }
 
   onDelete(id: number) {
     this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
-        if (response) {
-          // delete event in DB
-          this.eventservice.deleteEvent(id)
-            .subscribe(
-              data => {
-                this.notificationService.success('Successfull', 'DELETE');
-              }
-            );
-        }
+        // delete user from DB
+        this.loginService.deleteUser(id)
+          .subscribe(
+            data => {
+              this.notificationService.success('Successfull', 'DELETE');
+            }
+          );
       }
     );
   }
