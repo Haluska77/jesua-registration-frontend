@@ -14,7 +14,7 @@ export class DialogService {
     return this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
       panelClass:'confirm-dialog-container',
-      disableClose: true,
+      disableClose: false,
       position:{top:"20px"},
       data: {
         message : message
@@ -26,7 +26,7 @@ export class DialogService {
     return this.dialog.open(ResponseDialogComponent, {
       width: wide,
       panelClass:'response-dialog-container',
-      disableClose: true,
+      disableClose: false,
       position:{top:"20px"},
       data: {
         icon: icon,

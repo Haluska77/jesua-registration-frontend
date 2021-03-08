@@ -57,7 +57,7 @@ export function passwordMatcher(abstractControl: AbstractControl, error: Validat
 export class CustomValidators {
 
   static validateEmailPattern(): ValidatorFn {
-    return patternValidator(new RegExp('^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), {emailValid: true});
+    return patternValidator(new RegExp('^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*[a-zA-Z0-9]*@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), {emailValid: true});
   }
 
   static containsAtLeastOneNumber(): ValidatorFn {

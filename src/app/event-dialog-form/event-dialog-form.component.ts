@@ -22,23 +22,25 @@ export class EventDialogFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  get f() { return this.eventService.eventForm.controls; }
+  get f() {
+    return this.eventService.eventForm.controls;
+  }
 
   onSubmit(action: string) {
     if (this.eventService.eventForm.valid) {
       if (action == 'Add') {
         this.eventService.createEvent(this.eventService.eventForm.value)
           .subscribe(data => {
-            this.notificationService.success('Successfull', 'INSERT');
-          },
+              this.notificationService.success('Successfull', 'INSERT');
+            },
             error => console.log(error));
 
       } else {
         if (action == 'Update') {
           this.eventService.updateEvent(this.eventService.eventForm.get('id').value, this.eventService.eventForm.value)
             .subscribe(data => {
-              this.snack = this.notificationService.success('Successfull', 'UPDATE');
-            },
+                this.snack = this.notificationService.success('Successfull', 'UPDATE');
+              },
               error => console.log(error));
 
         } else {
