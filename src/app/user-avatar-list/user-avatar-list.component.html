@@ -1,0 +1,6 @@
+<mat-grid-list cols="8" rowHeight="80px">
+  <mat-grid-tile *ngFor="let avatar of avatars">
+    <img class="avatar" [ngClass]="{'active' : avatar==data.avatar}" src="../assets/avatars/{{avatar}}" (click)="select(avatar)">
+  </mat-grid-tile>
+</mat-grid-list>
+

@@ -17,3 +17,10 @@
   height: 400px;
   padding: 20px;
 }
+
+img.avatar{
+  width:100px;
+  height: 100px;
+  padding: 6px;
+  cursor: pointer;
+}

@@ -30,6 +30,7 @@ import {ResponseDialogComponent} from './response-dialog/response-dialog.compone
 import {UserDialogFormComponent} from './user-dialog-form/user-dialog-form.component';
 import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/registration-unsubscribe.component';
 import {RegistrationDialogFormComponent} from './registration-dialog-form/registration-dialog-form.component';
+import {UserAvatarListComponent} from './user-avatar-list/user-avatar-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {RegistrationDialogFormComponent} from './registration-dialog-form/regist
     ResponseDialogComponent,
     UserDialogFormComponent,
     RegistrationUnsubscribeComponent,
-    RegistrationDialogFormComponent
+    RegistrationDialogFormComponent,
+    UserAvatarListComponent
   ],
     imports: [
         MaterialModule,

@@ -22,7 +22,6 @@ export class RegistrationDialogFormComponent implements OnInit {
   visitor: any;
 
   ngOnInit(): void {
-    console.log(JSON.stringify(this.data));
     this.visitorService.registerForm.patchValue({course: this.data.course.id});
   }
 

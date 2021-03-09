@@ -2,6 +2,8 @@
 <div mat-dialog-content [formGroup]="userForm">
 
   <input type="hidden" formControlName="id">
+  <input type="hidden" formControlName="avatar">
+  Avatar: <img class="avatar" src="../assets/avatars/{{avatarValue}}" (click)="onListAvatar(avatarValue)">
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" placeholder="Hugo"/>

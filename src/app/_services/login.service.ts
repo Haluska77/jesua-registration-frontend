@@ -35,6 +35,7 @@ export class LoginService {
 
   signUp(user): Observable<any> {
     return this.http.post(`${this.baseUrl}` + 'signup', {
+      avatar: user.avatar,
       name: user.name,
       email: user.email,
       password: user.password,
@@ -45,6 +46,7 @@ export class LoginService {
 
   updateUser(id: number, user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}` + 'update/' + id, {
+      avatar: user.avatar,
       name: user.name,
       email: user.email,
       role: user.role,

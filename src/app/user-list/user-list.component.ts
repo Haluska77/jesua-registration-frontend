@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
     private loginService: LoginService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
   }
 
@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   users: any[];
   isChanged = false;
-
 
   openDialog(title: string, user: any) {
     this.dialog.open(UserDialogFormComponent, {
