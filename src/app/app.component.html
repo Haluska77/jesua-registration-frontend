@@ -17,14 +17,14 @@
 
   <ul class="navbar-nav ml-auto">
     <li class="nav-item" *ngIf="!isLoggedIn">
-      <a href="/login" class="nav-link" routerLink="login" title="Login"><mat-icon>lock_open</mat-icon></a>
+      <a href="/login" class="nav-link" routerLink="login" title="Login"><mat-icon>lock_outlined</mat-icon></a>
     </li>
     <li class="nav-item" *ngIf="isLoggedIn">
-      <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
+      <a href="/profile" routerLink="profile"><img class="avatar" src="assets/avatars/{{ avatar }}"></a>
     </li>
     <li *ngIf="isLoggedIn" [ngClass]="{'navbar bg-light btn-sm btn-outline-danger': mins < 1, 'nav-link' : mins >= 1}">{{mins | number: '2.0'}}:{{secs | number: '2.0'}}</li>
     <li class="nav-item" *ngIf="isLoggedIn">
-      <a href class="nav-link" (click)="logout()">LogOut</a>
+      <a href class="nav-link" (click)="logout()" title="Logout"><mat-icon>lock_open</mat-icon></a>
     </li>
   </ul>
 </nav>

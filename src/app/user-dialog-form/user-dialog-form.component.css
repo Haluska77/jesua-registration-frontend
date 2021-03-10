@@ -18,9 +18,16 @@
   padding: 20px;
 }
 
-img.avatar{
+div.avatar {
+  display: flex;
+  padding: 6px;
+  align-items: center;
+}
+
+img.avatar {
   width:100px;
   height: 100px;
-  padding: 6px;
   cursor: pointer;
+  border-radius: 50%;
+  border: 3px solid #ccc;
 }

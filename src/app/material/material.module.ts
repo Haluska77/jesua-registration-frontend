@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSelectModule,
     MatProgressBarModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ],
   exports: [
     CommonModule,
@@ -54,7 +56,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSelectModule,
     MatProgressBarModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [
     {

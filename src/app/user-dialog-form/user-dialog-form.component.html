@@ -3,7 +3,9 @@
 
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="avatar">
-  Avatar: <img class="avatar" src="../assets/avatars/{{avatarValue}}" (click)="onListAvatar(avatarValue)">
+  <div class="avatar">
+    Avatar:&nbsp;<img class="avatar" src="../assets/avatars/{{avatarValue}}" (click)="onListAvatar(avatarValue)">
+  </div>
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" placeholder="Hugo"/>
@@ -23,9 +25,16 @@
     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="data.action=='Add' && f.password.touched && f.password.errors?.required">Password is required</mat-error>
-    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must contain at least 1 number!</mat-error>
-    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required" [ngClass]="f.password.touched && f.password.errors?.minlength ? 'text-danger' :'text-success'">Must have at least 8 chars!</mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && f.password.errors?.required">Password is required
+    </mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required"
+               [ngClass]="f.password.touched && f.password.errors?.hasNumber ? 'text-danger' :'text-success'">Must
+      contain at least 1 number!
+    </mat-error>
+    <mat-error *ngIf="data.action=='Add' && f.password.touched && !f.password.errors?.required"
+               [ngClass]="f.password.touched && f.password.errors?.minlength ? 'text-danger' :'text-success'">Must have
+      at least 8 chars!
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="short-form-field" appearance="fill">
     <mat-label>Role</mat-label>

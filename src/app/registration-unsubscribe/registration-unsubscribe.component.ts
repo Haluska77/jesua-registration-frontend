@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DialogService} from '../_services/dialog.service';
 import {VisitorService} from '../_services/visitor.service';
@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './registration-unsubscribe.component.html',
   styleUrls: ['./registration-unsubscribe.component.css']
 })
-export class RegistrationUnsubscribeComponent implements OnInit {
+export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
 
   constructor(private userService: VisitorService,
               private dialogService: DialogService,
@@ -43,7 +43,7 @@ export class RegistrationUnsubscribeComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.userService$.unsubscribe();
   }
 }

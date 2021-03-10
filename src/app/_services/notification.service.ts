@@ -16,7 +16,7 @@ export class NotificationService {
 
   success(msg: string, label: string) {
     this.config.panelClass = ['success'];
-    let snackBarRef = this.snackBar.open(msg, label, this.config);
+    const snackBarRef = this.snackBar.open(msg, label, this.config);
 
     snackBarRef.afterDismissed().subscribe(() => {
       window.location.reload();

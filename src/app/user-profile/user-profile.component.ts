@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../_services/login.service';
-import { TokenService } from '../_services/token.service';
+import {Component, OnInit} from '@angular/core';
+import {TokenService} from '../_services/token.service';
+import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -9,20 +10,28 @@ import { TokenService } from '../_services/token.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  currentUser: any;
-  isAuthorized = true;
- 
+  loggedUser: any;
+  isAuthorized: boolean;
+
   constructor(private token: TokenService,
-    private loginService: LoginService) { }
+              private dialog: MatDialog) { }
 
   ngOnInit() {
-    if (!!this.token.getUser()) {
+    this.loggedUser = this.token.getUser();
+    if (!!this.loggedUser) {
       this.isAuthorized = true;
-      this.currentUser = this.token.getUser();
-    
     } else {
       this.isAuthorized = false;
-
     }
+  }
+
+  onEdit(user: any){
+    this.dialog.open(UserDialogFormComponent, {
+      width: '30%',
+      disableClose: false,
+      autoFocus: true,
+      panelClass: 'myapp-dialog',
+      data: {action: 'Update', user}
+    });
   }
 }

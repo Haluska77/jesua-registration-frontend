@@ -17,9 +17,8 @@ import {
 })
 
 export class AppComponent implements OnInit {
-  private roles: string[];
   isLoggedIn = false;
-  email: string;
+  avatar: string;
   token = this.tokenService.getToken();
   mins: number;
   secs: number;
@@ -85,15 +84,14 @@ export class AppComponent implements OnInit {
       );
 
       const user = this.tokenService.getUser();
-      this.roles = user.role;
-      this.email = user.email;
+      this.avatar = user.avatar;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showAdminBoard = user.role === 'ROLE_ADMIN';
+      this.showModeratorBoard = user.role === 'ROLE_MODERATOR';
     }
   }
 
-  logout() {
+  logout(): void {
     this.tokenService.signOut();
   }
 

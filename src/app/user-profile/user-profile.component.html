@@ -1,19 +1,24 @@
-<div class="container" *ngIf="currentUser">
+<div class="container" *ngIf="loggedUser">
   <header class="jumbotron">
     <h3>
-      <strong>{{ currentUser.email }}</strong> Profile
+      <strong>{{ loggedUser.name }}</strong>
     </h3>
   </header>
   <p>
     <strong>Email:</strong>
-    {{ currentUser.email }}
+    {{ loggedUser.email }}
   </p>
-  <strong>Roles:</strong>
-  <ul>
-    <li *ngFor="let role of currentUser.role">
-      {{ role }}
-    </li>
-  </ul>
+  <p>
+    <strong>Roles:</strong>
+    {{ loggedUser.role }}
+  </p>
+  <p>
+    <strong>Created:</strong>
+    {{ loggedUser.created | date: 'dd.MM.yyyy HH:mm' }}
+  </p>
+  <div>
+    <button mat-stroked-button color="primary" (click)="onEdit(loggedUser)">Edit</button>
+  </div>
 </div>
 <div class="alert alert-danger" *ngIf="!isAuthorized">
   {{errorMessage}}

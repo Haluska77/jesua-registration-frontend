@@ -1,43 +1,46 @@
-<div style="padding: 10px;" class="panel panel-default" *ngIf="!isChanged">
+<div class="container">
   <div class="panel-heading">
     <h1 style="text-align: center">Users</h1>
   </div>
-  <div style="padding: 10px;">
-    <button mat-button (click)="onCreate()" mat-flat-button color="primary">Add user</button>
-  </div>
-  <div class="panel-body">
-    <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-      <thead class="thead-light">
-        <tr>
-          <th>UserName</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Status</th>
-          <th>Created</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users ">
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.role}}</td>
-          <td>
-            <div class="custom-control custom-switch">
+  <mat-grid-list cols="3">
+    <mat-grid-tile *ngFor="let user of users ">
+      <mat-card>
+        <mat-card-header [ngClass]="{'active-header': user.active, 'inactive-header': !user.active}">
+          <div class="mat-card-header-text">
+          <mat-card-title>{{user.name}}</mat-card-title>
+          </div>
+          <img mat-card-avatar class="avatar" src="../assets/avatars/{{user.avatar}}" alt="{{user.name}}">
+        </mat-card-header>
+        <mat-card-content>
+          <div class="content">
+            <mat-icon>mail_outline</mat-icon>&nbsp;{{user.email}}
+          </div>
+          <div class="content">
+            <mat-icon>security</mat-icon>&nbsp;{{user.role}}
+          </div>
+          <div class="content">
+            <mat-icon>more_time</mat-icon>&nbsp;{{user.created | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}
+          </div>
+        </mat-card-content>
+        <hr>
+        <mat-card-actions>
+          <div class="flex-container">
+            <div class="flex1 custom-switch">
               <input type="checkbox" class="custom-control-input" id="active{{user.id}}" [checked]="user.active"
-                (click)="makeActive(user.id, user.userName)">
+                     (click)="makeActive(user.id, user.name)" [disabled]="user.id===loggedUser.id" />
               <label class="custom-control-label pointer" for="active{{user.id}}">{{user.active ? 'Aktívny' :
                 'Neaktívny'}}</label>
             </div>
-          </td>
-          <td>{{user.created | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
-          <td>
-            <button mat-icon-button (click)="onEdit(user)" mat-flat-button>
-            <mat-icon>edit</mat-icon>
-          </button>
-          </td>
-        </tr>
-      </tbody><br>
-    </table>
-  </div>
+            <div class="flex2">
+              <button mat-stroked-button color="primary" (click)="onEdit(user)">EDIT</button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+<div class="plus">
+  <button mat-fab (click)="onCreate()" color="primary"><mat-icon>plus_one</mat-icon></button>
 </div>
+</div>
+

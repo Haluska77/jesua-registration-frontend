@@ -5,7 +5,8 @@ import {NotificationService} from '../_services/notification.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../custom-validators';
 import {UserAvatarListComponent} from '../user-avatar-list/user-avatar-list.component';
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
+import {TokenService} from '../_services/token.service';
 
 @Component({
   selector: 'app-user-dialog-form',
@@ -19,6 +20,7 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     public loginService: LoginService,
     private notificationService: NotificationService,
+    private tokenService: TokenService,
     private dialog: MatDialog,
     private avatarRef: MatDialogRef<UserAvatarListComponent>,
     private dialogRef: MatDialogRef<UserDialogFormComponent>,
@@ -32,12 +34,13 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   avatarValue: string;
   avatarSub$: Subscription;
+  loggedUser = this.tokenService.getUser();
 
   ngOnInit(): void {
     this.makeForm(this.data);
   }
 
-  makeForm(data: any): void {
+  makeForm(formUser: any): void {
 
     // add
     this.userForm = this.formBuilder.group({
@@ -57,12 +60,23 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
     this.avatarValue = this.userForm.controls.avatar.value;
 
     // update
-    if (data.action === 'Update') {
+    if (formUser.action === 'Update') {
       this.userForm.setControl('email', this.formBuilder.control({value: '', disabled: true}));
       this.userForm.setControl('password', this.formBuilder.control({value: '', disabled: true}));
 
-      this.userForm.patchValue(this.data.user);
-      this.avatarValue = this.data.user.avatar;
+
+      // MODERATOR user is not able to change his role and active
+      if (this.loggedUser.role === 'ROLE_MODERATOR'){
+        this.userForm.setControl('role', this.formBuilder.control({value: '', disabled: true}));
+        this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
+      }
+
+      // to prevent deactive current ADMIN user
+      if (formUser.user.role === 'ROLE_ADMIN' && formUser.user.id === this.loggedUser.id){
+        this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
+      }
+      this.userForm.patchValue(formUser.user);
+      this.avatarValue = formUser.user.avatar;
 
     }
   }
@@ -111,10 +125,13 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
 
       } else {
         if (action === 'Update') {
-          console.log(JSON.stringify(this.userForm.value));
           this.loginService.updateUser(this.userForm.get('id').value, this.userForm.value)
             .subscribe(data => {
               this.snack = this.notificationService.success('Successful', 'UPDATE');
+
+              if (data.response.body.id === this.loggedUser.id) {
+                this.tokenService.signOut();
+              }
             });
 
         } else {

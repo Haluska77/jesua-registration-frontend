@@ -53,16 +53,16 @@ import {UserAvatarListComponent} from './user-avatar-list/user-avatar-list.compo
     RegistrationDialogFormComponent,
     UserAvatarListComponent
   ],
-    imports: [
-        MaterialModule,
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        DataTablesModule,
-        BrowserAnimationsModule,
-      NgxChartsModule
-    ],
+  imports: [
+    MaterialModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    DataTablesModule,
+    BrowserAnimationsModule,
+    NgxChartsModule
+  ],
   providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService, EventService, DatePipe],
   bootstrap: [AppComponent],
 })
