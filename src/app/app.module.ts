@@ -3,25 +3,25 @@ import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {RegistrationFormComponent} from './registration-form/registration-form.component';
 import {HttpClientModule} from '@angular/common/http';
+import {DataTablesModule} from 'angular-datatables';
+import {authInterceptorProviders} from './_helpers/auth.interceptor';
+import {AuthGuard} from './_guard/auth.guard';
+import {GlobalErrorHandlerService} from './_services/global-error-handler.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialModule} from './material/material.module';
+
+import {RegistrationFormComponent} from './registration-form/registration-form.component';
+import {UserComponent} from './user/user.component';
+import {LoginFormComponent} from './login-form/login-form.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
 import {EventListComponent} from './event-list/event-list.component';
-import {DataTablesModule} from 'angular-datatables';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import {UserComponent} from './user/user.component';
-import {AuthGuard} from './_guard/auth.guard';
 import {VisitorListComponent} from './visitor-list/visitor-list.component';
 import {UserListComponent} from './user-list/user-list.component';
-import {GlobalErrorHandlerService} from './_services/global-error-handler.service';
 import {ErrorComponent} from './error/error.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-
-import {MaterialModule} from './material/material.module';
 import {EventDialogFormComponent} from './event-dialog-form/event-dialog-form.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {EventService} from './_services/event.service';
@@ -61,7 +61,7 @@ import {UserAvatarListComponent} from './user-avatar-list/user-avatar-list.compo
     HttpClientModule,
     DataTablesModule,
     BrowserAnimationsModule,
-    NgxChartsModule
+    FlexLayoutModule
   ],
   providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService, EventService, DatePipe],
   bootstrap: [AppComponent],

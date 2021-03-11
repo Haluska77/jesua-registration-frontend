@@ -2,12 +2,12 @@
   <div class="panel-heading">
     <h1 style="text-align: center">Users</h1>
   </div>
-  <mat-grid-list cols="3">
-    <mat-grid-tile *ngFor="let user of users ">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let user of users ">
       <mat-card>
         <mat-card-header [ngClass]="{'active-header': user.active, 'inactive-header': !user.active}">
           <div class="mat-card-header-text">
-          <mat-card-title>{{user.name}}</mat-card-title>
+            <mat-card-title>{{user.name}}</mat-card-title>
           </div>
           <img mat-card-avatar class="avatar" src="../assets/avatars/{{user.avatar}}" alt="{{user.name}}">
         </mat-card-header>
@@ -27,7 +27,7 @@
           <div class="flex-container">
             <div class="flex1 custom-switch">
               <input type="checkbox" class="custom-control-input" id="active{{user.id}}" [checked]="user.active"
-                     (click)="makeActive(user.id, user.name)" [disabled]="user.id===loggedUser.id" />
+                     (click)="makeActive(user.id, user.name)" [disabled]="user.id===loggedUser.id"/>
               <label class="custom-control-label pointer" for="active{{user.id}}">{{user.active ? 'Aktívny' :
                 'Neaktívny'}}</label>
             </div>
@@ -37,10 +37,12 @@
           </div>
         </mat-card-actions>
       </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-<div class="plus">
-  <button mat-fab (click)="onCreate()" color="primary"><mat-icon>plus_one</mat-icon></button>
-</div>
+    </div>
+  </div>
+  <div class="plus">
+    <button mat-fab (click)="onCreate()" color="primary">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
 </div>
 

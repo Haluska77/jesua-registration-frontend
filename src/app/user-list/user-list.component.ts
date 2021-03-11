@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   openDialog(title: string, user: any) {
     this.dialog.open(UserDialogFormComponent, {
-      width: '30%',
+      width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',

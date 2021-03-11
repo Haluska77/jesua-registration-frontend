@@ -39,7 +39,6 @@ export class AuthInterceptor implements HttpInterceptor {
       .pipe(
         tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            console.log(event);
             this.spinnerService.hide();
           }
         }, (error) => {

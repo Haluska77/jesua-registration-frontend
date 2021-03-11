@@ -21,7 +21,7 @@ export class TokenService {
   }
 
   public isLoggedIn(token): boolean {
-    return (this.getToken() != null && !this.isTokenExpired(token));
+    return (!!this.getToken() && !this.isTokenExpired(token));
   }
 
   public isTokenExpired(token): boolean {

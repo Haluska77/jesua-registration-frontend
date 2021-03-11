@@ -30,17 +30,8 @@
   background-color: white !important;
 }
 
-
-.mat-grid-list{
-  width: 100%;
-}
-.mat-grid-tile{
-  padding: 0px;
-}
-
 mat-card{
   padding:0;
-  width: 350px;
 }
 
 .active-header {

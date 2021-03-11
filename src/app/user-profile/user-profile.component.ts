@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
 
   onEdit(user: any){
     this.dialog.open(UserDialogFormComponent, {
-      width: '30%',
+      width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',

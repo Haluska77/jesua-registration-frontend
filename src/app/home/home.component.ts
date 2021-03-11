@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   onCreate(course: any): void {
     this.dialog.open(RegistrationDialogFormComponent, {
-      width: '30%',
+      width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',
