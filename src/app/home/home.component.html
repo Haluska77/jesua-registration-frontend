@@ -4,8 +4,8 @@
     <div fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let stat of stats">
       <mat-card class="left-style-{{courseStateMap.get(stat.id).state}}">
         <mat-card-content>
-          <div class="description-tile" fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxLayout="column" fxLayoutAlign="center start">
+          <div class="info-tile" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <div class="description-tile" fxLayout="column">
               <div class="description-item">
                 <mat-icon>place</mat-icon>&nbsp;{{stat.description}}
               </div>
@@ -16,14 +16,14 @@
                 <mat-icon>people_alt</mat-icon>&nbsp;{{stat.active + stat.waiting}}/{{stat.capacity}}
               </div>
             </div>
-            <div class="status-tile {{courseStateMap.get(stat.id).state}}">
-              {{courseStateMap.get(stat.id).statusText}}
+            <div class="status-tile {{courseStateMap.get(stat.id).state}}-back">
+              {{courseStateMap.get(stat.id).capacity}}
             </div>
           </div>
         </mat-card-content>
         <mat-card-content>
           <div fxFlex="100%" fxLayoutAlign="center center">
-            <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}" (click)="onCreate(stat)">add_circle
+            <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}-icon" (click)="onCreate(stat)">add_circle
             </mat-icon>
           </div>
         </mat-card-content>

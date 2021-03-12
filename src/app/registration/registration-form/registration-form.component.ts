@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DialogService} from '../_services/dialog.service';
-import {EventService} from '../_services/event.service';
-import {VisitorService} from '../_services/visitor.service';
-import {SpinnerService} from '../_services/spinner.service';
+import {DialogService} from '../../_services/dialog.service';
+import {EventService} from '../../_services/event.service';
+import {VisitorService} from '../../_services/visitor.service';
+import {SpinnerService} from '../../_services/spinner.service';
 import {AbstractControl} from '@angular/forms';
 
 

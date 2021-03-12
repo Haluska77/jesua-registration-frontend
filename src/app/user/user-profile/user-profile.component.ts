@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenService} from '../_services/token.service';
+import {TokenService} from '../../_services/token.service';
 import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
 import {MatDialog} from '@angular/material/dialog';
 

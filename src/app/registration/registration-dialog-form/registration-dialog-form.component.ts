@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {VisitorService} from '../_services/visitor.service';
-import {DialogService} from '../_services/dialog.service';
+import {VisitorService} from '../../_services/visitor.service';
+import {DialogService} from '../../_services/dialog.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl} from '@angular/forms';
-import {SpinnerService} from '../_services/spinner.service';
+import {SpinnerService} from '../../_services/spinner.service';
 
 @Component({
   selector: 'app-registration-dialog-form',

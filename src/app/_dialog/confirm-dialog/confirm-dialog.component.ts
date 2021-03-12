@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({
@@ -17,6 +17,5 @@ export class ConfirmDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close(false);
-    window.location.reload();
   }
 }

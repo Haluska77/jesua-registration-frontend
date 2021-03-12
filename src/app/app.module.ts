@@ -10,27 +10,26 @@ import {AuthGuard} from './_guard/auth.guard';
 import {GlobalErrorHandlerService} from './_services/global-error-handler.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MaterialModule} from './material/material.module';
+import {MaterialModule} from './_module/material/material.module';
 
-import {RegistrationFormComponent} from './registration-form/registration-form.component';
-import {UserComponent} from './user/user.component';
+import {RegistrationFormComponent} from './registration/registration-form/registration-form.component';
 import {LoginFormComponent} from './login-form/login-form.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
-import {EventListComponent} from './event-list/event-list.component';
-import {UserProfileComponent} from './user-profile/user-profile.component';
+import {EventListComponent} from './event/event-list/event-list.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {VisitorListComponent} from './visitor-list/visitor-list.component';
-import {UserListComponent} from './user-list/user-list.component';
+import {UserListComponent} from './user/user-list/user-list.component';
 import {ErrorComponent} from './error/error.component';
-import {EventDialogFormComponent} from './event-dialog-form/event-dialog-form.component';
-import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+import {EventDialogFormComponent} from './event/event-dialog-form/event-dialog-form.component';
+import {ConfirmDialogComponent} from './_dialog/confirm-dialog/confirm-dialog.component';
 import {EventService} from './_services/event.service';
 import {DatePipe} from '@angular/common';
-import {ResponseDialogComponent} from './response-dialog/response-dialog.component';
-import {UserDialogFormComponent} from './user-dialog-form/user-dialog-form.component';
-import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/registration-unsubscribe.component';
-import {RegistrationDialogFormComponent} from './registration-dialog-form/registration-dialog-form.component';
-import {UserAvatarListComponent} from './user-avatar-list/user-avatar-list.component';
+import {ResponseDialogComponent} from './_dialog/response-dialog/response-dialog.component';
+import {UserDialogFormComponent} from './user/user-dialog-form/user-dialog-form.component';
+import {RegistrationUnsubscribeComponent} from './registration/registration-unsubscribe/registration-unsubscribe.component';
+import {RegistrationDialogFormComponent} from './registration/registration-dialog-form/registration-dialog-form.component';
+import {UserAvatarListComponent} from './user/user-avatar-list/user-avatar-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import {UserAvatarListComponent} from './user-avatar-list/user-avatar-list.compo
     EventListComponent,
     LoginFormComponent,
     UserProfileComponent,
-    UserComponent,
     VisitorListComponent,
     UserListComponent,
     ErrorComponent,

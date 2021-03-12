@@ -1,7 +1,7 @@
 import {Component, Inject, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {EventService} from '../_services/event.service';
-import {NotificationService} from '../_services/notification.service';
+import {EventService} from '../../_services/event.service';
+import {NotificationService} from '../../_services/notification.service';
 
 @Component({
   selector: 'app-event-dialog-form',

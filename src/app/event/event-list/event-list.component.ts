@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {EventService} from '../_services/event.service';
-import {Event} from '../_models/event';
+import {EventService} from '../../_services/event.service';
+import {Event} from '../../_models/event';
 import {Observable, Subject} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatTable} from '@angular/material/table';
 import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
-import {DialogService} from '../_services/dialog.service';
-import {NotificationService} from '../_services/notification.service';
+import {DialogService} from '../../_services/dialog.service';
+import {NotificationService} from '../../_services/notification.service';
 
 
 @Component({

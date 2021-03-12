@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RegistrationFormComponent} from './registration-form/registration-form.component';
-import {EventListComponent} from './event-list/event-list.component';
+import {RegistrationFormComponent} from './registration/registration-form/registration-form.component';
+import {EventListComponent} from './event/event-list/event-list.component';
 import {HomeComponent} from './home/home.component';
 import {LoginFormComponent} from './login-form/login-form.component';
-import {UserProfileComponent} from './user-profile/user-profile.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {AuthGuard} from './_guard/auth.guard';
-import {UserListComponent} from './user-list/user-list.component';
+import {UserListComponent} from './user/user-list/user-list.component';
 import {VisitorListComponent} from './visitor-list/visitor-list.component';
 import {ErrorComponent} from './error/error.component';
-import {RegistrationUnsubscribeComponent} from './registration-unsubscribe/registration-unsubscribe.component';
+import {RegistrationUnsubscribeComponent} from './registration/registration-unsubscribe/registration-unsubscribe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},

@@ -5,7 +5,7 @@ import {PasswordRoutingModule} from './password-routing.module';
 import {PasswordComponent} from './password/password.component';
 import {PasswordRegisterFormComponent} from './password-register-form/password-register-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MaterialModule} from '../material/material.module';
+import {MaterialModule} from '../_module/material/material.module';
 
 
 @NgModule({

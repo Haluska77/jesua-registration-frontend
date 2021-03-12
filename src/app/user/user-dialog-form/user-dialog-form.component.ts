@@ -1,12 +1,12 @@
 import {Component, Inject, OnDestroy, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginService} from '../_services/login.service';
-import {NotificationService} from '../_services/notification.service';
+import {LoginService} from '../../_services/login.service';
+import {NotificationService} from '../../_services/notification.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from '../custom-validators';
+import {CustomValidators} from '../../custom-validators';
 import {UserAvatarListComponent} from '../user-avatar-list/user-avatar-list.component';
 import {Subscription} from 'rxjs';
-import {TokenService} from '../_services/token.service';
+import {TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-user-dialog-form',

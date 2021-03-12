@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../_services/home.service';
 import {MatDialog} from '@angular/material/dialog';
-import {RegistrationDialogFormComponent} from '../registration-dialog-form/registration-dialog-form.component';
+import {RegistrationDialogFormComponent} from '../registration/registration-dialog-form/registration-dialog-form.component';
 
 export class CourseState {
 

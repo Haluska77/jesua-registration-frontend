@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogService} from '../_services/dialog.service';
-import {LoginService} from '../_services/login.service';
-import {NotificationService} from '../_services/notification.service';
+import {DialogService} from '../../_services/dialog.service';
+import {LoginService} from '../../_services/login.service';
+import {NotificationService} from '../../_services/notification.service';
 import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
 import {Subscription} from 'rxjs';
-import {TokenService} from '../_services/token.service';
+import {TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-user-list',
@@ -56,6 +56,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.openDialog('Update', row);
   }
 
+  // currently not invoked from web
   onDelete(id: number): void {
     this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
