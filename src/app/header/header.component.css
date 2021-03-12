@@ -1,0 +1,47 @@
+
+.mat-icon{
+  cursor: pointer;
+}
+
+.mat-button.mat-base{
+  background-color: #6f634d;
+  color: #dbd8d2;
+}
+
+.mat-button.mat-base:a{
+  background-color: #6f634d;
+  color: #dbd8d2;
+  margin: 0;
+}
+
+.mat-button.mat-base:active{
+  background-color: #dbd8d2;
+  color: #6f634d;
+}
+
+.sticky {
+  background-color: #6f634d;
+  color: #dbd8d2;
+  width: 100%;
+}
+
+img.avatar{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #dbd8d2;
+}
+
+.timer{
+  font-size: 15px;
+  padding: 10px;
+}
+
+.warn {
+  color: yellow;
+}
+
+a:link, :visited {
+  font-size: 20px;
+  color: #dbd8d2;
+}

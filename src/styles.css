@@ -17,6 +17,60 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: lightgreen;
 }
 
+.mat-button.mat-base{
+  background-color: #6f634d;
+  font-size: large;
+  color: #dbd8d2;
+}
+
+.confirm-dialog-container .mat-dialog-container {
+  padding: 10px;
+}
+
+.confirm-dialog-container #error_outline {
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+  color: orangered
+}
+
+.confirm-dialog-container #close-icon {
+  width: 100%;
+  text-align: right;
+  font-weight: bolder;
+  color: grey;
+}
+
+.confirm-dialog-container #close-icon:hover {
+  cursor: pointer;
+}
+
+.confirm-dialog-container .content-container {
+  margin: 25px 5px 25px 5px;
+  color: grey;
+  text-align: center;
+  display: block;
+}
+
+.confirm-dialog-container #yes-but {
+  height: 40px;
+  width: 30%;
+  background-color: orangered;
+  color: white;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+.confirm-dialog-container #no-but {
+  height: 40px;
+  width: 30%;
+  background-color: lightgray;
+  color: white;
+  border-radius: 4px;
+  margin: 5px;
+  border: lightgray;
+}
+
 .response-dialog-container .mat-dialog-container {
   background-color: white;
   color: grey;
@@ -53,54 +107,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .response-dialog-container #x-icon:hover {
   cursor: pointer;
-}
-
-.confirm-dialog-container .mat-dialog-container {
-    padding: 10px;
-}
-
-.confirm-dialog-container #error_outline {
-  height: 48px;
-  width: 48px;
-  font-size: 48px;
-  color: orangered
-}
-
-.confirm-dialog-container #close-icon {
-  width: 100%;
-  text-align: right;
-  font-weight: bolder;
-  color: grey;
-}
-
-.confirm-dialog-container #close-icon:hover {
-    cursor: pointer;
-}
-
-.confirm-dialog-container .content-container {
-  margin: 25px 5px 25px 5px;
-  color: grey;
-  text-align: center;
-  display: block;
-}
-
-.confirm-dialog-container #yes-but {
-    height: 40px;
-    width: 30%;
-    background-color: orangered;
-    color: white;
-    border-radius: 4px;
-    margin: 5px;
-}
-
-.confirm-dialog-container #no-but {
-    height: 40px;
-    width: 30%;
-    background-color: lightgray;
-    color: white;
-    border-radius: 4px;
-    margin: 5px;
-    border: lightgray;
 }
 
 simple-snack-bar {

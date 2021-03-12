@@ -53,7 +53,6 @@ export class EventListComponent implements OnInit {
     this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
         if (response) {
-          // delete event in DB
           this.eventservice.deleteEvent(id)
             .subscribe(
               data => {

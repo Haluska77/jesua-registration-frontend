@@ -13,7 +13,8 @@
 
 .mat-raised-button.mat-primary{
   background-color: #6f634d;
-  color: #bfb8ab;
+  color: #dbd8d2;
+  margin: 4px;
 }
 
 .mat-raised-button.mat-primary:disabled {
@@ -22,7 +23,8 @@
 }
 
 .mat-stroked-button.mat-primary{
-  background-color: #E3E2DE;
+  background-color: #dbd8d2;
   color: #6f634d;
   border-color: #6f634d;
+  margin: 4px;
 }

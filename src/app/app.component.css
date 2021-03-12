@@ -15,37 +15,3 @@
 :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
   stroke: #6f634d;
 }
-
-img.avatar{
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: 1px solid #dbd8d2;
-}
-
-.mat-button.mat-base{
-  background-color: #6f634d;
-  font-size: large;
-  color: #dbd8d2;
-}
-
-.sticky {
-  background-color: #6f634d;
-  color: #dbd8d2;
-  padding: 0px;
-  width: 100%;
-  top: 0px;
-}
-
-.timer{
-  font-size: 15px;
-  padding: 10px;
-}
-.warn {
-  color: yellow;
-}
-
-.logo {
-  padding: 0px 5px;
-  font-size: 20px;
-}

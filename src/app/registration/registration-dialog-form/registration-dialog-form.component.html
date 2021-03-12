@@ -20,7 +20,7 @@
     <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email is not valid</mat-error>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div>
   <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="visitorService.registerForm.invalid">
     Submit
   </button>

@@ -23,7 +23,6 @@ export class MediaService {
       this.deviceSm = result.mqAlias === 'sm';
       this.deviceXs = result.mqAlias === 'xs';
       this.deviceSize = result.mqAlias;
-      console.log(result.mqAlias);
     });
   }
 
