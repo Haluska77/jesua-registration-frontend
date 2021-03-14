@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="status-tile {{courseStateMap.get(stat.id).state}}-back">
-              {{courseStateMap.get(stat.id).capacity}}
+              {{courseStateMap.get(stat.id).obsCapacity | async}}
             </div>
           </div>
         </mat-card-content>

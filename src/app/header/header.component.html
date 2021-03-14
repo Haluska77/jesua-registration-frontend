@@ -4,25 +4,25 @@
       <button mat-button>
         <span class="logo"><a href="http://www.jesua.sk">JEŠUA</a></span>
       </button>
-      <button mat-button color="base" [routerLink]="'/home'" routerLinkActive="active" title="Home"><mat-icon>home</mat-icon></button>
+      <a mat-icon-button color="base" [routerLink]="'/home'" routerLinkActive="active" title="Home"><mat-icon>home</mat-icon></a>
       <div *ngIf="!mediaService.deviceXs" fxLayout="row">
-        <button mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</button>
-        <button mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</button>
-        <button mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</button>
+        <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</a>
+        <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</a>
+        <a mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</a>
       </div>
     </div>
     <div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div *ngIf="!tokenService.isLoggedIn" [routerLink]="'/login'" routerLinkActive="active" title="Login"><mat-icon>lock_outlined</mat-icon></div>
-        <div *ngIf="tokenService.isLoggedIn"><a href="/profile" routerLink="profile"><img class="avatar" src="./assets/avatars/{{ tokenService.avatar }}"></a></div>
-        <div *ngIf="tokenService.isLoggedIn" class="timer" [ngClass]="{'warn': tokenService.mins < 1}">{{tokenService.mins | number: '2.0'}}:{{tokenService.secs | number: '2.0'}}</div>
-        <div *ngIf="tokenService.isLoggedIn" (click)="tokenService.signOut()" title="Logout"><mat-icon>lock_open</mat-icon></div>
+        <a mat-icon-button color="base" *ngIf="!tokenService.isLoggedIn" [routerLink]="'/login'" routerLinkActive="active" title="Login"><mat-icon>lock_outlined</mat-icon></a>
+        <a mat-button *ngIf="tokenService.isLoggedIn" [routerLink]="'/profile'"><img class="avatar" src="./assets/avatars/{{ tokenService.avatar }}"></a>
+        <a mat-button *ngIf="tokenService.isLoggedIn" class="timer" [ngClass]="{'warn': tokenService.mins < 1}">{{tokenService.mins | number: '2.0'}}:{{tokenService.secs | number: '2.0'}}</a>
+        <a mat-icon-button color="base" *ngIf="tokenService.isLoggedIn" (click)="tokenService.signOut()" routerLinkActive="active" title="Logout"><mat-icon>lock_open</mat-icon></a>
       </div>
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row *ngIf="mediaService.deviceXs && (tokenService.showAdminBoard || tokenService.showModeratorBoard)" fxLayoutAlign="space-between end">
-    <button mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</button>
-    <button mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</button>
-    <button mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</button>
+    <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</a>
+    <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</a>
+    <a mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</a>
   </mat-toolbar-row>
 </mat-toolbar>

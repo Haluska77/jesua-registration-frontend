@@ -41,7 +41,6 @@ img.avatar{
   color: yellow;
 }
 
-a:link, :visited {
-  font-size: 20px;
+a:link, :visited, :hover {
   color: #dbd8d2;
 }

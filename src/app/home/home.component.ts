@@ -2,12 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../_services/home.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogFormComponent} from '../registration/registration-dialog-form/registration-dialog-form.component';
+import { interval, Observable } from 'rxjs';
+import { filter, map, take, takeUntil, takeWhile } from 'rxjs/operators';
 
 export class CourseState {
 
   state: string;
   statusText: string;
   capacity: number;
+  obsCapacity: Observable<any>;
 }
 
 @Component({
@@ -39,6 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.homeService.getStatistics().subscribe(
       data => {
 
@@ -46,7 +50,6 @@ export class HomeComponent implements OnInit {
         this.courseStateMap = new Map<number, CourseState>();
         data.response.body.forEach(item => {
           this.courseState = new CourseState();
-
           if (item.active < item.capacity){
             this.courseState.state = 'free';
             this.courseState.statusText = 'Voľné';
@@ -56,7 +59,15 @@ export class HomeComponent implements OnInit {
             this.courseState.statusText = 'Obsadené';
             this.courseState.capacity = item.waiting;
           }
-          this.courseStateMap.set(item.id, this.courseState);
+          console.log(this.courseState.capacity);
+          
+          this.courseState.obsCapacity = interval(40)
+          .pipe(
+            // takeWhile(x => x<=this.courseState.capacity)
+            take(this.courseState.capacity+1)
+            )
+
+            this.courseStateMap.set(item.id, this.courseState);
 
           // console.log('RESPONSE: ' + item.id + '-' + JSON.stringify(this.courseStateMap.get(item.id)));
 
