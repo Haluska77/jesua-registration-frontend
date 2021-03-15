@@ -12,20 +12,18 @@
             <th>Miesto akcie</th>
             <th>Začiatok</th>
             <th>Otvorené</th>
-            <th>Vytvorené</th>
             <th>Vytvoril</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let event of events "
-            [ngClass]="{'active-background': event.open, 'error-background': !event.open}">
+            [ngClass]="event.open ? 'active-background' : 'error-background'">
             <td>{{event.id}}</td>
             <td>{{event.description}}</td>
-            <td>{{event.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
-            <td>{{event.open ? 'Otvorené' : 'Zatvorené'}}</td>
-            <td>{{event.created | date: 'dd.MM.yyyy HH:mm'}}</td>
-            <td>{{event.user.name}}</td>
+            <td>{{event.startDate | date: 'dd.MM.yyyy, HH:mm'}}</td>
+            <td><mat-icon>{{event.open ? 'check' : 'close'}}</mat-icon></td>
+            <td [ngClass]="event.user.active ? '' : 'inactive'">{{event.user.name}} ({{event.created | date: 'dd.MM.yyyy, HH:mm:ss'}})</td>
             <td>
               <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
                 <mat-icon>edit</mat-icon>
