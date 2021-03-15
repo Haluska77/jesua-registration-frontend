@@ -12,6 +12,8 @@
             <th>Miesto akcie</th>
             <th>Začiatok</th>
             <th>Otvorené</th>
+            <th>Vytvorené</th>
+            <th>Vytvoril</th>
             <th></th>
           </tr>
         </thead>
@@ -22,6 +24,8 @@
             <td>{{event.description}}</td>
             <td>{{event.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
             <td>{{event.open ? 'Otvorené' : 'Zatvorené'}}</td>
+            <td>{{event.created | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{event.user.name}}</td>
             <td>
               <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
                 <mat-icon>edit</mat-icon>

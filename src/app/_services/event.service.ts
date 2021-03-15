@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {TokenService} from "./token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,15 @@ export class EventService {
   private baseUrl = environment.baseUrl + 'events/';
 
   constructor(private http: HttpClient,
-              private datePipe: DatePipe) { }
+              private datePipe: DatePipe,
+              private tokenService: TokenService) {
+  }
+
+  user = this.tokenService.getUser();
 
   eventForm = new FormGroup({
-    id: new FormControl('', ),
+    id: new FormControl(''),
+    userId: new FormControl(this.user.id),
     description: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
     open: new FormControl(),
@@ -26,8 +32,7 @@ export class EventService {
 
   fillEvent(event: any): void {
     event.startDate = this.datePipe.transform(event.startDate, 'yyyy-MM-ddTHH:mm', 'Europe/Bratislava');
-    this.eventForm.setValue(event);
-
+    this.eventForm.patchValue(event);
   }
 
   getEventList(): Observable<any> {
@@ -44,7 +49,8 @@ export class EventService {
       description: course.description,
       startDate: course.startDate,
       open: course.open,
-      capacity: course.capacity
+      capacity: course.capacity,
+      userId: course.userId
     });
   }
 

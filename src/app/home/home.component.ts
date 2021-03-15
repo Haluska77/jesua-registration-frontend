@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
               this.courseState.capacity = item.waiting;
             }
 
-            this.courseState.obsCapacity = interval(40)
+            this.courseState.obsCapacity = interval(30)
               .pipe(
                 // takeWhile(x => x <= this.courseState.capacity)
                 take(this.courseState.capacity + 1)

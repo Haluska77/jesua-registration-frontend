@@ -2,6 +2,7 @@
 <div mat-dialog-content [formGroup]="eventService.eventForm">
 
   <input type="hidden" formControlName="id">
+  <input type="hidden" formControlName="userId">
   <mat-form-field>
     <input matInput formControlName="description" placeholder="Miesto akcie*"/>
     <mat-error *ngIf="f.description.touched && f.description.errors?.required">Popis is required</mat-error>
