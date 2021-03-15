@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 import {DatePipe} from '@angular/common';
-import {VisitorService} from '../_services/visitor.service';
+import {FollowerService} from '../_services/follower.service';
 import {DialogService} from '../_services/dialog.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {DialogService} from '../_services/dialog.service';
 })
 export class VisitorListComponent implements OnInit {
 
-  constructor(private visitorservice: VisitorService,
+  constructor(private followerService: FollowerService,
     private dialogService: DialogService,
   ) { }
 
@@ -31,7 +31,7 @@ export class VisitorListComponent implements OnInit {
       order: [[3, 'asc']],
       language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
     };
-    this.visitorservice.getVisitorList().subscribe(
+    this.followerService.getVisitorList().subscribe(
       data => {
         this.followerList = data.response.body;
         this.dtTrigger.next();
@@ -42,7 +42,7 @@ export class VisitorListComponent implements OnInit {
     this.dialogService.openConfirmDialog("Are you sure to unsubscribe user: '" + email + "'?")
       .afterClosed().subscribe(response => {
         if (response) {
-          this.visitorservice.unsubscribe(token, event).subscribe(
+          this.followerService.unsubscribe(token, event).subscribe(
             data => {
               this.follower = data.response;
               this.dialogService.openSuccessResponseDialog('Odhlásený', this.follower.message, '/visitors');

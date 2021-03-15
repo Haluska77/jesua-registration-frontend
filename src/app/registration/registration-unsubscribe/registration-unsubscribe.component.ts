@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../_services/dialog.service';
-import {VisitorService} from '../../_services/visitor.service';
+import {FollowerService} from '../../_services/follower.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
 })
 export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
 
-  constructor(private userService: VisitorService,
+  constructor(private userService: FollowerService,
               private dialogService: DialogService,
               private route: ActivatedRoute,
               private router: Router) {

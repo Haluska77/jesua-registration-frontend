@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {VisitorService} from '../../_services/visitor.service';
+import {FollowerService} from '../../_services/follower.service';
 import {DialogService} from '../../_services/dialog.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl} from '@angular/forms';
@@ -12,7 +12,7 @@ import {SpinnerService} from '../../_services/spinner.service';
 })
 export class RegistrationDialogFormComponent implements OnInit {
 
-  constructor(public visitorService: VisitorService,
+  constructor(public followerService: FollowerService,
               private dialogService: DialogService,
               public spinnerService: SpinnerService,
               public dialogRef: MatDialogRef<RegistrationDialogFormComponent>,
@@ -22,16 +22,16 @@ export class RegistrationDialogFormComponent implements OnInit {
   visitor: any;
 
   ngOnInit(): void {
-    this.visitorService.registerForm.patchValue({course: this.data.course.id});
+    this.followerService.registerForm.patchValue({course: this.data.course.id});
   }
 
   get f(): {[p: string]: AbstractControl}  {
-    return this.visitorService.registerForm.controls;
+    return this.followerService.registerForm.controls;
   }
 
   onSubmit() {
 
-    this.visitorService.register(this.visitorService.registerForm.value).subscribe(
+    this.followerService.register(this.followerService.registerForm.value).subscribe(
       data => {
         this.visitor = data.response;
         if (data.response.body.accepted) {
@@ -52,7 +52,7 @@ export class RegistrationDialogFormComponent implements OnInit {
   }
 
   onClose(): void {
-    this.visitorService.registerForm.reset();
+    this.followerService.registerForm.reset();
     this.dialogRef.close();
   }
 

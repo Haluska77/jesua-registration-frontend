@@ -21,7 +21,7 @@
         'error-background': follower.unregistered }">
           <td>{{follower.name}}</td>
           <td>{{follower.email}}</td>
-          <td>{{follower.course.id}}</td>
+          <td>{{follower.course.description}} - {{follower.course.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}</td>
           <td>{{follower.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
           <td>{{follower.unregistered ? 'Odhlásený' : (follower.accepted ? 'Prihlásený' : 'Waiting')}}</td>
           <td *ngIf="follower.unregistered">{{follower.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>

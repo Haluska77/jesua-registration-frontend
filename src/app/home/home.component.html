@@ -5,7 +5,7 @@
       <mat-card class="left-style-{{courseStateMap.get(stat.id).state}}">
         <mat-card-content>
           <div class="info-tile" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <div class="description-tile" fxLayout="column">
+            <div class="description-tile" fxLayout="column" fxFlex="60%" >
               <div class="description-item">
                 <mat-icon>place</mat-icon>&nbsp;{{stat.description}}
               </div>
@@ -16,7 +16,7 @@
                 <mat-icon>people_alt</mat-icon>&nbsp;{{stat.active + stat.waiting}}/{{stat.capacity}}
               </div>
             </div>
-            <div class="status-tile {{courseStateMap.get(stat.id).state}}-back">
+            <div class="status-tile {{courseStateMap.get(stat.id).state}}-back" fxFlex="40%" >
               {{courseStateMap.get(stat.id).obsCapacity | async}}
             </div>
           </div>

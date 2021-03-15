@@ -29,6 +29,7 @@ mat-card-content {
   display: flex;
   border-radius: 5px 5px 0px 0px;
   margin: 0;
+  min-width: 270px;
 }
 
 .info-tile {
@@ -37,7 +38,8 @@ mat-card-content {
 }
 
 .description-tile {
-  width: 50%;
+  width: 60%;
+  min-width: 162px;
 }
 
 .description-item {
@@ -49,7 +51,8 @@ mat-card-content {
 }
 
 .status-tile {
-  width: 50%;
+  width: 40%;
+  min-width: 108px;
   font-size: xxx-large;
   font-weight: bolder;
   display: flex;

@@ -9,7 +9,7 @@ import {CustomValidators} from '../custom-validators';
   providedIn: 'root'
 })
 
-export class VisitorService {
+export class FollowerService {
 
   constructor(private http: HttpClient) { }
 

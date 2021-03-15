@@ -1,7 +1,7 @@
 <mat-progress-bar color="warn" mode="indeterminate" *ngIf="spinnerService.visibility | async"></mat-progress-bar>
 <div mat-dialog-title>Registrácia
 {{data.course.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
-<div mat-dialog-content [formGroup]="visitorService.registerForm">
+<div mat-dialog-content [formGroup]="followerService.registerForm">
 
   <input type="hidden" formControlName="course">
   <input type="hidden" formControlName="gdpr" value="true"/>
@@ -21,7 +21,7 @@
   </mat-form-field>
 </div>
 <div>
-  <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="visitorService.registerForm.invalid">
+  <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="followerService.registerForm.invalid">
     Submit
   </button>
   <button mat-stroked-button (click)="onClose()" color="primary">Cancel</button>
