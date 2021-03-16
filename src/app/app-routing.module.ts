@@ -14,7 +14,7 @@ import {RoleGuard} from './_guard/role.guard';
 import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'registration', component: RegistrationFormComponent},
   {path: 'registration/unsubscribe', component: RegistrationUnsubscribeComponent},
   {path: 'home', component: HomeComponent},

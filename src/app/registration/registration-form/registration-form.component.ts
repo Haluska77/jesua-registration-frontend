@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {DialogService} from '../../_services/dialog.service';
 import {EventService} from '../../_services/event.service';
 import {FollowerService} from '../../_services/follower.service';
-import {SpinnerService} from '../../_services/spinner.service';
 import {AbstractControl} from '@angular/forms';
 
 
@@ -18,8 +17,7 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(public followerService: FollowerService,
               private eventService: EventService,
-              private dialogService: DialogService,
-              public spinnerService: SpinnerService) {
+              private dialogService: DialogService) {
   }
 
   get f(): {[p: string]: AbstractControl} {

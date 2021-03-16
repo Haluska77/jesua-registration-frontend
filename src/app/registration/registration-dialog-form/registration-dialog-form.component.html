@@ -1,4 +1,3 @@
-<mat-progress-bar color="warn" mode="indeterminate" *ngIf="spinnerService.visibility | async"></mat-progress-bar>
 <div mat-dialog-title>Registrácia
 {{data.course.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
 <div mat-dialog-content [formGroup]="followerService.registerForm">

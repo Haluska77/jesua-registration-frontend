@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaService} from '../_services/media.service';
 import {TokenService} from '../_services/token.service';
+import {SpinnerService} from '../_services/spinner.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import {TokenService} from '../_services/token.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(public tokenService: TokenService,
+              public spinnerService: SpinnerService,
               public mediaService: MediaService) {
   }
 

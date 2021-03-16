@@ -26,3 +26,5 @@
     <a mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</a>
   </mat-toolbar-row>
 </mat-toolbar>
+<div style="height: 5px"><mat-progress-bar color="warn" mode="indeterminate" *ngIf="spinnerService.visibility | async"></mat-progress-bar></div>
+
