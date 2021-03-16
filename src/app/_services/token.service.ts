@@ -31,8 +31,8 @@ export class TokenService {
   }
 
   initialize(): void {
-    if (!!this.token) {
-      if (this.isTokenExpired(this.token)) {
+    if (this.tokenExists()) {
+      if (this.isTokenExpired()) {
         this.signOut();
       } else {
         this.isLoggedIn = true;
@@ -72,8 +72,12 @@ export class TokenService {
       });
   }
 
-  public isTokenExpired(token): boolean {
-    return new Date().getTime() > this.tokenExpirationDateTime(token);
+  public tokenExists(): boolean {
+    return !!this.getToken();
+  }
+
+  public isTokenExpired(): boolean {
+    return new Date().getTime() > this.tokenExpirationDateTime(this.getToken());
   }
 
   public tokenExpirationDateTime(token): number {
