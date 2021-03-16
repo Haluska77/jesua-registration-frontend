@@ -31,6 +31,7 @@ import {RegistrationUnsubscribeComponent} from './registration/registration-unsu
 import {RegistrationDialogFormComponent} from './registration/registration-dialog-form/registration-dialog-form.component';
 import {UserAvatarListComponent} from './user/user-avatar-list/user-avatar-list.component';
 import {HeaderComponent} from './header/header.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {HeaderComponent} from './header/header.component';
     RegistrationUnsubscribeComponent,
     RegistrationDialogFormComponent,
     UserAvatarListComponent,
-    HeaderComponent
+    HeaderComponent,
+    NotFoundComponent
   ],
   imports: [
     MaterialModule,

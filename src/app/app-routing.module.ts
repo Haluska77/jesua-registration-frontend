@@ -10,7 +10,8 @@ import {UserListComponent} from './user/user-list/user-list.component';
 import {VisitorListComponent} from './visitor-list/visitor-list.component';
 import {ErrorComponent} from './error/error.component';
 import {RegistrationUnsubscribeComponent} from './registration/registration-unsubscribe/registration-unsubscribe.component';
-import {RoleGuard} from "./_guard/role.guard";
+import {RoleGuard} from './_guard/role.guard';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -31,7 +32,9 @@ const routes: Routes = [
   {
     path: 'password',
     loadChildren: () => import('./password/password.module').then(mod => mod.PasswordModule),
-  }];
+  },
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
