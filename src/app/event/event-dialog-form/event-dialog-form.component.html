@@ -1,29 +1,29 @@
 <h1 mat-dialog-title>Course :: {{data.action}}</h1>
-<div mat-dialog-content [formGroup]="eventService.eventForm">
+<div class="form-group" [formGroup]="eventService.eventForm">
 
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="userId">
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <input matInput formControlName="description" placeholder="Miesto akcie*"/>
     <mat-error *ngIf="f.description.touched && f.description.errors?.required">Popis is required</mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <input matInput formControlName="startDate" type="datetime-local" placeholder="startDate*"/>
     <mat-error *ngIf="f.startDate.errors?.required">StartDate is required</mat-error>
   </mat-form-field>
-  <mat-form-field class="short">
+
+  <div *ngIf="data.action=='Add'">
+    <mat-icon class="warn" (click)="showCapacityWarning()">warning_amber</mat-icon>
+    <mat-icon class="arrow" (click)="showCapacityWarning()">{{capacityWarning ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
+  </div>
+  <div class="warn-text" *ngIf="capacityWarning">Kapacita kurzu sa v budúcnosti nedá meniť!</div>
+
+  <mat-form-field class="short" appearance="fill">
     <input matInput formControlName="capacity" placeholder="Kapacita kurzu*" type="number"
            [readonly]="data.action=='Update'"/>
     <mat-error *ngIf="f.capacity.touched && f.capacity.errors?.required">Kapacita is required</mat-error>
   </mat-form-field>
-  <mat-expansion-panel *ngIf="data.action=='Add'">
-    <mat-expansion-panel-header>
-      <mat-icon class="warn">warning_amber</mat-icon>
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      Kapacita sa v buducnosti neda menit!
-    </ng-template>
-  </mat-expansion-panel>
+
   <mat-checkbox formControlName="open" color="primary" [checked]="true">Otvoreny</mat-checkbox>
 </div>
 <div mat-dialog-actions>

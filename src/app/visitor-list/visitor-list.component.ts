@@ -39,7 +39,7 @@ export class VisitorListComponent implements OnInit {
   }
 
   unsubscribe(email: string, token: string, event: string) {
-    this.dialogService.openConfirmDialog("Are you sure to unsubscribe user: '" + email + "'?")
+    this.dialogService.openConfirmDialog('Are you sure to unsubscribe user: \'' + email + '\'?')
       .afterClosed().subscribe(response => {
         if (response) {
           this.followerService.unsubscribe(token, event).subscribe(

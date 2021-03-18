@@ -1,40 +1,45 @@
-<div style="padding: 10px;" class="panel panel-default">
-  <div class="panel-heading">
-    <h1 style="text-align: center">Events</h1>
-    <div style="padding: 10px;">
-      <button mat-button (click)="onCreate()" mat-flat-button color="primary">Pridaj udalosť</button>
-    </div>
-    <div class="panel-body">
-      <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-        <thead class="thead-light">
-          <tr>
-            <th>ID</th>
-            <th>Miesto akcie</th>
-            <th>Začiatok</th>
-            <th>Otvorené</th>
-            <th>Vytvoril</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let event of events "
-            [ngClass]="event.open ? 'active-background' : 'error-background'">
-            <td>{{event.id}}</td>
-            <td>{{event.description}}</td>
-            <td>{{event.startDate | date: 'dd.MM.yyyy, HH:mm'}}</td>
-            <td><mat-icon>{{event.open ? 'check' : 'close'}}</mat-icon></td>
-            <td [ngClass]="event.user.active ? '' : 'inactive'">{{event.user.name}} ({{event.created | date: 'dd.MM.yyyy, HH:mm:ss'}})</td>
-            <td>
-              <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button class="red-icon" (click)="onDelete(event.id)" mat-flat-button>
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </tr>
-        </tbody><br>
-      </table>
-    </div>
+<div class="container">
+  <h1 style="text-align: center">Events</h1>
+  <div class="panel-body">
+    <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Miesto akcie</th>
+        <th>Začiatok</th>
+        <th>Otvorené</th>
+        <th>Vytvoril</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let event of events "
+          [ngClass]="event.open ? 'active-background' : 'error-background'">
+        <td>{{event.id}}</td>
+        <td>{{event.description}}</td>
+        <td>{{event.startDate | date: 'dd.MM.yyyy, HH:mm'}}</td>
+        <td>
+          <mat-icon>{{event.open ? 'check' : 'close'}}</mat-icon>
+        </td>
+        <td [ngClass]="event.createdBy.active ? '' : 'inactive'">{{event.createdBy.name}}
+          ({{event.created | date: 'dd.MM.yyyy, HH:mm:ss'}})
+        </td>
+        <td>
+          <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <!--              <button mat-icon-button class="red-icon" (click)="onDelete(event.id)" mat-flat-button>-->
+          <!--                <mat-icon>delete</mat-icon>-->
+          <!--              </button>-->
+        </td>
+      </tr>
+      </tbody>
+      <br>
+    </table>
+  </div>
+  <div class="plus">
+    <button mat-fab (click)="onCreate()" color="primary">
+      <mat-icon>plus_one</mat-icon>
+    </button>
   </div>
 </div>

@@ -1,36 +1,37 @@
-<div style="padding: 10px;" class="panel panel-default">
-  <div class="panel-heading">
-    <h1 style="text-align: center">Visitors</h1>
-  </div>
+<div class="container">
+  <h1 style="text-align: center">Visitors</h1>
 
   <div class="panel-body">
     <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
       <thead class="thead-light">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Event</th>
-          <th>Registered</th>
-          <th></th>
-          <th>Unregistered</th>
-        </tr>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Event</th>
+        <th>Registered</th>
+        <th></th>
+        <th>Unregistered</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let follower of followerList " [ngClass]="{'active-background': follower.accepted,
+      <tr *ngFor="let follower of followerList " [ngClass]="{'active-background': follower.accepted,
         'warn-background': !follower.unregistered && !follower.accepted,
         'error-background': follower.unregistered }">
-          <td>{{follower.name}}</td>
-          <td>{{follower.email}}</td>
-          <td>{{follower.course.description}} - {{follower.course.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}</td>
-          <td>{{follower.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
-          <td>{{follower.unregistered ? 'Odhlásený' : (follower.accepted ? 'Prihlásený' : 'Waiting')}}</td>
-          <td *ngIf="follower.unregistered">{{follower.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
-          <td *ngIf="!follower.unregistered"><button (click)="unsubscribe(follower.email, follower.token, follower.course.id)"
-              class='btn btn-warning'>
-
-              <i class="material-icons">edit</i>unregister</button></td>
-        </tr>
-      </tbody><br>
+        <td>{{follower.name}}</td>
+        <td>{{follower.email}}</td>
+        <td>{{follower.course.description}}
+          - {{follower.course.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}</td>
+        <td>{{follower.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
+        <td>{{follower.unregistered ? 'Odhlásený' : (follower.accepted ? 'Prihlásený' : 'Waiting')}}</td>
+        <td *ngIf="follower.unregistered">{{follower.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+        <td *ngIf="!follower.unregistered">
+          <button mat-icon-button mat-flat-button (click)="unsubscribe(follower.email, follower.token, follower.course.id)">
+            <mat-icon>person_off</mat-icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <br>
     </table>
   </div>
 </div>

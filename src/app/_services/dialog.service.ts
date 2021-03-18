@@ -26,7 +26,7 @@ export class DialogService {
     return this.dialog.open(ResponseDialogComponent, {
       width: wide,
       panelClass: 'response-dialog-container',
-      disableClose: false,
+      disableClose: true,
       position: {top: '20px'},
       data: {
         icon,

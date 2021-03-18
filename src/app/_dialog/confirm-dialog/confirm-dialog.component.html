@@ -1,11 +1,12 @@
 <mat-icon id="close-icon" (click)="closeDialog()">close</mat-icon>
 <div>
-    <div class="content-container">
-        <mat-icon id="error_outline">error_outline</mat-icon><br>
-        {{data.message}}
-    </div>
-    <div class="content-container">
-        <button mat-flat-button id="no-but" [mat-dialog-close]="false" (click)="closeDialog()">NO</button>
-        <button mat-flat-button id="yes-but" [mat-dialog-close]="true">YES</button>
-    </div>
+  <div class="content-container">
+    <mat-icon id="error_outline">error_outline</mat-icon>
+    <br>
+    {{data.message}}
+  </div>
+  <div class="content-container">
+    <button mat-flat-button id="yes-but" [mat-dialog-close]="true">YES</button>
+    <button mat-stroked-button id="no-but" [mat-dialog-close]="false" (click)="closeDialog()">NO</button>
+  </div>
 </div>

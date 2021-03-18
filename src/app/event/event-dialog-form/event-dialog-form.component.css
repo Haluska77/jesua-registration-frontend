@@ -1,19 +1,30 @@
-.mat-form-field{
-    /*width: 100%;*/
-  display: inline;
-  flex-direction: column;
-  align-items: flex-start;
+.form-group{
+  width: 100%;
 }
 
-.myapp-dialog {
-    width: 100%;
-    /*height: 200px;*/
-    padding: 20px;
+.mat-form-field {
+  display: inline;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-basis: 380px;
 }
-.short{
-  width:50%;
+
+.short {
+  width: 300px;
 }
 
 .warn {
-color: orange;
+  color: orange;
+  cursor: pointer;
+}
+
+.warn-text {
+  color: grey;
+  font-style: italic;
+}
+
+.arrow {
+  color: grey;
+  cursor: pointer;
 }

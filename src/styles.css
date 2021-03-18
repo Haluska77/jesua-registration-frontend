@@ -1,23 +1,29 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .red-icon {
   color: red;
 }
 
-.error-background{
+.error-background {
   background-color: rgb(167, 167, 167);
 }
 
-.warn-background{
+.warn-background {
   background-color: rgb(238, 214, 134);
 }
 
-.active-background{
+.active-background {
   background-color: lightgreen;
 }
 
-.mat-button.mat-base{
+.mat-button.mat-base {
   background-color: #6f634d;
   font-size: large;
   color: #dbd8d2;
@@ -34,14 +40,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: orangered
 }
 
-.confirm-dialog-container #close-icon {
+.confirm-dialog-container #close-icon, .response-dialog-container #close-icon {
   width: 100%;
   text-align: right;
   font-weight: bolder;
   color: grey;
 }
 
-.confirm-dialog-container #close-icon:hover {
+.confirm-dialog-container #close-icon:hover, .response-dialog-container #close-icon:hover {
   cursor: pointer;
 }
 
@@ -64,38 +70,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .confirm-dialog-container #no-but {
   height: 40px;
   width: 30%;
-  background-color: lightgray;
-  color: white;
+  background-color: white;
+  color: lightgray;
   border-radius: 4px;
   margin: 5px;
-  border: lightgray;
 }
 
 .response-dialog-container .mat-dialog-container {
+  padding: 10px;
   background-color: white;
   color: grey;
   text-align: center;
-}
-
-.response-dialog-container #x-icon {
-  width: 100%;
-  text-align: right;
-  font-weight: bolder;
-  color: grey;
 }
 
 .response-dialog-container #success {
   height: 48px;
   width: 48px;
   font-size: 48px;
-  color:   rgb(64, 194, 64);
+  color: rgb(64, 194, 64);
 }
 
 .response-dialog-container #waiting {
   height: 48px;
   width: 48px;
   font-size: 48px;
-  color:   orange;
+  color: orange;
 }
 
 .response-dialog-container #error {
@@ -105,51 +104,47 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: red;
 }
 
-.response-dialog-container #x-icon:hover {
-  cursor: pointer;
-}
-
 simple-snack-bar {
-    font-size: 20px !important;
+  font-size: 20px !important;
 }
 
-.mat-simple-snackbar-action  {
-    color: yellow;
-  }
+.mat-simple-snackbar-action {
+  color: yellow;
+}
 
-snack-bar-container.success  {
-    background-color: rgb(57, 161, 57);
-    color: white;
-    font-weight: bold;
-    /* animation: snackbarIn 1s; */
-    /* animation: snackbarOut 1s; */
+snack-bar-container.success {
+  background-color: rgb(57, 161, 57);
+  color: white;
+  font-weight: bold;
+  /* animation: snackbarIn 1s; */
+  /* animation: snackbarOut 1s; */
 
 }
 
 @keyframes snackbarIn {
-    from {
-      transform: translateY(-100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(100px);
-      opacity: 1;
-    }
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
   }
-
-  @keyframes snackbarOut {
-    to {
-      transform: translateY(-100px);
-      opacity: 0;
-    }
+  to {
+    transform: translateY(100px);
+    opacity: 1;
   }
+}
 
-  snack-bar-container.warn {
-    background-color: orange;
-    color: white;
+@keyframes snackbarOut {
+  to {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+snack-bar-container.warn {
+  background-color: orange;
+  color: white;
 }
 
 snack-bar-container.error {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }

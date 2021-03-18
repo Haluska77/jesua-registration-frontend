@@ -9,3 +9,8 @@
 .inactive {
   color: #aaa;
 }
+
+.plus {
+  display: flex;
+  justify-content: flex-end;
+}

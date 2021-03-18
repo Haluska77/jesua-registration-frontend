@@ -13,6 +13,7 @@ import {NotificationService} from '../../_services/notification.service';
 export class EventDialogFormComponent {
 
   snack: any;
+  capacityWarning = false;
 
   constructor(
     public eventService: EventService,
@@ -49,6 +50,10 @@ export class EventDialogFormComponent {
       }
     }
     this.onClose();
+  }
+
+  showCapacityWarning(): void{
+    this.capacityWarning = !this.capacityWarning;
   }
 
   onClose() {
