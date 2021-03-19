@@ -1,0 +1,26 @@
+<mat-card class="left-style-{{event.state}}">
+  <mat-card-content>
+    <div class="info-tile" fxLayout="row" fxLayoutAlign="space-between stretch">
+      <div class="description-tile" fxLayout="column" fxFlex="60%" >
+        <div class="description-item">
+          <mat-icon>place</mat-icon>&nbsp;{{event.description}}
+        </div>
+        <div class="description-item">
+          <mat-icon>access_time</mat-icon>&nbsp;{{event.startDate | date: 'dd.MM.yyyy - HH:mm' }}
+        </div>
+        <div class="description-item">
+          <mat-icon>people_alt</mat-icon>&nbsp;{{event.active + event.waiting}}/{{event.capacity}}
+        </div>
+      </div>
+      <div class="status-tile {{event.state}}-back" fxFlex="40%" >
+        {{event.obsCapacity | async}}
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-content>
+    <div fxFlex="100%" fxLayoutAlign="center center">
+      <mat-icon class="big-icon {{event.state}}-icon" (click)="onCreate(event)">add_circle
+      </mat-icon>
+    </div>
+  </mat-card-content>
+</mat-card>

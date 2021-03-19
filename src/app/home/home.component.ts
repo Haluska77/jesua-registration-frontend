@@ -3,14 +3,19 @@ import {HomeService} from '../_services/home.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogFormComponent} from '../registration/registration-dialog-form/registration-dialog-form.component';
 import {interval, Observable} from 'rxjs';
-import {take} from 'rxjs/operators';
+import {map, takeWhile} from 'rxjs/operators';
 
-export class CourseState {
+export class EventDetail {
 
+  id: number;
   state: string;
-  statusText: string;
+  description: string;
+  startDate: string;
+  active: number;
+  waiting: number;
   capacity: number;
-  obsCapacity: Observable<any>;
+  availableCapacity: number;
+  obsCapacity: Observable<number>;
 }
 
 @Component({
@@ -20,14 +25,10 @@ export class CourseState {
 })
 export class HomeComponent implements OnInit {
 
-  stats: any[];
-
-  courseState: CourseState;
-  courseStateMap: Map<number, CourseState>;
+  events$: Observable<EventDetail[]>;
 
   constructor(private homeService: HomeService,
               public dialog: MatDialog) {
-
   }
 
   onCreate(course: any): void {
@@ -43,36 +44,36 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.homeService.getStatistics().subscribe(
-      data => {
+    this.events$ = this.homeService.getStatistics()
+      .pipe(
+        map(data => data.response.body
+          .map(
+            item => {
+              const eventDetail = new EventDetail();
+              eventDetail.id = item.id;
+              eventDetail.description = item.description;
+              eventDetail.startDate = item.startDate;
+              eventDetail.active = item.active;
+              eventDetail.waiting = item.waiting;
+              eventDetail.capacity = item.capacity;
+              if (item.active < item.capacity) {
+                eventDetail.state = 'free';
+                eventDetail.availableCapacity = item.capacity - item.active;
+              } else {
+                eventDetail.state = 'full';
+                eventDetail.availableCapacity = item.waiting;
 
-        this.stats = data.response.body;
-        this.courseStateMap = new Map<number, CourseState>();
-        data.response.body.forEach(item => {
-            this.courseState = new CourseState();
-            if (item.active < item.capacity) {
-              this.courseState.state = 'free';
-              this.courseState.statusText = 'Voľné';
-              this.courseState.capacity = item.capacity - item.active;
-            } else {
-              this.courseState.state = 'full';
-              this.courseState.statusText = 'Obsadené';
-              this.courseState.capacity = item.waiting;
+              }
+              eventDetail.obsCapacity = interval(30)
+                .pipe(
+                  takeWhile(x => x <= eventDetail.availableCapacity)
+                );
+              return eventDetail;
+
             }
+          )
+        )
+      );
 
-            this.courseState.obsCapacity = interval(30)
-              .pipe(
-                // takeWhile(x => x <= this.courseState.capacity)
-                take(this.courseState.capacity + 1)
-              );
-
-            this.courseStateMap.set(item.id, this.courseState);
-
-            // console.log('RESPONSE: ' + item.id + '-' + JSON.stringify(this.courseStateMap.get(item.id)));
-
-          }
-        );
-
-      });
   }
 }

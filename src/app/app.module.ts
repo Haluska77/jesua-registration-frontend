@@ -32,6 +32,7 @@ import {RegistrationDialogFormComponent} from './registration/registration-dialo
 import {UserAvatarListComponent} from './user/user-avatar-list/user-avatar-list.component';
 import {HeaderComponent} from './header/header.component';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {EventStatsCardComponent} from './event/event-stats-card/event-stats-card.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {NotFoundComponent} from './not-found/not-found.component';
     RegistrationDialogFormComponent,
     UserAvatarListComponent,
     HeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EventStatsCardComponent
   ],
   imports: [
     MaterialModule,

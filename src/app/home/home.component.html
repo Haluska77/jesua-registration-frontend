@@ -1,33 +1,8 @@
 <h2>Aktuálne sa môžte prihlásiť na tieto JEŠUA stretnutia</h2>
 <div class="container">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let stat of stats">
-      <mat-card class="left-style-{{courseStateMap.get(stat.id).state}}">
-        <mat-card-content>
-          <div class="info-tile" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <div class="description-tile" fxLayout="column" fxFlex="60%" >
-              <div class="description-item">
-                <mat-icon>place</mat-icon>&nbsp;{{stat.description}}
-              </div>
-              <div class="description-item">
-                <mat-icon>access_time</mat-icon>&nbsp;{{stat.startDate | date: 'dd.MM.yyyy - HH:mm' }}
-              </div>
-              <div class="description-item">
-                <mat-icon>people_alt</mat-icon>&nbsp;{{stat.active + stat.waiting}}/{{stat.capacity}}
-              </div>
-            </div>
-            <div class="status-tile {{courseStateMap.get(stat.id).state}}-back" fxFlex="40%" >
-              {{courseStateMap.get(stat.id).obsCapacity | async}}
-            </div>
-          </div>
-        </mat-card-content>
-        <mat-card-content>
-          <div fxFlex="100%" fxLayoutAlign="center center">
-            <mat-icon class="big-icon {{courseStateMap.get(stat.id).state}}-icon" (click)="onCreate(stat)">add_circle
-            </mat-icon>
-          </div>
-        </mat-card-content>
-      </mat-card>
+    <div fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let event of events$ | async">
+      <app-event-stats-card [event]="event"></app-event-stats-card>
     </div>
   </div>
 </div>

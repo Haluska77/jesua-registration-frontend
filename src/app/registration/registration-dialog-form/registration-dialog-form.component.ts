@@ -3,7 +3,6 @@ import {FollowerService} from '../../_services/follower.service';
 import {DialogService} from '../../_services/dialog.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl} from '@angular/forms';
-import {SpinnerService} from '../../_services/spinner.service';
 
 @Component({
   selector: 'app-registration-dialog-form',
@@ -14,7 +13,6 @@ export class RegistrationDialogFormComponent implements OnInit {
 
   constructor(public followerService: FollowerService,
               private dialogService: DialogService,
-              public spinnerService: SpinnerService,
               public dialogRef: MatDialogRef<RegistrationDialogFormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any
   ) { }

@@ -1,27 +1,30 @@
-.form-group{
+.mat-form-field{
   width: 100%;
 }
 
-.mat-form-field {
-  display: inline;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-basis: 380px;
+.mat-checkbox{
+  width: 100%;
 }
 
-.short {
-  width: 300px;
+.mat-form-field.short-form-field{
+  width: 50%;
+}
+
+.warning {
+  display: inline;
+  width: 200px;
 }
 
 .warn {
-  color: orange;
+  padding: 15px;
+  color: red;
   cursor: pointer;
 }
 
 .warn-text {
   color: grey;
   font-style: italic;
+  font-weight: bold;
 }
 
 .arrow {
