@@ -1,0 +1,113 @@
+
+.custom-control-input:checked~.custom-control-label::before {
+  cursor: pointer;
+  border-color: #6f634d !important;
+  background-color: #6f634d !important;
+}
+
+.custom-control-input:not(:checked)~.custom-control-label::before {
+  cursor: pointer;
+  border-color: lightgray !important;
+  background-color: lightgray !important;
+}
+
+.custom-control-input~.custom-control-label::after {
+  cursor: pointer;
+  background-color: white !important;
+}
+
+.custom-control-input:disabled~.custom-control-label::before {
+  cursor: default;
+  border-color: lightgray !important;
+  background-color: lightgray !important;
+}
+
+.custom-control-input:disabled~.custom-control-label::after {
+  cursor: default;
+  background-color: white !important;
+}
+
+mat-card{
+  padding:0;
+}
+
+.active-header {
+  background: #6a6;
+}
+
+.inactive-header {
+  background: #aaa;
+}
+
+mat-card-header{
+  padding: 20px 20px 20px 20px;
+  color: white;
+  display: flex;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0 0px 10px 2px #ddd;
+}
+
+.mat-card-header-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+img.avatar{
+  width: 100px;
+  height: 100px;
+  border: 3px solid #ccc;
+  cursor: pointer;
+}
+
+.active-avatar {
+  box-shadow: 5px 5px 10px 2px #484;
+}
+
+.inactive-avatar {
+  box-shadow: 5px 5px 10px 2px #888;
+}
+
+mat-card-content{
+  padding: 10px;
+  margin: 0;
+}
+
+.content {
+  padding: 2px;
+  position: relative;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  color: #666;
+}
+
+mat-card-actions{
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-container{
+  display: flex;
+  padding: 10px 10px 20px 10px;
+  width: 100%;
+}
+
+.flex1 {
+  display: flex;
+  flex-basis: 50%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex2 {
+  display: flex;
+  flex-basis: 50%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+hr {
+  width: 60%;
+}

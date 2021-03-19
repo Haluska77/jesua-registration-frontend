@@ -33,6 +33,7 @@ import {UserAvatarListComponent} from './user/user-avatar-list/user-avatar-list.
 import {HeaderComponent} from './header/header.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {EventStatsCardComponent} from './event/event-stats-card/event-stats-card.component';
+import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {EventStatsCardComponent} from './event/event-stats-card/event-stats-card
     UserAvatarListComponent,
     HeaderComponent,
     NotFoundComponent,
-    EventStatsCardComponent
+    EventStatsCardComponent,
+    UserDetailCardComponent
   ],
   imports: [
     MaterialModule,
