@@ -6,16 +6,19 @@ import {interval, Observable} from 'rxjs';
 import {map, takeWhile} from 'rxjs/operators';
 
 export class EventDetail {
-
-  id: number;
+  event: Event;
   state: string;
+  availableCapacity: number;
+  obsCapacity: Observable<number>;
+}
+
+interface Event {
+  id: number;
   description: string;
   startDate: string;
   active: number;
   waiting: number;
   capacity: number;
-  availableCapacity: number;
-  obsCapacity: Observable<number>;
 }
 
 @Component({
@@ -48,14 +51,9 @@ export class HomeComponent implements OnInit {
       .pipe(
         map(data => data.response.body
           .map(
-            item => {
+            (item: Event) => {
               const eventDetail = new EventDetail();
-              eventDetail.id = item.id;
-              eventDetail.description = item.description;
-              eventDetail.startDate = item.startDate;
-              eventDetail.active = item.active;
-              eventDetail.waiting = item.waiting;
-              eventDetail.capacity = item.capacity;
+              eventDetail.event = item;
               if (item.active < item.capacity) {
                 eventDetail.state = 'free';
                 eventDetail.availableCapacity = item.capacity - item.active;
@@ -74,6 +72,5 @@ export class HomeComponent implements OnInit {
           )
         )
       );
-
   }
 }
