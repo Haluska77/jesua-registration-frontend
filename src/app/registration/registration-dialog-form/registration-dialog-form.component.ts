@@ -20,7 +20,7 @@ export class RegistrationDialogFormComponent implements OnInit {
   visitor: any;
 
   ngOnInit(): void {
-    this.followerService.registerForm.patchValue({course: this.data.course.id});
+    this.followerService.registerForm.patchValue({course: this.data.event.event.id});
   }
 
   get f(): {[p: string]: AbstractControl}  {

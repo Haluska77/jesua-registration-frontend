@@ -1,5 +1,5 @@
 <div mat-dialog-title>Registrácia
-{{data.course.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
+{{data.event.event.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
 <div mat-dialog-content [formGroup]="followerService.registerForm">
 
   <input type="hidden" formControlName="course">

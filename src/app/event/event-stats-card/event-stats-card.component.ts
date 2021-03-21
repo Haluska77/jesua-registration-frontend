@@ -14,13 +14,13 @@ export class EventStatsCardComponent {
 
   constructor(public dialog: MatDialog) { }
 
-  onCreate(course: any): void {
+  onCreate(event: EventDetail): void {
     this.dialog.open(RegistrationDialogFormComponent, {
       width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',
-      data: {course}
+      data: {event}
     });
 
   }
