@@ -1,9 +1,8 @@
 <div mat-dialog-title>Registrácia
-{{data.event.event.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
-<div mat-dialog-content [formGroup]="followerService.registerForm">
+  {{data.event.event.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
+<mat-dialog-content [formGroup]="followerService.registerForm">
 
   <input type="hidden" formControlName="course">
-  <input type="hidden" formControlName="gdpr" value="true"/>
   <mat-form-field appearance="fill" class="short">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" placeholder="Jesua"/>
@@ -18,11 +17,15 @@
     <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email is required</mat-error>
     <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email is not valid</mat-error>
   </mat-form-field>
-</div>
-<div>
+    <input type="hidden" formControlName="gdpr"/>
+<!--  <mat-checkbox formControlName="gdpr" color="primary"><i>Súhlasím so spracovaním osobných údajov</i>-->
+<!--  </mat-checkbox>-->
+
+</mat-dialog-content>
+<mat-dialog-actions>
   <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="followerService.registerForm.invalid">
     Submit
   </button>
   <button mat-stroked-button (click)="onClose()" color="primary">Cancel</button>
-</div>
+</mat-dialog-actions>
 

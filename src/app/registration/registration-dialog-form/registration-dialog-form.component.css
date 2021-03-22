@@ -28,3 +28,15 @@
   border-color: #6f634d;
   margin: 4px;
 }
+
+.mat-checkbox {
+  font-size: 12px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background: #6f634d!important;
+}
+
+mat-dialog-content {
+  height: 200px;
+}

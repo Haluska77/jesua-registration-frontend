@@ -19,7 +19,7 @@ export class FollowerService {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, CustomValidators.validateEmailPattern()]),
     course: new FormControl('', [Validators.required]),
-    gdpr: new FormControl()
+    gdpr: new FormControl(false, [Validators.requiredTrue])
   });
 
   getVisitorList(): Observable<any> {

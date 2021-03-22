@@ -34,6 +34,7 @@ import {HeaderComponent} from './header/header.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {EventStatsCardComponent} from './event/event-stats-card/event-stats-card.component';
 import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.component';
+import {GdprDialogComponent} from './_dialog/gdpr-dialog/gdpr-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.
     HeaderComponent,
     NotFoundComponent,
     EventStatsCardComponent,
-    UserDetailCardComponent
+    UserDetailCardComponent,
+    GdprDialogComponent
   ],
   imports: [
     MaterialModule,
