@@ -10,6 +10,7 @@
         <th>Event</th>
         <th>Registered</th>
         <th></th>
+        <th>Device</th>
         <th>Unregistered</th>
       </tr>
       </thead>
@@ -23,6 +24,7 @@
           - {{follower.course.startDate | date: 'dd.MM.yyyy HH:mm' : 'Europe/Bratislava'}}</td>
         <td>{{follower.registered | date: 'dd.MM.yyyy HH:mm:ss' : 'Europe/Bratislava'}}</td>
         <td>{{follower.unregistered ? 'Odhlásený' : (follower.accepted ? 'Prihlásený' : 'Waiting')}}</td>
+        <td>{{follower.deviceDetail}}</td>
         <td *ngIf="follower.unregistered">{{follower.unregistered | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
         <td *ngIf="!follower.unregistered">
           <button mat-icon-button mat-flat-button (click)="unsubscribe(follower.email, follower.token, follower.course.id)">

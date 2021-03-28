@@ -7,7 +7,7 @@
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" placeholder="Jesua"/>
     <mat-error *ngIf="f.name.touched && f.name.errors?.required">Name is required</mat-error>
-    <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Name must be at least
+    <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Name must have at least
       {{f.name.errors?.minlength.requiredLength}} characters
     </mat-error>
   </mat-form-field>

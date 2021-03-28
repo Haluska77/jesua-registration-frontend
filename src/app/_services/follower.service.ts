@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../custom-validators';
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import {CustomValidators} from '../custom-validators';
 
 export class FollowerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private deviceDetector: DeviceDetectorService) { }
 
   private baseUrl = environment.baseUrl + 'registration/';
 
@@ -19,7 +21,8 @@ export class FollowerService {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, CustomValidators.validateEmailPattern()]),
     course: new FormControl('', [Validators.required]),
-    gdpr: new FormControl(false, [Validators.requiredTrue])
+    gdpr: new FormControl(false, [Validators.requiredTrue]),
+    device: new FormControl(this.deviceDetector.userAgent)
   });
 
   getVisitorList(): Observable<any> {
@@ -33,13 +36,13 @@ export class FollowerService {
     return this.http.get(`${this.baseUrl}` + 'unsubscribe', {params});
   }
 
-  register(user): Observable<any> {
+  register(visitor): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}` + 'add',
       {
-        name: user.name,
-        email: user.email,
-        eventId: user.course,
-        gdpr: user.gdpr
+        name: visitor.name,
+        email: visitor.email,
+        eventId: visitor.course,
+        deviceDetail: visitor.device
       }
 );
 

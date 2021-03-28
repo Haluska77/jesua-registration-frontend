@@ -35,7 +35,7 @@ export class VisitorListComponent implements OnInit {
       data => {
         this.followerList = data.response.body;
         this.dtTrigger.next();
-      })
+      });
   }
 
   unsubscribe(email: string, token: string, event: string) {
@@ -51,7 +51,7 @@ export class VisitorListComponent implements OnInit {
               this.follower = error.error.error.message;
               console.log(error.error.error.message);
             }
-          )
+          );
         }
       }
       );

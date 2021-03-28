@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {GdprDialogComponent} from '../_dialog/gdpr-dialog/gdpr-dialog.component';
 
 @Component({
-  selector: 'footer',
+  selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
