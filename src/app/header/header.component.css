@@ -1,3 +1,7 @@
+.progress-bar {
+  height: 5px;
+  background-color: #6f634d;
+}
 
 .mat-icon{
   cursor: pointer;

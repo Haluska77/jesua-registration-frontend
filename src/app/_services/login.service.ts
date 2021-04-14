@@ -68,8 +68,4 @@ export class LoginService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + 'deleteUser/' + `${id}`);
   }
-
-  loggedIn(): boolean {
-    return !!sessionStorage.getItem('auth-token');
-  }
 }

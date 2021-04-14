@@ -1,0 +1,16 @@
+
+img.avatar {
+  width:75px;
+  height: 75px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+img.avatar:hover {
+  background-color: #eee;
+}
+
+.active {
+  border: 1px solid #aaa;
+  background-color: #ccc;
+}

@@ -31,3 +31,15 @@
   color: grey;
   cursor: pointer;
 }
+
+div.avatar {
+  display: flex;
+  padding: 6px;
+  align-items: center;
+}
+
+img.avatar {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}

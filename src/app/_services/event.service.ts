@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {TokenService} from "./token.service";
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,8 @@ export class EventService {
     description: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
     open: new FormControl(),
-    capacity: new FormControl('', [Validators.required])
+    capacity: new FormControl('', [Validators.required]),
+    image: new FormControl()
   });
 
   fillEvent(event: any): void {
@@ -44,13 +45,14 @@ export class EventService {
   }
 
   createEvent(course: any): Observable<object> {
-    console.log(this.baseUrl);
+
     return this.http.post(`${this.baseUrl}` + 'addEvent', {
       description: course.description,
       startDate: course.startDate,
       open: course.open,
       capacity: course.capacity,
-      userId: course.userId
+      userId: course.userId,
+      image: course.image
     });
   }
 
@@ -58,7 +60,7 @@ export class EventService {
     return this.http.delete(`${this.baseUrl}` + 'deleteEvent/' + `${id}`);
   }
 
-  updateEvent(id: number, value: object): Observable<Object> {
+  updateEvent(id: number, value: object): Observable<any> {
     return this.http.post(`${this.baseUrl}` + 'updateEvent/' + `${id}`, value);
   }
 

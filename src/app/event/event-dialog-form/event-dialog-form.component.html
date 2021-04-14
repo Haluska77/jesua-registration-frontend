@@ -3,17 +3,24 @@
 
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="userId">
+  <input type="hidden" formControlName="image">
+  <div class="avatar">
+    Obrazok:&nbsp;<img class="avatar" src="../assets/projects/images/{{imageValue}}" (click)="onImageList(imageValue)">
+  </div>
   <mat-form-field appearance="fill">
-    <input matInput formControlName="description" placeholder="Miesto akcie*"/>
-    <mat-error *ngIf="f.description.touched && f.description.errors?.required">Popis is required</mat-error>
+    <mat-label>Miesto akcie</mat-label>
+    <input matInput formControlName="description"/>
+    <mat-error *ngIf="f.description.touched && f.description.errors?.required">Miesto akcie is required</mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
+    <mat-label>Začiatok akcie</mat-label>
     <input matInput formControlName="startDate" type="datetime-local" placeholder="startDate*"/>
     <mat-error *ngIf="f.startDate.errors?.required">StartDate is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="short-form-field" appearance="fill">
-    <input matInput formControlName="capacity" placeholder="Kapacita kurzu*" type="number" min="0"
+    <mat-label>Kapacita kurzu</mat-label>
+    <input matInput formControlName="capacity" type="number" min="0"
            [readonly]="data.action=='Update'"/>
     <mat-error *ngIf="f.capacity.touched && f.capacity.errors?.required">Kapacita is required</mat-error>
   </mat-form-field>

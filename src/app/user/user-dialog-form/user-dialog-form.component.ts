@@ -103,12 +103,12 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
       }
     );
     this.avatarSub$ = this.avatarRef.backdropClick().subscribe(
-      data => {
+      () => {
         this.avatarRef.close(this.avatarValue);
       }
     );
     this.avatarSub$ = this.avatarRef.keydownEvents().subscribe(
-      data => {
+      () => {
         this.avatarRef.close(this.avatarValue);
       }
     );
