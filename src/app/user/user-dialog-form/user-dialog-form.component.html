@@ -1,6 +1,5 @@
 <h1 mat-dialog-title>User :: {{data.action}}</h1>
 <div mat-dialog-content [formGroup]="userForm">
-
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="avatar">
   <div class="avatar">
@@ -39,7 +38,7 @@
   <mat-form-field class="short-form-field" appearance="fill">
     <mat-label>Role</mat-label>
     <mat-select matInput formControlName="role">
-      <mat-option *ngFor="let role of loginService.roles" [value]="role.value">
+      <mat-option *ngFor="let role of roleList" [value]="role.value">
         {{role.viewValue}}
       </mat-option>
     </mat-select>

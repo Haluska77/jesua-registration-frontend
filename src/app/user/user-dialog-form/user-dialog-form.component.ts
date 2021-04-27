@@ -1,6 +1,6 @@
-import {Component, Inject, OnDestroy, OnInit, Optional} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginService} from '../../_services/login.service';
+import {LoginService, Role} from '../../_services/login.service';
 import {NotificationService} from '../../_services/notification.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../../custom-validators';
@@ -14,7 +14,7 @@ import {TokenService} from '../../_services/token.service';
   styleUrls: ['./user-dialog-form.component.css']
 })
 
-export class UserDialogFormComponent implements OnInit, OnDestroy {
+export class UserDialogFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +35,7 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
   avatarValue: string;
   avatarSub$: Subscription;
   loggedUser = this.tokenService.getUser();
+  roleList: Role[] = [];
 
   ngOnInit(): void {
     this.makeForm(this.data);
@@ -57,6 +58,14 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
       role: ['', [Validators.required]],
       active: ['']
     });
+
+    if (this.loggedUser.role === 'ROLE_ADMIN') {
+      this.roleList = this.loginService.roles;
+    } else {
+      const myRole = this.loginService.roles.filter(a => a.value === formUser.user.role)[0];
+      this.roleList.push({value: myRole.value, viewValue: myRole.viewValue});
+    }
+
     this.avatarValue = this.userForm.controls.avatar.value;
 
     // update
@@ -64,23 +73,19 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
       this.userForm.setControl('email', this.formBuilder.control({value: '', disabled: true}));
       this.userForm.setControl('password', this.formBuilder.control({value: '', disabled: true}));
 
-
       // MODERATOR user is not able to change his role and active
-      if (this.loggedUser.role === 'ROLE_MODERATOR'){
-        this.userForm.setControl('role', this.formBuilder.control({value: '', disabled: true}));
+      if (this.loggedUser.role === 'ROLE_MODERATOR') {
         this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
       }
 
       // to prevent deactive current ADMIN user
-      if (formUser.user.role === 'ROLE_ADMIN' && formUser.user.id === this.loggedUser.id){
+      if (formUser.user.role === 'ROLE_ADMIN' && formUser.user.id === this.loggedUser.id) {
         this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
       }
       this.userForm.patchValue(formUser.user);
       this.avatarValue = formUser.user.avatar;
-
     }
   }
-
 
   get f() {
     return this.userForm.controls;
@@ -145,9 +150,5 @@ export class UserDialogFormComponent implements OnInit, OnDestroy {
   onClose() {
     this.userForm.reset();
     this.dialogRef.close();
-  }
-
-  ngOnDestroy(): void {
-    this.avatarSub$.unsubscribe();
   }
 }

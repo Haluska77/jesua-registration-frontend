@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserDialogFormComponent} from "../user-dialog-form/user-dialog-form.component";
-import {DialogService} from "../../_services/dialog.service";
-import {LoginService} from "../../_services/login.service";
-import {MatDialog} from "@angular/material/dialog";
-import {TokenService} from "../../_services/token.service";
+import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
+import {DialogService} from '../../_services/dialog.service';
+import {LoginService} from '../../_services/login.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-user-detail-card',

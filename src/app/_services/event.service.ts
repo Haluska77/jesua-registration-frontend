@@ -28,7 +28,8 @@ export class EventService {
     startDate: new FormControl('', [Validators.required]),
     open: new FormControl(),
     capacity: new FormControl('', [Validators.required]),
-    image: new FormControl()
+    image: new FormControl(),
+    project: new FormControl('', [Validators.required])
   });
 
   fillEvent(event: any): void {
@@ -52,7 +53,8 @@ export class EventService {
       open: course.open,
       capacity: course.capacity,
       userId: course.userId,
-      image: course.image
+      image: course.image,
+      projectId: course.project
     });
   }
 

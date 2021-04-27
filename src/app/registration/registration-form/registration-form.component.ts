@@ -3,6 +3,7 @@ import {DialogService} from '../../_services/dialog.service';
 import {EventService} from '../../_services/event.service';
 import {FollowerService} from '../../_services/follower.service';
 import {AbstractControl} from '@angular/forms';
+import {Event} from '../../_models/event';
 
 
 @Component({

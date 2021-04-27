@@ -22,7 +22,6 @@ export class UserListComponent implements OnInit {
   ) {
   }
 
-  users: any[];
   users$: Observable<any>;
 
   ngOnInit() {

@@ -9,6 +9,7 @@
         <th>Začiatok</th>
         <th>Otvorené</th>
         <th>Vytvoril</th>
+        <th>Projekt</th>
         <th></th>
       </tr>
       </thead>
@@ -24,6 +25,7 @@
         <td [ngClass]="event.createdBy.active ? '' : 'inactive'">{{event.createdBy.name}}
           ({{event.created | date: 'dd.MM.yyyy, HH:mm:ss'}})
         </td>
+        <td>{{event.project.shortName}}</td>
         <td>
           <button mat-icon-button (click)="onEdit(event)" mat-flat-button>
             <mat-icon>edit</mat-icon>

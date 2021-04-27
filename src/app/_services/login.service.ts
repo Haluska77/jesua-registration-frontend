@@ -7,8 +7,8 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
-interface Role {
-  value: string;
+export interface Role {
+  value: any;
   viewValue: string;
 }
 
@@ -40,7 +40,8 @@ export class LoginService {
       email: user.email,
       password: user.password,
       role: user.role,
-      active: user.active
+      active: user.active,
+      projectId: user.project
     }, httpOptions);
   }
 
@@ -50,7 +51,8 @@ export class LoginService {
       name: user.name,
       email: user.email,
       role: user.role,
-      active: user.active
+      active: user.active,
+      projectId: user.project
     });
   }
 

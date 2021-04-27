@@ -2,8 +2,9 @@ import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EventService} from '../../_services/event.service';
 import {NotificationService} from '../../_services/notification.service';
-import {Subscription} from "rxjs";
-import {EventImageListComponent} from "../event-image-list/event-image-list.component";
+import {Subscription} from 'rxjs';
+import {EventImageListComponent} from '../event-image-list/event-image-list.component';
+import {Project, ProjectService} from '../../_services/project.service';
 
 @Component({
   selector: 'app-event-dialog-form',
@@ -18,10 +19,14 @@ export class EventDialogFormComponent implements OnInit {
   capacityWarning = false;
   imageListSub$: Subscription;
   imageValue: string;
+  projectList: Project[] = [];
+  myProject: Project;
+  myProjectValue: any;
 
   constructor(
     public eventService: EventService,
     private notificationService: NotificationService,
+    private projectService: ProjectService,
     public dialogRef: MatDialogRef<EventDialogFormComponent>,
     private dialog: MatDialog,
     private imageListRef: MatDialogRef<EventImageListComponent>,
@@ -31,6 +36,12 @@ export class EventDialogFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageValue = this.eventService.eventForm.controls.image.value;
+    this.projectService.getProjectList().subscribe(data => {
+      this.myProject = data;
+    });
+    console.log('PROJECT LSIT ' + this.myProject);
+    this.myProjectValue = this.eventService.eventForm.controls.project.value.id;
+
   }
 
   get f() {
