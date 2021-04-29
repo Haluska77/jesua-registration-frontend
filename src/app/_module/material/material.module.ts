@@ -15,6 +15,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -35,7 +37,9 @@ import {MatCardModule} from '@angular/material/card';
     MatProgressBarModule,
     MatGridListModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule,
+    MatBadgeModule
   ],
   exports: [
     CommonModule,
@@ -54,7 +58,9 @@ import {MatCardModule} from '@angular/material/card';
     MatProgressBarModule,
     MatGridListModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule,
+    MatBadgeModule
   ],
   providers: [
     {

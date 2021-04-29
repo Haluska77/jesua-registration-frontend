@@ -36,6 +36,7 @@ import {EventStatsCardComponent} from './event/event-stats-card/event-stats-card
 import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.component';
 import {GdprDialogComponent} from './_dialog/gdpr-dialog/gdpr-dialog.component';
 import {EventImageListComponent} from './event/event-image-list/event-image-list.component';
+import {ProjectDialogFormComponent} from './project/project-dialog-form/project-dialog-form.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {EventImageListComponent} from './event/event-image-list/event-image-list
     EventStatsCardComponent,
     UserDetailCardComponent,
     GdprDialogComponent,
-    EventImageListComponent
+    EventImageListComponent,
+    ProjectDialogFormComponent
   ],
   imports: [
     MaterialModule,

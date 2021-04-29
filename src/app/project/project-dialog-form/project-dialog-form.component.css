@@ -1,0 +1,14 @@
+.mat-dialog-content {
+  height: 600px;
+}
+
+.mat-form-field{
+  width: 100%;
+}
+.mat-form-field.short-form-field{
+  width: 50%;
+}
+
+.mat-form-field.wider-form-field{
+  height: 100px;
+}

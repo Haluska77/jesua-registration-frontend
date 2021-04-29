@@ -73,7 +73,7 @@ export class EventListComponent implements OnInit {
       language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
 
     };
-    this.eventservice.getEventList().subscribe(
+    this.eventservice.getEventListByUser().subscribe(
       data => {
         this.events = data.response.body;
         this.dtTrigger.next();

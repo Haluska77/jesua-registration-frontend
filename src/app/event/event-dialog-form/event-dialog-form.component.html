@@ -10,8 +10,8 @@
   <mat-form-field appearance="fill">
     <mat-label>Project</mat-label>
     <mat-select matInput formControlName="project" [ngModel]="myProjectValue">
-      <mat-option *ngFor="let projects of myProject" [value]="projects.id">
-        {{projects.shortName}}
+      <mat-option *ngFor="let project of myProject" [value]="project.id">
+        {{project.shortName}}
       </mat-option>
     </mat-select>
     <mat-hint>Select assigned project</mat-hint>

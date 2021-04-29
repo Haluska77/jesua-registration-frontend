@@ -4,21 +4,43 @@
       <strong>{{ loggedUser.name }}</strong>
     </h3>
   </header>
-  <p>
-    <strong>Email:</strong>
-    {{ loggedUser.email }}
-  </p>
-  <p>
-    <strong>Roles:</strong>
-    {{ loggedUser.role }}
-  </p>
-  <p>
-    <strong>Created:</strong>
-    {{ loggedUser.created | date: 'dd.MM.yyyy HH:mm' }}
-  </p>
-  <div>
-    <button mat-stroked-button color="primary" (click)="onEdit(loggedUser)">Edit</button>
-  </div>
+  <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+<!--    first tab-->
+    <mat-tab label="Personal">
+      <p>
+        <strong>Email:</strong>
+        {{ loggedUser.email }}
+      </p>
+      <p>
+        <strong>Roles:</strong>
+        {{ loggedUser.role }}
+      </p>
+      <p>
+        <strong>Created:</strong>
+        {{ loggedUser.created | date: 'dd.MM.yyyy HH:mm' }}
+      </p>
+
+      <div>
+        <button mat-stroked-button color="primary" (click)="onEditUser(loggedUser)">Edit</button>
+      </div>
+    </mat-tab>
+<!--    second tab-->
+    <mat-tab>
+      <ng-template matTabLabel>
+        <span matBadge="{{projectSize}}" matBadgeOverlap="false">Projects</span>
+      </ng-template>
+      <div *ngFor="let project of loggedUser.projects">
+        <li>{{project.project.shortName}} ({{project.project.description}}) <strong>{{project.project.active ? 'Active' : 'Closed'}}</strong> {{project.role}}
+          <button mat-icon-button (click)="onEditProject(project.project)" mat-flat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+      </div>
+      <div>
+        <button mat-stroked-button color="primary" (click)="onCreateProject()">Add my project</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
 <div class="alert alert-danger" *ngIf="!isAuthorized">
   {{errorMessage}}

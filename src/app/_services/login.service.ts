@@ -1,11 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
 
 export interface Role {
   value: any;
@@ -30,7 +26,7 @@ export class LoginService {
   ];
 
   signIn(login: object): Observable<object> {
-    return this.http.post(`${this.baseUrl}` + 'signin', login, httpOptions);
+    return this.http.post(`${this.baseUrl}` + 'signin', login);
   }
 
   signUp(user): Observable<any> {
@@ -40,9 +36,8 @@ export class LoginService {
       email: user.email,
       password: user.password,
       role: user.role,
-      active: user.active,
-      projectId: user.project
-    }, httpOptions);
+      active: user.active
+    });
   }
 
   updateUser(id: number, user: any): Observable<any> {
@@ -51,8 +46,7 @@ export class LoginService {
       name: user.name,
       email: user.email,
       role: user.role,
-      active: user.active,
-      projectId: user.project
+      active: user.active
     });
   }
 

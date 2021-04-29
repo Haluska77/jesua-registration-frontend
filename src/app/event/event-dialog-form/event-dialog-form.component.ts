@@ -19,7 +19,6 @@ export class EventDialogFormComponent implements OnInit {
   capacityWarning = false;
   imageListSub$: Subscription;
   imageValue: string;
-  projectList: Project[] = [];
   myProject: Project;
   myProjectValue: any;
 
@@ -36,10 +35,13 @@ export class EventDialogFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageValue = this.eventService.eventForm.controls.image.value;
-    this.projectService.getProjectList().subscribe(data => {
-      this.myProject = data;
-    });
-    console.log('PROJECT LSIT ' + this.myProject);
+
+    this.myProject = this.eventService.projects;
+    if (this.eventService.user.role === 'ROLE_ADMIN') {
+      this.projectService.getProjectList().subscribe(data => {
+        this.myProject = data;
+      });
+    }
     this.myProjectValue = this.eventService.eventForm.controls.project.value.id;
 
   }
@@ -47,7 +49,6 @@ export class EventDialogFormComponent implements OnInit {
   get f() {
     return this.eventService.eventForm.controls;
   }
-
 
   onImageList(image: string): void {
     this.imageListRef = this.dialog.open(EventImageListComponent, {
