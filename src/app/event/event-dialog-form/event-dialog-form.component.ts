@@ -36,9 +36,9 @@ export class EventDialogFormComponent implements OnInit {
   ngOnInit(): void {
     this.imageValue = this.eventService.eventForm.controls.image.value;
 
-    this.myProject = this.eventService.projects;
+    this.myProject = this.eventService.formProjectList;
     if (this.eventService.user.role === 'ROLE_ADMIN') {
-      this.projectService.getProjectList().subscribe(data => {
+      this.projectService.getAllProjectList().subscribe(data => {
         this.myProject = data;
       });
     }
@@ -62,7 +62,8 @@ export class EventDialogFormComponent implements OnInit {
 
     this.imageListSub$ = this.imageListRef.afterClosed().subscribe(
       data => {
-        this.eventService.eventForm.patchValue({image: data});
+        this.imageValue = data;
+        this.eventService.eventForm.patchValue({image: this.imageValue});
       }
     );
     this.imageListSub$ = this.imageListRef.backdropClick().subscribe(

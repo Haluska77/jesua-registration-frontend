@@ -28,7 +28,7 @@
   </mat-form-field>
 
   <mat-form-field class="short-form-field" appearance="fill">
-    <mat-label>Kapacita kurzu</mat-label>
+    <mat-label>Maximálna kapacita akcie</mat-label>
     <input matInput formControlName="capacity" type="number" min="0"
            [readonly]="data.action=='Update'"/>
     <mat-error *ngIf="f.capacity.touched && f.capacity.errors?.required">Kapacita is required</mat-error>
@@ -38,7 +38,7 @@
     <mat-icon class="warn" (click)="showCapacityWarning()">warning_amber</mat-icon>
     <mat-icon class="arrow"
               (click)="showCapacityWarning()">{{capacityWarning ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
-    <div class="warn-text" *ngIf="capacityWarning">Kapacita kurzu sa v budúcnosti nedá meniť!</div>
+    <div class="warn-text" *ngIf="capacityWarning">Kapacita akcie sa v budúcnosti nedá meniť!</div>
   </div>
   <mat-checkbox formControlName="open" color="primary" [checked]="true">Otvoreny</mat-checkbox>
 </div>

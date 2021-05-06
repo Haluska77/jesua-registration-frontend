@@ -41,22 +41,21 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  openProjectDialog(action: string): void {
+  openProjectDialog(action: string, project: any): void {
     this.dialog.open(ProjectDialogFormComponent, {
       width: '400px',
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',
-      data: { action }
+      data: { action, project }
     });
   }
 
   onCreateProject(): void {
-    this.openProjectDialog('Add');
+    this.openProjectDialog('Add', null);
   }
 
   onEditProject(project: any): void {
-    this.projectService.fillProject(project);
-    this.openProjectDialog('Update');
+    this.openProjectDialog('Update', project);
   }
 }

@@ -31,7 +31,7 @@ export class VisitorListComponent implements OnInit {
       order: [[3, 'asc']],
       language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
     };
-    this.followerService.getVisitorList().subscribe(
+    this.followerService.getVisitorListByProjects().subscribe(
       data => {
         this.followerList = data.response.body;
         this.dtTrigger.next();

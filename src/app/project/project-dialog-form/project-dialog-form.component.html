@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Project :: {{data.action}}</h1>
-<div [formGroup]="projectService.projectForm">
+<div [formGroup]="projectForm">
 
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="userId">
@@ -7,6 +7,9 @@
   <mat-form-field appearance="fill">
     <mat-label>Short Name</mat-label>
     <input matInput formControlName="shortName"/>
+    <mat-hint align="start">
+      Short Name is unique identifier
+    </mat-hint>
     <mat-error *ngIf="f.shortName.touched && f.shortName.errors?.required">ShortName is required</mat-error>
     <mat-error *ngIf="f.shortName.touched && f.shortName.errors?.minlength">ShortName must have at least
       {{f.shortName.errors?.minlength.requiredLength}} characters
@@ -14,10 +17,14 @@
     <mat-error *ngIf="f.shortName.touched && f.shortName.errors?.maxlength">ShortName must have max
       {{f.shortName.errors?.maxlength.requiredLength}} characters
     </mat-error>
+    <mat-error *ngIf="f.shortName.touched && f.shortName.errors?.duplicateShortName">ShortName already exists</mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
     <input matInput formControlName="description"/>
+    <mat-hint align="end">
+      {{f.description.value.length}} / 60
+    </mat-hint>
     <mat-error *ngIf="f.description.touched && f.description.errors?.required">Description is required</mat-error>
     <mat-error *ngIf="f.description.touched && f.description.errors?.minlength">Description must have at least
       {{f.description.errors?.minlength.requiredLength}} characters
@@ -27,7 +34,7 @@
   <mat-checkbox formControlName="active" color="primary" [checked]="true">Active</mat-checkbox>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onSubmit(data.action)" color="primary" [disabled]="projectService.projectForm.invalid">
+  <button mat-raised-button (click)="onSubmit(data.action)" color="primary" [disabled]="projectForm.invalid">
     Submit
   </button>
   <button mat-raised-button (click)="onClose()" color="warn">Cancel</button>

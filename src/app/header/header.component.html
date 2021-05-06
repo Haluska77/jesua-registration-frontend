@@ -2,10 +2,7 @@
 <mat-toolbar class="sticky">
   <mat-toolbar-row fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <button mat-button>
-        <span class="logo"><a href="http://www.jesua.sk">JEŠUA</a></span>
-      </button>
-      <a mat-icon-button color="base" [routerLink]="'/home'" routerLinkActive="active" title="Home"><mat-icon>home</mat-icon></a>
+      <a mat-icon-button matTooltip="Home" color="base" [routerLink]="'/home'" routerLinkActive="active"><mat-icon>home</mat-icon></a>
       <div *ngIf="!mediaService.deviceXs" fxLayout="row">
         <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</a>
         <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</a>
@@ -14,10 +11,10 @@
     </div>
     <div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <a mat-icon-button color="base" *ngIf="!tokenService.isLoggedIn" [routerLink]="'/login'" routerLinkActive="active" title="Login"><mat-icon>lock_outlined</mat-icon></a>
-        <a mat-button *ngIf="tokenService.isLoggedIn" [routerLink]="'/profile'"><img class="avatar" src="./assets/avatars/{{ tokenService.avatar }}"></a>
+        <a mat-icon-button matTooltip="Login" color="base" *ngIf="!tokenService.isLoggedIn" [routerLink]="'/login'" routerLinkActive="active"><mat-icon>lock_outlined</mat-icon></a>
+        <a mat-button matTooltip="View profile" *ngIf="tokenService.isLoggedIn" [routerLink]="'/profile'"><img class="avatar" src="./assets/avatars/{{ tokenService.avatar }}"></a>
         <a mat-button *ngIf="tokenService.isLoggedIn" class="timer" [ngClass]="{'warn': tokenService.mins < 1}">{{tokenService.mins | number: '2.0'}}:{{tokenService.secs | number: '2.0'}}</a>
-        <a mat-icon-button color="base" *ngIf="tokenService.isLoggedIn" (click)="tokenService.signOut()" routerLinkActive="active" title="Logout"><mat-icon>lock_open</mat-icon></a>
+        <a mat-icon-button matTooltip="Logout" color="base" *ngIf="tokenService.isLoggedIn" (click)="tokenService.signOut()" routerLinkActive="active"><mat-icon>lock_open</mat-icon></a>
       </div>
     </div>
   </mat-toolbar-row>

@@ -5,7 +5,7 @@ import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {TokenService} from './token.service';
-import {Project, ProjectService} from './project.service';
+import {Project} from './project.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +17,23 @@ export class EventService {
 
   constructor(private http: HttpClient,
               private datePipe: DatePipe,
-              private tokenService: TokenService,
-              private projectService: ProjectService) {
+              private tokenService: TokenService) {
   }
 
   user = this.tokenService.getUser();
-  projects = this.user.projects.map(item => {
+  formProjectList = this.user.projects.map(item => {
     const project = new Project();
     project.id = item.project.id;
     project.shortName = item.project.shortName;
     return project;
   });
 
+  projectIds: number[] = [];
 
   eventForm = new FormGroup({
     id: new FormControl(''),
     userId: new FormControl(this.user.id),
-    project: new FormControl(this.projects, [Validators.required]),
+    project: new FormControl(this.formProjectList, [Validators.required]),
     description: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
     open: new FormControl(),
@@ -46,15 +46,11 @@ export class EventService {
     this.eventForm.patchValue(event);
   }
 
-  getEventListByUser(): Observable<any> {
-    const params = new HttpParams()
-      .set('userId', this.user.id);
-    return this.http.get(`${this.baseUrl}` + 'eventList', {params});
-  }
+  getEventListByProjects(): Observable<any> {
+    const userProjectsIds = this.tokenService.getUserProjectsIds();
 
-  getActiveEventList(): Observable<any> {
     const params = new HttpParams()
-      .set('open', String(true));
+      .set('projectList', String(userProjectsIds));
     return this.http.get(`${this.baseUrl}` + 'eventList', {params});
   }
 

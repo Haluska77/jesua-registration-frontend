@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../custom-validators';
-import {DeviceDetectorService} from "ngx-device-detector";
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import {DeviceDetectorService} from "ngx-device-detector";
 export class FollowerService {
 
   constructor(private http: HttpClient,
+              private tokenService: TokenService,
               private deviceDetector: DeviceDetectorService) { }
 
   private baseUrl = environment.baseUrl + 'registration/';
@@ -25,8 +27,14 @@ export class FollowerService {
     device: new FormControl(this.deviceDetector.userAgent)
   });
 
-  getVisitorList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + '');
+  user = this.tokenService.getUser();
+
+  getVisitorListByProjects(): Observable<any> {
+    const userProjectsIds = this.tokenService.getUserProjectsIds();
+
+    const params = new HttpParams()
+      .set('projects', String(userProjectsIds));
+    return this.http.get(`${this.baseUrl}`, {params});
   }
 
   unsubscribe(token, eventId): Observable<any> {

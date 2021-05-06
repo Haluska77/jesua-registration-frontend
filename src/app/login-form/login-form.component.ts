@@ -16,11 +16,19 @@ export class LoginFormComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router) { }
 
+
+  get f() { return this.loginForm.controls; }
+
   submitted = false;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  });
 
   ngOnInit() {
     if (this.tokenService.getToken()) {
@@ -28,18 +36,6 @@ export class LoginFormComponent implements OnInit {
       this.roles = this.tokenService.getUser().role;
       this.router.navigate(['/profile']);
     }
-  }
-
-
-  get f() { return this.loginForm.controls; }
-
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  });
-
-  log(x) {
-    console.log(x);
   }
 
   signin() {

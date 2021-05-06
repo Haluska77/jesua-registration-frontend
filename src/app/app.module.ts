@@ -12,7 +12,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './_module/material/material.module';
 
-import {RegistrationFormComponent} from './registration/registration-form/registration-form.component';
 import {LoginFormComponent} from './login-form/login-form.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
@@ -41,7 +40,6 @@ import {ProjectDialogFormComponent} from './project/project-dialog-form/project-
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationFormComponent,
     HomeComponent,
     FooterComponent,
     EventListComponent,

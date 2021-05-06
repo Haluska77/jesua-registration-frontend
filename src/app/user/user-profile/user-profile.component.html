@@ -1,11 +1,11 @@
 <div class="container" *ngIf="loggedUser">
   <header class="jumbotron">
     <h3>
-      <strong>{{ loggedUser.name }}</strong>
+      <strong>Vitaj {{ loggedUser.name }}</strong>
     </h3>
   </header>
   <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
-<!--    first tab-->
+    <!--    first tab-->
     <mat-tab label="Personal">
       <p>
         <strong>Email:</strong>
@@ -24,19 +24,37 @@
         <button mat-stroked-button color="primary" (click)="onEditUser(loggedUser)">Edit</button>
       </div>
     </mat-tab>
-<!--    second tab-->
+    <!--    second tab-->
     <mat-tab>
       <ng-template matTabLabel>
         <span matBadge="{{projectSize}}" matBadgeOverlap="false">Projects</span>
       </ng-template>
-      <div *ngFor="let project of loggedUser.projects">
-        <li>{{project.project.shortName}} ({{project.project.description}}) <strong>{{project.project.active ? 'Active' : 'Closed'}}</strong> {{project.role}}
-          <button mat-icon-button (click)="onEditProject(project.project)" mat-flat-button>
-            <mat-icon>edit</mat-icon>
-          </button>
+      <div *ngIf="projectSize == 0">Momentálne nie si pridaný k žiadnemu projektu. Vytvor si svoj projekt, aby si mohol
+        pridávať nové udalosti v záložke 'Events'.
+      </div>
+      <div *ngIf="projectSize > 0">
+        <table>
+          <tr>
+            <th>Projekt</th>
+            <th>Status</th>
+            <th>Role</th>
+          </tr>
+          <tr *ngFor="let project of loggedUser.projects">
+            <td>{{project.project.description}}</td>
+            <td>
+              <mat-icon>{{project.project.active ? 'check' : 'close'}}</mat-icon>
+            </td>
+            <td>{{project.role}}</td>
+            <td>
+              <button mat-icon-button (click)="onEditProject(project.project)" mat-flat-button>
+                <mat-icon matTooltip="Edit project" matTooltipPosition="right">edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
       <div>
-        <button mat-stroked-button color="primary" (click)="onCreateProject()">Add my project</button>
+        <button mat-stroked-button color="primary" (click)="onCreateProject()">Add new project</button>
       </div>
     </mat-tab>
   </mat-tab-group>

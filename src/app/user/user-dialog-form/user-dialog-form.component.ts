@@ -70,12 +70,12 @@ export class UserDialogFormComponent implements OnInit {
 
     // update
     if (formUser.action === 'Update') {
-      this.userForm.setControl('email', this.formBuilder.control({value: '', disabled: true}));
-      this.userForm.setControl('password', this.formBuilder.control({value: '', disabled: true}));
+      this.userForm.controls.email.disable();
+      this.userForm.controls.password.disable();
 
       // MODERATOR user is not able to change his role and active
       if (this.loggedUser.role === 'ROLE_MODERATOR') {
-        this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
+        this.userForm.controls.active.disable();
       }
 
       // to prevent deactive current ADMIN user

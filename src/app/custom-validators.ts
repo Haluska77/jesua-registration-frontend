@@ -15,7 +15,6 @@ export function patternValidator(regex: RegExp, error: ValidationErrors): Valida
   };
 }
 
-
 export function mustMatch(controlName: string, matchingControlName: string, error: ValidationErrors): ValidatorFn {
 
   return (abstractControl: AbstractControl): { [key: string]: boolean } => {

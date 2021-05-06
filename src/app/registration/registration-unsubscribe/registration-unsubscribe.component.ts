@@ -44,7 +44,7 @@ export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
     this.urlEvent = this.route.snapshot.queryParamMap.get('event');
 
     if (this.urlToken && this.urlEvent) {
-      this.dialogService$ = this.dialogService.openConfirmDialog('Chceš sa odhlásiť z kurzu Ješua?')
+      this.dialogService$ = this.dialogService.openConfirmDialog('Chceš sa odhlásiť z akcie?')
         .afterClosed().subscribe(data => { // returns true if OK is clicked
           if (data) {
             this.unsubscribeFollower();

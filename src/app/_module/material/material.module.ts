@@ -17,6 +17,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   exports: [
     CommonModule,
@@ -60,7 +62,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   providers: [
     {

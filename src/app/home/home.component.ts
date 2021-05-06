@@ -19,6 +19,7 @@ interface Event {
   active: number;
   waiting: number;
   capacity: number;
+  image: string;
 }
 
 @Component({

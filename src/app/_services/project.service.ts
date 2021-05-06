@@ -4,8 +4,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TokenService} from './token.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-
 
 export class Project {
   id: number;
@@ -16,6 +14,7 @@ export class Project {
   providedIn: 'root'
 })
 
+@Injectable()
 export class ProjectService {
 
   private baseUrl = environment.baseUrl + 'projects/';
@@ -26,28 +25,16 @@ export class ProjectService {
 
   user = this.tokenService.getUser();
 
-  projectForm = new FormGroup({
-    id: new FormControl(''),
-    userId: new FormControl(this.user.id),
-    shortName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    active: new FormControl()
-  });
-
-  fillProject(project: any): void {
-    this.projectForm.patchValue(project);
-  }
-
-  getProjects(): Observable<any> {
+  getProjects(control: string): Observable<any> {
     const params = new HttpParams()
-      .set('userId', this.user.id);
+      .set('name', control);
     return this.http.get(`${this.baseUrl}`, {params});
   }
 
-  getProjectList(): Observable<Project> {
-    return this.getProjects()
+  getAllProjectList(): Observable<Project> {
+    return this.http.get(`${this.baseUrl}`)
       .pipe(
-        map(data => data.response.body
+        map((data: any) => data.response.body
           .map(item => {
               const project = new Project();
               project.id = item.id;
