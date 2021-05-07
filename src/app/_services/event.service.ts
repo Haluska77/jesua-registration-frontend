@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -28,8 +28,6 @@ export class EventService {
     return project;
   });
 
-  projectIds: number[] = [];
-
   eventForm = new FormGroup({
     id: new FormControl(''),
     userId: new FormControl(this.user.id),
@@ -47,11 +45,7 @@ export class EventService {
   }
 
   getEventListByProjects(): Observable<any> {
-    const userProjectsIds = this.tokenService.getUserProjectsIds();
-
-    const params = new HttpParams()
-      .set('projectList', String(userProjectsIds));
-    return this.http.get(`${this.baseUrl}` + 'eventList', {params});
+    return this.http.get(`${this.baseUrl}` + 'eventListByUserProject/' + this.user.id);
   }
 
   createEvent(course: any): Observable<object> {
