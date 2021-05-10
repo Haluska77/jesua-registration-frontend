@@ -21,7 +21,9 @@ export class EventImageListComponent {
   images: Images[] = [
     {projectName: 'jesua', image: 'logo_jesua.png'},
     {projectName: 'jesua', image: 'logo_jesua2.png'},
-    {projectName: 'Kalvarka', image: 'logo_kalvarka.png'}
+    {projectName: 'Kalvarka', image: 'logo_kalvarka.png'},
+    {projectName: 'trihorky', image: 'no-image.png'}
+
   ];
 
   select(image: string): void {

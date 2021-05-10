@@ -1,21 +1,22 @@
-<div mat-dialog-title>Registrácia
+<div mat-dialog-title>Registrácia<br>
+  {{data.event.event.description}} -
   {{data.event.event.startDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
 <mat-dialog-content [formGroup]="followerService.registerForm">
 
   <input type="hidden" formControlName="course">
   <mat-form-field appearance="fill" class="short">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" placeholder="Jesua"/>
-    <mat-error *ngIf="f.name.touched && f.name.errors?.required">Name is required</mat-error>
-    <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Name must have at least
-      {{f.name.errors?.minlength.requiredLength}} characters
+    <mat-label>Meno</mat-label>
+    <input matInput formControlName="name"/>
+    <mat-error *ngIf="f.name.touched && f.name.errors?.required">Meno je povinné</mat-error>
+    <mat-error *ngIf="f.name.touched && f.name.errors?.minlength">Meno musí obsahovať aspoň
+      {{f.name.errors?.minlength.requiredLength}} znaky
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Enter your email</mat-label>
-    <input matInput formControlName="email" placeholder="jesua@jesua.com"/>
-    <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email is required</mat-error>
-    <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email is not valid</mat-error>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email"/>
+    <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email je povinný</mat-error>
+    <mat-error *ngIf="f.email.touched && f.email.errors?.emailValid">Email nemá správny formát</mat-error>
   </mat-form-field>
     <input type="hidden" formControlName="gdpr"/>
 <!--  <mat-checkbox formControlName="gdpr" color="primary"><i>Súhlasím so spracovaním osobných údajov</i>-->
