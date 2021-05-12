@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../_services/dialog.service';
 import {FollowerService} from '../../_services/follower.service';
 import {Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-unsubscribe',
@@ -20,13 +21,14 @@ export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
   urlToken: string;
   urlEvent: string;
   visitor: any;
+  course: any;
 
   userService$: Subscription;
   dialogService$: Subscription;
 
-  unsubscribeFollower(): void {
+  unsubscribeFollower(token: string, event: string): void {
 
-    this.userService$ = this.userService.unsubscribe(this.urlToken, this.urlEvent).subscribe(
+    this.userService$ = this.userService.unsubscribe(token, event).subscribe(
       data => {
         this.visitor = data.response;
         this.dialogService.openSuccessResponseDialog('Odhlásený', this.visitor.message, '/home');
@@ -41,20 +43,32 @@ export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.urlToken = this.route.snapshot.queryParamMap.get('token');
-    this.urlEvent = this.route.snapshot.queryParamMap.get('event');
 
-    if (this.urlToken && this.urlEvent) {
-      this.dialogService$ = this.dialogService.openConfirmDialog('Chceš sa odhlásiť z akcie?')
-        .afterClosed().subscribe(data => { // returns true if OK is clicked
-          if (data) {
-            this.unsubscribeFollower();
+    if (this.urlToken) {
+      this.userService$ = this.userService.getVisitorListByToken(this.urlToken)
+        .pipe(
+          map((data: any) => data.response.body
+            .map((body: any) => {
+              this.course = body.course;
+            })
+          )
+        )
+        .subscribe((item: any) => {
+          if (item.length > 0) {
+            this.dialogService.openConfirmDialog('Chceš sa odhlásiť z akcie ' + this.course.description + '?')
+              .afterClosed().subscribe(response => { // returns true if OK is clicked
+              if (response) {
+                this.unsubscribeFollower(this.urlToken, this.course.id);
+              } else {
+                this.router.navigate(['/home']);
+              }
+            });
           } else {
-            this.router.navigate(['/home']);
+            this.dialogService.openErrorResponseDialog('Error!', 'Token je neplatný !!!', '/home');
           }
         });
     } else {
-      // not valid URL
-      this.dialogService.openErrorResponseDialog('Error!', 'Not valid URL', '/home');
+      this.dialogService.openErrorResponseDialog('Error!', 'Neplatná URL !!!', '/home');
     }
   }
 

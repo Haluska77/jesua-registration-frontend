@@ -15,7 +15,8 @@ export class FollowerService {
 
   constructor(private http: HttpClient,
               private tokenService: TokenService,
-              private deviceDetector: DeviceDetectorService) { }
+              private deviceDetector: DeviceDetectorService) {
+  }
 
   private baseUrl = environment.baseUrl + 'registration/';
 
@@ -30,10 +31,13 @@ export class FollowerService {
   user = this.tokenService.getUser();
 
   getVisitorListByProjects(): Observable<any> {
-    const userProjectsIds = this.tokenService.getUserProjectsIds();
+    const userProjectsIds: number[] = this.tokenService.getUserProjectsIds();
+    return this.http.get(`${this.baseUrl}` + '?projects=' + userProjectsIds);
+  }
 
+  getVisitorListByToken(token: string): Observable<any> {
     const params = new HttpParams()
-      .set('projects', String(userProjectsIds));
+      .set('token', token);
     return this.http.get(`${this.baseUrl}`, {params});
   }
 
@@ -52,7 +56,7 @@ export class FollowerService {
         eventId: visitor.course,
         deviceDetail: visitor.device
       }
-);
+    );
 
   }
 }

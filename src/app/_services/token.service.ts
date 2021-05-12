@@ -107,7 +107,7 @@ export class TokenService {
     return this.getUser().projects;
   }
 
-  public getUserProjectsIds(): any[] {
+  public getUserProjectsIds(): number[] {
     return this.getUserProjects().map((item: any) => item.project.id);
   }
 }
