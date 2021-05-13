@@ -49,8 +49,7 @@ export class UserListComponent implements OnInit {
       .afterClosed().subscribe(() => {
         // delete user from DB
         this.loginService.deleteUser(id)
-          .subscribe(
-            () => {
+          .subscribe(() => {
               this.notificationService.success('Successfull', 'DELETE');
             }
           );

@@ -49,7 +49,6 @@ export class VisitorListComponent implements OnInit {
             },
             error => {
               this.follower = error.error.error.message;
-              console.log(error.error.error.message);
             }
           );
         }

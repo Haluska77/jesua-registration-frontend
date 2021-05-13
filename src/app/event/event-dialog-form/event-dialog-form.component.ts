@@ -83,7 +83,7 @@ export class EventDialogFormComponent implements OnInit {
     if (this.eventService.eventForm.valid) {
       if (action === 'Add') {
         this.eventService.createEvent(this.eventService.eventForm.value)
-          .subscribe(data => {
+          .subscribe(() => {
               this.notificationService.success('Successfull', 'INSERT');
             },
             error => console.log(error));
@@ -91,7 +91,7 @@ export class EventDialogFormComponent implements OnInit {
       } else {
         if (action === 'Update') {
           this.eventService.updateEvent(this.eventService.eventForm.get('id').value, this.eventService.eventForm.value)
-            .subscribe(data => {
+            .subscribe(() => {
                 this.snack = this.notificationService.success('Successfull', 'UPDATE');
               },
               error => console.log(error));

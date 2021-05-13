@@ -70,8 +70,7 @@ export class EventListComponent implements OnInit {
       .afterClosed().subscribe(response => {
         if (response) {
           this.eventService.deleteEvent(id)
-            .subscribe(
-              data => {
+            .subscribe(() => {
                 this.notificationService.success('Successfull', 'DELETE');
               }
             );

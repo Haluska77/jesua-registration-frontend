@@ -26,8 +26,8 @@ export class PasswordRegisterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.paramMap.get('token');
-    this.passwordService.validateToken(this.token).subscribe(
-      (data: any) => {
+    this.passwordService.validateToken(this.token)
+      .subscribe(() => {
         this.isValidated = true;
         this.passwordService.passwordResetForm.patchValue({token: this.token});
       },
@@ -40,8 +40,8 @@ export class PasswordRegisterFormComponent implements OnInit {
   }
 
   resetPassword() {
-    this.passwordService.changePassword(this.passwordService.passwordResetForm.value).subscribe(
-      (data: any) => {
+    this.passwordService.changePassword(this.passwordService.passwordResetForm.value)
+      .subscribe((data: any) => {
         this.dialogService.openSuccessResponseDialog('Zmenený', data.response.message, '../login');
       },
       (err) => {

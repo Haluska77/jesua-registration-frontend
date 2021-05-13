@@ -43,8 +43,8 @@ export class UserDetailCardComponent implements OnInit {
     this.dialogService.openConfirmDialog('Are you sure to change status for ' + userName + '?')
       .afterClosed().subscribe(data => { // returns true
           if (data) {
-            this.loginService.makeActive(id).subscribe(
-              value => {
+            this.loginService.makeActive(id)
+              .subscribe(value => {
                 this.dialogService.openSuccessResponseDialog('Zmenený', value.response.message, '../users');
 
               });

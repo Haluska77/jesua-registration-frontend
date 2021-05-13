@@ -64,7 +64,7 @@ export class ProjectDialogFormComponent implements OnInit {
   onSubmit(action: string) {
     if (action === 'Add') {
       this.projectService.addProject(this.projectForm.controls.userId.value, this.projectForm.value)
-        .subscribe(data => {
+        .subscribe(() => {
             this.notificationService.success('Successful', 'INSERT');
           },
           error => console.log(error));
@@ -72,7 +72,7 @@ export class ProjectDialogFormComponent implements OnInit {
     } else {
       if (action === 'Update') {
         this.projectService.updateProject(this.projectForm.controls.id.value, this.projectForm.value)
-          .subscribe(data => {
+          .subscribe(() => {
             this.notificationService.success('Successful', 'UPDATE');
 
           });

@@ -29,8 +29,8 @@ export class RegistrationDialogFormComponent implements OnInit {
 
   onSubmit() {
     this.dialogRef.close();
-    this.followerService.register(this.followerService.registerForm.value).subscribe(
-      data => {
+    this.followerService.register(this.followerService.registerForm.value)
+      .subscribe(data => {
         this.visitor = data.response;
         if (data.response.body.accepted) {
           this.dialogService.openWideSuccessResponseDialog('Prihlásený', data.response.message, '');

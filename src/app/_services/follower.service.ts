@@ -35,10 +35,8 @@ export class FollowerService {
     return this.http.get(`${this.baseUrl}` + '?projects=' + userProjectsIds);
   }
 
-  getVisitorListByToken(token: string): Observable<any> {
-    const params = new HttpParams()
-      .set('token', token);
-    return this.http.get(`${this.baseUrl}`, {params});
+  getVisitorByToken(token: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + 'token/' + token);
   }
 
   unsubscribe(token, eventId): Observable<any> {

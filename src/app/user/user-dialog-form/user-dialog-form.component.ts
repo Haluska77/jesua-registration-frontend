@@ -123,7 +123,7 @@ export class UserDialogFormComponent implements OnInit {
     if (this.userForm.valid) {
       if (action === 'Add') {
         this.loginService.signUp(this.userForm.value)
-          .subscribe(data => {
+          .subscribe(() => {
               this.notificationService.success('Successful', 'INSERT');
             },
             error => console.log(error));

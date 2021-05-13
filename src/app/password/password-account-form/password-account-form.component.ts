@@ -23,8 +23,8 @@ export class PasswordAccountFormComponent implements OnInit {
 
   sendEmail() {
     this.submitted = true;
-    this.passwordService.getUserAccount(this.passwordService.passwordAccountForm.get('email').value).subscribe(
-      (data: any) => {
+    this.passwordService.getUserAccount(this.passwordService.passwordAccountForm.get('email').value)
+      .subscribe((data: any) => {
         this.isLoginFailed = false;
         this.dialogService.openSuccessResponseDialog('Akceptovaný', data.response.message, '../home');
         this.passwordService.passwordAccountForm.reset();
