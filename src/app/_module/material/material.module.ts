@@ -18,6 +18,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [],
@@ -41,7 +44,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatTabsModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
   exports: [
     CommonModule,
@@ -63,13 +69,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatTabsModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
   providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {}
-    },
+    {provide: MatDialogRef, useValue: {}},
+    MatDatepickerModule, MatNativeDateModule
   ],
 
 })

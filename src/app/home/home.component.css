@@ -1,6 +1,6 @@
 .container {
   min-height: 100%;
-  padding-bottom:60px;
+  padding-bottom: 60px;
 }
 
 h2 {
@@ -9,4 +9,11 @@ h2 {
   text-align: center;
   /*text-transform: uppercase;*/
   color: #6f634d;
+}
+
+.filter {
+  background-color: #eeecea;
+  padding: 8px;
+  border: 2px solid #6f634d;
+  border-radius: 4px;
 }

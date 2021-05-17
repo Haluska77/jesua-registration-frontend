@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -36,6 +36,7 @@ import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.
 import {GdprDialogComponent} from './_dialog/gdpr-dialog/gdpr-dialog.component';
 import {EventImageListComponent} from './event/event-image-list/event-image-list.component';
 import {ProjectDialogFormComponent} from './project/project-dialog-form/project-dialog-form.component';
+import {EventFilterPipe} from './project/event-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -61,18 +62,20 @@ import {ProjectDialogFormComponent} from './project/project-dialog-form/project-
     UserDetailCardComponent,
     GdprDialogComponent,
     EventImageListComponent,
-    ProjectDialogFormComponent
+    ProjectDialogFormComponent,
+    EventFilterPipe
   ],
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    DataTablesModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule
-  ],
+    imports: [
+        MaterialModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DataTablesModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        FormsModule
+    ],
   providers: [authInterceptorProviders, AuthGuard, GlobalErrorHandlerService, EventService, DatePipe],
   bootstrap: [AppComponent],
 })

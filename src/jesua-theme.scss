@@ -1,0 +1,44 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$jesua: (
+  50 : #eeecea,
+  100 : #d4d0ca,
+  200 : #b7b1a6,
+  300 : #9a9282,
+  400 : #857a68,
+  500 : #6f634d,
+  600 : #675b46,
+  700 : #5c513d,
+  800 : #524734,
+  900 : #403525,
+  A100 : #ffd089,
+  A200 : #ffbb56,
+  A400 : #ffa723,
+  A700 : #ff9d09,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+$my-primary: mat-palette($jesua, 500);
+$my-accent: mat-palette($mat-teal, 800);
+
+$my-theme: mat-light-theme($my-primary, $my-accent);
+
+@include angular-material-theme($my-theme)

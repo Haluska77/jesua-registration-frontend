@@ -25,13 +25,13 @@ export class ProjectService {
 
   user = this.tokenService.getUser();
 
-  getProjects(control: string): Observable<any> {
+  getProjectByName(control: string): Observable<any> {
     const params = new HttpParams()
       .set('name', control);
     return this.http.get(`${this.baseUrl}`, {params});
   }
 
-  getAllProjectList(): Observable<Project> {
+  getAllProjectList(): Observable<Project[]> {
     return this.http.get(`${this.baseUrl}`)
       .pipe(
         map((data: any) => data.response.body

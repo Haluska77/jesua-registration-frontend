@@ -19,7 +19,7 @@ export class EventDialogFormComponent implements OnInit {
   capacityWarning = false;
   imageListSub$: Subscription;
   imageValue: string;
-  myProject: Project;
+  myProject: Project[];
   myProjectValue: any;
 
   constructor(

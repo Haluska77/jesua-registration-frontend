@@ -4,6 +4,10 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogFormComponent} from '../registration/registration-dialog-form/registration-dialog-form.component';
 import {interval, Observable} from 'rxjs';
 import {map, takeWhile} from 'rxjs/operators';
+import {Project, ProjectService} from '../_services/project.service';
+import {MediaService} from '../_services/media.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 export class EventDetail {
   event: Event;
@@ -20,18 +24,31 @@ interface Event {
   waiting: number;
   capacity: number;
   image: string;
+  project: any;
 }
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'sk-SK'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ]
 })
 export class HomeComponent implements OnInit {
 
-  events$: Observable<EventDetail[]>;
+  projectList$: Observable<Project[]>;
+  events: EventDetail[];
+  projectSearch: number;
+  openSearch: boolean;
+  dateFromSearch: string;
+  dateToSearch: string;
 
   constructor(private homeService: HomeService,
+              private projectService: ProjectService,
+              public mediaService: MediaService,
               public dialog: MatDialog) {
   }
 
@@ -48,7 +65,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.events$ = this.homeService.getStatistics()
+    this.projectList$ = this.projectService.getAllProjectList();
+
+    this.homeService.getStatistics()
       .pipe(
         map(data => data.response.body
           .map(
@@ -72,6 +91,14 @@ export class HomeComponent implements OnInit {
             }
           )
         )
-      );
+      ).subscribe(data => this.events = data);
+
+  }
+
+  resetFilter(): void {
+    this.projectSearch = undefined;
+    this.openSearch = false;
+    this.dateFromSearch = undefined;
+    this.dateToSearch = undefined;
   }
 }

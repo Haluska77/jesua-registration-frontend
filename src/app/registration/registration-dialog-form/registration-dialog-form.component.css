@@ -12,29 +12,15 @@
 }
 
 .mat-raised-button.mat-primary{
-  background-color: #6f634d;
-  color: #dbd8d2;
   margin: 4px;
 }
 
-.mat-raised-button.mat-primary:disabled {
-  background-color: #eeeeee;
-  color: #aaaaaa;
-}
-
 .mat-stroked-button.mat-primary{
-  background-color: #dbd8d2;
-  color: #6f634d;
-  border-color: #6f634d;
   margin: 4px;
 }
 
 .mat-checkbox {
   font-size: 12px;
-}
-
-::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background {
-  background: #6f634d!important;
 }
 
 mat-dialog-content {
