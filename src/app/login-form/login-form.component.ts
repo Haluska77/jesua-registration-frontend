@@ -24,6 +24,7 @@ export class LoginFormComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  hidePassword = true;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),

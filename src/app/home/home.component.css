@@ -17,3 +17,8 @@ h2 {
   border: 2px solid #6f634d;
   border-radius: 4px;
 }
+.content{
+  color: #6f634d;
+  font-size: large;
+  font-weight: bold;
+}

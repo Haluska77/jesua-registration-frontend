@@ -5,7 +5,6 @@ import {RegistrationDialogFormComponent} from '../registration/registration-dial
 import {interval, Observable} from 'rxjs';
 import {map, takeWhile} from 'rxjs/operators';
 import {Project, ProjectService} from '../_services/project.service';
-import {MediaService} from '../_services/media.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
@@ -45,10 +44,10 @@ export class HomeComponent implements OnInit {
   openSearch: boolean;
   dateFromSearch: string;
   dateToSearch: string;
+  filteredCount: any = { count: 0 };
 
   constructor(private homeService: HomeService,
               private projectService: ProjectService,
-              public mediaService: MediaService,
               public dialog: MatDialog) {
   }
 

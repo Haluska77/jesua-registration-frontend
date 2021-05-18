@@ -1,42 +1,45 @@
 <h2>Aktuálne sa môžte prihlásiť na tieto udalosti</h2>
 <div class="container" fxLayoutGap="10px" fxLayout="column wrap">
-  <div class="filter" fxLayoutAlign="space-evenly end" fxLayout.xs="column" fxLayoutGap="8px">
-    <div>
-      <mat-form-field>
-        <mat-label>Projekt:</mat-label>
-        <mat-select [(ngModel)]="projectSearch">
-          <mat-option [value]=0>Všetky</mat-option>
-          <mat-option *ngFor="let project of projectList$ | async"
-                      [value]=project.id>{{project.shortName}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div class="filter">
+    <div fxLayoutAlign="space-evenly end" fxLayout.xs="column" fxLayoutGap="8px">
+      <div>
+        <mat-form-field>
+          <mat-label>Projekt:</mat-label>
+          <mat-select [(ngModel)]="projectSearch">
+            <mat-option [value]=0>Všetky</mat-option>
+            <mat-option *ngFor="let project of projectList$ | async"
+                        [value]=project.id>{{project.shortName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Od</mat-label>
+          <input matInput [matDatepicker]="frompicker" [(ngModel)]="dateFromSearch">
+          <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+          <mat-datepicker #frompicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Do</mat-label>
+          <input matInput [matDatepicker]="topicker" [(ngModel)]="dateToSearch">
+          <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+          <mat-datepicker #topicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-checkbox color="primary" [checked]="true" [(ngModel)]="openSearch">Iba voľné</mat-checkbox>
+      </div>
+      <div>
+        <button mat-raised-button (click)="resetFilter()" color="primary">Reset filter</button>
+      </div>
     </div>
-    <div>
-      <mat-form-field>
-        <mat-label>Od</mat-label>
-        <input matInput [matDatepicker]="frompicker" [(ngModel)]="dateFromSearch">
-        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
-        <mat-datepicker #frompicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>Do</mat-label>
-        <input matInput [matDatepicker]="topicker" [(ngModel)]="dateToSearch">
-        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
-        <mat-datepicker #topicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-checkbox color="primary" [checked]="true" [(ngModel)]="openSearch">Iba voľné</mat-checkbox>
-    </div>
-    <div>
-      <button mat-raised-button (click)="resetFilter()" color="primary">Reset filter</button>
-    </div>
+    <div class="content" fxLayoutAlign="center center">Počet: {{filteredCount.count}}</div>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div fxFlex="33.33%" fxFlex.sm="50%" fxFlex.xs="100%"
-         *ngFor="let event of events | eventFilter: projectSearch : openSearch : dateFromSearch : dateToSearch">
+         *ngFor="let event of events | eventFilter: projectSearch : openSearch : dateFromSearch : dateToSearch : filteredCount">
       <app-event-stats-card [event]="event"></app-event-stats-card>
     </div>
   </div>
