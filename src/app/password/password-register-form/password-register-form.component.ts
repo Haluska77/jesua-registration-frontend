@@ -17,7 +17,8 @@ export class PasswordRegisterFormComponent implements OnInit {
 
   isValidated = false;
   token: string;
-  hidePassword = true;
+  newHidePassword = true;
+  confirmHidePassword = true;
 
   get f() {
     return this.passwordService.passwordResetForm.controls;

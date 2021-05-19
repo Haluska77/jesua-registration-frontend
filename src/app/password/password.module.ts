@@ -18,8 +18,9 @@ import {MaterialModule} from '../_module/material/material.module';
     CommonModule,
     PasswordRoutingModule,
     ReactiveFormsModule,
-    MaterialModule,
+    MaterialModule
   ]
 })
 
-export class PasswordModule { }
+export class PasswordModule {
+}

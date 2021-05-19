@@ -12,9 +12,8 @@ export class PasswordAccountFormComponent implements OnInit {
   constructor(public passwordService: PasswordService,
               private dialogService: DialogService) { }
 
-  submitted = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage: string;
 
   get f() { return this.passwordService.passwordAccountForm.controls; }
 
@@ -22,7 +21,8 @@ export class PasswordAccountFormComponent implements OnInit {
   }
 
   sendEmail() {
-    this.submitted = true;
+
+    console.log(this.errorMessage);
     this.passwordService.getUserAccount(this.passwordService.passwordAccountForm.get('email').value)
       .subscribe((data: any) => {
         this.isLoginFailed = false;
