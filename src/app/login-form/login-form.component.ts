@@ -48,7 +48,7 @@ export class LoginFormComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenService.getUser().role;
-        this.router.navigate(["/profile"]);
+        this.router.navigate(['/profile']);
         window.location.reload();
       },
       (err) => {

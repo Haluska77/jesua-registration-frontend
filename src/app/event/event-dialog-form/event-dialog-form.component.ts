@@ -15,7 +15,6 @@ import {Project, ProjectService} from '../../_services/project.service';
 
 export class EventDialogFormComponent implements OnInit {
 
-  snack: any;
   capacityWarning = false;
   imageListSub$: Subscription;
   imageValue: string;
@@ -85,16 +84,14 @@ export class EventDialogFormComponent implements OnInit {
         this.eventService.createEvent(this.eventService.eventForm.value)
           .subscribe(() => {
               this.notificationService.success('Successfull', 'INSERT');
-            },
-            error => console.log(error));
+            });
 
       } else {
         if (action === 'Update') {
           this.eventService.updateEvent(this.eventService.eventForm.get('id').value, this.eventService.eventForm.value)
             .subscribe(() => {
-                this.snack = this.notificationService.success('Successfull', 'UPDATE');
-              },
-              error => console.log(error));
+                this.notificationService.success('Successfull', 'UPDATE');
+              });
 
         } else {
           this.notificationService.error('Error: no valid action', 'ACTION');

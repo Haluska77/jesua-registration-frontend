@@ -17,8 +17,6 @@ export class RegistrationDialogFormComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  visitor: any;
-
   ngOnInit(): void {
     this.followerService.registerForm.patchValue({course: this.data.event.event.id, gdpr: true});
   }
@@ -31,7 +29,6 @@ export class RegistrationDialogFormComponent implements OnInit {
     this.dialogRef.close();
     this.followerService.register(this.followerService.registerForm.value)
       .subscribe(data => {
-        this.visitor = data.response;
         if (data.response.body.accepted) {
           this.dialogService.openWideSuccessResponseDialog('Prihlásený', data.response.message, '');
         }
@@ -40,8 +37,7 @@ export class RegistrationDialogFormComponent implements OnInit {
         }
       },
       error => {
-        this.visitor = error.error.message;
-        this.dialogService.openErrorResponseDialog('Error', error.error.message, '');
+        this.dialogService.openErrorResponseDialog('Error', error.error.error.message, '');
       }
     );
   }

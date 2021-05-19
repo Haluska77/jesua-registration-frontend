@@ -53,10 +53,6 @@ export class ProjectDialogFormComponent implements OnInit {
 
   }
 
-  log() {
-    console.log(this.projectForm.controls.shortName.errors);
-  }
-
   get f() {
     return this.projectForm.controls;
   }
@@ -66,15 +62,13 @@ export class ProjectDialogFormComponent implements OnInit {
       this.projectService.addProject(this.projectForm.controls.userId.value, this.projectForm.value)
         .subscribe(() => {
             this.notificationService.success('Successful', 'INSERT');
-          },
-          error => console.log(error));
+          });
 
     } else {
       if (action === 'Update') {
         this.projectService.updateProject(this.projectForm.controls.id.value, this.projectForm.value)
           .subscribe(() => {
             this.notificationService.success('Successful', 'UPDATE');
-
           });
       } else {
         this.notificationService.error('Error: no valid action', 'ACTION');

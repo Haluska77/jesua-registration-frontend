@@ -28,7 +28,6 @@ export class UserDialogFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  snack: any;
   hidePassword = true;
 
   userForm: FormGroup;
@@ -125,14 +124,13 @@ export class UserDialogFormComponent implements OnInit {
         this.loginService.signUp(this.userForm.value)
           .subscribe(() => {
               this.notificationService.success('Successful', 'INSERT');
-            },
-            error => console.log(error));
+            });
 
       } else {
         if (action === 'Update') {
           this.loginService.updateUser(this.userForm.get('id').value, this.userForm.value)
             .subscribe(data => {
-              this.snack = this.notificationService.success('Successful', 'UPDATE');
+              this.notificationService.success('Successful', 'UPDATE');
 
               if (data.response.body.id === this.loggedUser.id) {
                 this.tokenService.signOut();

@@ -13,6 +13,7 @@ import {TokenService} from '../_services/token.service';
 import {catchError, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {SpinnerService} from '../_services/spinner.service';
+import {DialogService} from '../_services/dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,62 +23,48 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private token: TokenService,
               private router: Router,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private dialogService: DialogService) {
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+  intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<any> {
 
-    let authReq = req;
+    let authReq = httpRequest;
     const token = this.token.getToken();
     if (token != null) {
-      authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)});
+      authReq = httpRequest.clone({headers: httpRequest.headers.set('Authorization', 'Bearer ' + token)});
     }
 
     this.spinnerService.show();
 
-    return next.handle(authReq)
+    return httpHandler.handle(authReq)
       .pipe(
         tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             this.spinnerService.hide();
           }
-        }, (error) => {
+        }, () => {
           this.spinnerService.hide();
         }),
         catchError((error: any) => {
-          let errorMsg = '';
+          // let errorMsg = '';
           if (error instanceof HttpErrorResponse) {
-            if (error instanceof ErrorEvent) {
-              console.log('this is client side error');
-              errorMsg = `Error: ${error}`;
-            } else { // instanceof HttpError
-              errorMsg = `CODE: ${error.status},  MESSAGE: ${error.error.error.message}`;
-            }
-            console.log("SERVER SIDE ERROR- " + errorMsg);
+            // handle HttpErrorResponse individually in component
+            // if (error instanceof ErrorEvent) {
+            //   console.log('this is client side error');
+            //   errorMsg = `${error}`;
+            // } else { // instanceof HttpError
+            //   errorMsg = `${error.error.error.message}`;
+            // }
           } else {
-            console.error("some thing else happened");
+            this.dialogService.openErrorResponseDialog('Error' + `${error.status}`, 'Unexpected error!!!', '/home');
           }
           return throwError(error);
         })
-      )
-
-    //     .pipe(tap((event: HttpEvent<any>) => {
-    //     if(event instanceof HttpResponse){
-    //       // if the token is valid
-    //     }
-    //   }, (err: any) => {
-    //     // if the token has expired.
-    //     if(err instanceof HttpErrorResponse){
-    //       if(err.status === 500){
-    //         // this is where you can do anything like navigating
-    //         this.router.navigateByUrl('/home');
-    //       }
-    //     }
-    //   }));
-
+      );
   }
 }
 
 export const authInterceptorProviders = [
   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-]
+];

@@ -16,7 +16,6 @@ export class PasswordRegisterFormComponent implements OnInit {
   }
 
   isValidated = false;
-  errorMessage = '';
   token: string;
   hidePassword = true;
 
@@ -34,7 +33,6 @@ export class PasswordRegisterFormComponent implements OnInit {
       (err) => {
         this.isValidated = false;
         this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../home');
-        this.errorMessage = err.error.error.message;
       }
     );
   }
@@ -46,7 +44,6 @@ export class PasswordRegisterFormComponent implements OnInit {
       },
       (err) => {
         this.dialogService.openErrorResponseDialog('Not accepted', err.error.error.message, '../home');
-        this.errorMessage = err.error.error.message;
       }
     );
 

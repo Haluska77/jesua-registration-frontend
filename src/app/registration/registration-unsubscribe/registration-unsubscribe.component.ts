@@ -32,8 +32,7 @@ export class RegistrationUnsubscribeComponent implements OnInit, OnDestroy {
         this.dialogService.openSuccessResponseDialog('Odhlásený', this.visitor.message, '/home');
       },
       error => {
-        this.visitor = error.error;
-        this.dialogService.openErrorResponseDialog('Error!', this.visitor.error.message, '/home');
+        this.dialogService.openErrorResponseDialog('Error!', error.error.error.message, '/home');
       }
     );
   }

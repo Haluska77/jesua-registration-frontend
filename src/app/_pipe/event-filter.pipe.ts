@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {EventDetail} from '../home/home.component';
 
 @Pipe({
-  name: 'eventFilter'
+  name: 'eventFilter',
+  pure: true
 })
 export class EventFilterPipe implements PipeTransform {
   transform(events: EventDetail[], projectSearch: number, openSearch: boolean, dateFromSearch: string, dateToSearch: string, filteredCount: any): EventDetail[] {

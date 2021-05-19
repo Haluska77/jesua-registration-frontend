@@ -46,9 +46,6 @@ export class VisitorListComponent implements OnInit {
             data => {
               this.follower = data.response;
               this.dialogService.openSuccessResponseDialog('Odhlásený', this.follower.message, '/visitors');
-            },
-            error => {
-              this.follower = error.error.error.message;
             }
           );
         }

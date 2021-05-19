@@ -12,7 +12,7 @@ export class NotificationService {
     duration: 2000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
-  }
+  };
 
   success(msg: string, label: string) {
     this.config.panelClass = ['success'];

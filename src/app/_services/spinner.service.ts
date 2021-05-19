@@ -12,11 +12,11 @@ export class SpinnerService {
     this.visibility = new BehaviorSubject(false);
   }
 
-  show() {
+  show(): void {
     this.visibility.next(true);
   }
 
-  hide() {
+  hide(): void {
     this.visibility.next(false);
   }
 }

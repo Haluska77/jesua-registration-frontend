@@ -36,7 +36,7 @@ import {UserDetailCardComponent} from './user/user-detail-card/user-detail-card.
 import {GdprDialogComponent} from './_dialog/gdpr-dialog/gdpr-dialog.component';
 import {EventImageListComponent} from './event/event-image-list/event-image-list.component';
 import {ProjectDialogFormComponent} from './project/project-dialog-form/project-dialog-form.component';
-import {EventFilterPipe} from './project/event-filter.pipe';
+import {EventFilterPipe} from './_pipe/event-filter.pipe';
 
 @NgModule({
   declarations: [

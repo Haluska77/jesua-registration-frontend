@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {EventService} from '../../_services/event.service';
-import {Event} from '../../_models/event';
 import {Observable, Subject} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatTable} from '@angular/material/table';
@@ -28,7 +27,7 @@ export class EventListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  events: Observable<Event[]>;
+  events: Observable<any[]>;
 
   ngOnInit() {
     this.dtOptions = {
