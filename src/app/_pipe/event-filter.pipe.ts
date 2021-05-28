@@ -8,7 +8,7 @@ import {EventDetail} from '../home/home.component';
 export class EventFilterPipe implements PipeTransform {
   transform(events: EventDetail[], projectSearch: number, openSearch: boolean, dateFromSearch: string, dateToSearch: string, filteredCount: any): EventDetail[] {
 
-    if (projectSearch !== undefined && projectSearch > 0) {
+    if (projectSearch !== undefined) {
       events = events.filter(eventDetail => eventDetail.event.project.id === projectSearch);
     }
     if (openSearch === true) {

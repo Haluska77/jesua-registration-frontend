@@ -1,12 +1,12 @@
 <h2>Aktuálne sa môžte prihlásiť na tieto udalosti</h2>
 <div class="container" fxLayoutGap="10px" fxLayout="column wrap">
   <div class="filter">
-    <div fxLayoutAlign="space-evenly end" fxLayout.xs="column" fxLayoutGap="8px">
+    <div fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayoutGap="8px">
       <div>
         <mat-form-field>
           <mat-label>Projekt:</mat-label>
           <mat-select [(ngModel)]="projectSearch">
-            <mat-option [value]=0>Všetky</mat-option>
+            <mat-option>Všetky</mat-option>
             <mat-option *ngFor="let project of projectList$ | async"
                         [value]=project.id>{{project.shortName}}</mat-option>
           </mat-select>
