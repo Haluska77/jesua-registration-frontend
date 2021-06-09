@@ -37,7 +37,7 @@
   </mat-form-field>
   <mat-form-field class="short-form-field" appearance="fill">
     <mat-label>Role</mat-label>
-    <mat-select matInput formControlName="role">
+    <mat-select formControlName="role">
       <mat-option *ngFor="let role of roleList" [value]="role.value">
         {{role.viewValue}}
       </mat-option>

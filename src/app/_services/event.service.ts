@@ -21,21 +21,24 @@ export class EventService {
   }
 
   user = this.tokenService.getUser();
-  formProjectList = this.user.projects.map(item => {
-    const project = new Project();
-    project.id = item.project.id;
-    project.shortName = item.project.shortName;
-    return project;
-  });
+  currentUser = this.user.id;
+  activeUserProjectList: any[] = this.user.projects
+    .filter(proj => proj.project.active === true)
+    .map(item => {
+      const project = new Project();
+      project.id = item.project.id;
+      project.shortName = item.project.shortName;
+      return project;
+    });
 
   eventForm = new FormGroup({
-    id: new FormControl(''),
-    userId: new FormControl(this.user.id),
-    project: new FormControl(this.formProjectList, [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    startDate: new FormControl('', [Validators.required]),
+    id: new FormControl(),
+    userId: new FormControl(this.currentUser),
+    project: new FormControl(this.activeUserProjectList, [Validators.required]),
+    description: new FormControl(null, [Validators.required]),
+    startDate: new FormControl(null, [Validators.required]),
     open: new FormControl(),
-    capacity: new FormControl('', [Validators.required]),
+    capacity: new FormControl(null, [Validators.required]),
     image: new FormControl()
   });
 
@@ -45,7 +48,7 @@ export class EventService {
   }
 
   getEventListByProjects(): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + 'eventListByUserProject/' + this.user.id);
+    return this.http.get(`${this.baseUrl}` + 'eventListByUserProject/' + this.currentUser);
   }
 
   createEvent(course: any): Observable<object> {

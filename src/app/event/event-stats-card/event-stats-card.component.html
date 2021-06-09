@@ -1,10 +1,10 @@
 <mat-card class="left-style-{{event.state}}">
-  <mat-card-content>
-    <div fxFlex="100%" fxLayoutAlign="center center">
-      <img class="logo" src="../assets/projects/images/{{event.event.image}}">
+  <mat-card-content class="upper-content">
+    <div fxFlex="100%" fxLayoutAlign="center stretch">
+      <img class="logo" [src]="event.event.image">
     </div>
   </mat-card-content>
-  <mat-card-content>
+  <mat-card-content class="lower-content">
     <div class="info-tile" fxLayout="row" fxLayoutAlign="space-between stretch">
       <div class="description-tile" fxLayout="column" fxFlex="60%" >
         <div class="description-item">
@@ -17,7 +17,7 @@
           <mat-icon>people_alt</mat-icon>&nbsp;{{event.event.active + event.event.waiting}}/{{event.event.capacity}}
         </div>
       </div>
-      <div class="status-tile {{event.state}}-back" fxFlex="40%" (click)="onCreate(event)">
+      <div class="status-tile {{event.state}}-back" fxFlex="40%" fxLayoutAlign="center center" (click)="onCreate(event)">
         {{event.obsCapacity | async}}
       </div>
     </div>

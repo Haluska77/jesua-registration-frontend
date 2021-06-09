@@ -6,6 +6,7 @@
       <div *ngIf="!mediaService.deviceXs" fxLayout="row">
         <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</a>
         <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</a>
+        <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/projects'" routerLinkActive="active" >Projects</a>
         <a mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</a>
       </div>
     </div>
@@ -21,6 +22,7 @@
   <mat-toolbar-row *ngIf="mediaService.deviceXs && (tokenService.showAdminBoard || tokenService.showModeratorBoard)" fxLayoutAlign="space-between end">
     <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/events'" routerLinkActive="active" >Events</a>
     <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/visitors'" routerLinkActive="active" >Visitors</a>
+    <a mat-button color="base" *ngIf="tokenService.showAdminBoard || tokenService.showModeratorBoard" [routerLink]="'/projects'" routerLinkActive="active" >Projects</a>
     <a mat-button color="base" *ngIf="tokenService.showAdminBoard" [routerLink]="'/users'" routerLinkActive="active" >Users</a>
   </mat-toolbar-row>
 </mat-toolbar>

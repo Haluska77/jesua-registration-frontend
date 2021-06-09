@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {EventService} from '../../_services/event.service';
 import {Observable, Subject} from 'rxjs';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatTable} from '@angular/material/table';
 import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
 import {DialogService} from '../../_services/dialog.service';
@@ -22,6 +22,7 @@ export class EventListComponent implements OnInit {
     public eventService: EventService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
+    public eventDialogRef: MatDialogRef<EventDialogFormComponent>,
     public dialog: MatDialog) { }
 
   dtOptions: DataTables.Settings = {};
@@ -46,7 +47,7 @@ export class EventListComponent implements OnInit {
   }
 
   openDialog(title: string) {
-    this.dialog.open(EventDialogFormComponent, {
+    this.eventDialogRef = this.dialog.open(EventDialogFormComponent, {
       width: '400px',
       disableClose: false,
       autoFocus: true,
@@ -54,7 +55,13 @@ export class EventListComponent implements OnInit {
       data: { action: title }
     });
 
+    this.eventDialogRef.afterClosed().subscribe(
+      () => {
+        this.eventService.eventForm.reset();
+      }
+    );
   }
+
   onCreate() {
     this.openDialog('Add');
   }

@@ -1,19 +1,29 @@
 
 .mat-card {
   border: solid 1px #6f634d;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  box-shadow: 0 0px 10px 2px #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 2px #ddd;
   padding: 0;
 }
 
 mat-card-content {
   background-color: #f6f6f6;
-  padding: 13px;
   display: flex;
-  border-radius: 5px 5px 0px 0px;
   margin: 0;
-  min-width: 270px;
+  min-width: 258px;
+}
+
+.upper-content{
+  border-radius: 0 8px 0 0;
+}
+
+.lower-content{
+  border-radius: 0 0 8px 0;
+}
+
+.info-tile {
+  width: 100%;
+  padding: 12px;
 }
 
 .left-style-free {
@@ -22,11 +32,6 @@ mat-card-content {
 
 .left-style-full {
   border-left: solid 8px #ff3333;
-}
-
-.info-tile {
-  background-color: #f6f6f6;
-  width: 100%;
 }
 
 .description-tile {
@@ -44,12 +49,9 @@ mat-card-content {
 
 .status-tile {
   width: 40%;
-  min-width: 108px;
+  min-width: 78px;
   font-size: xxx-large;
   font-weight: bolder;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -62,6 +64,13 @@ mat-card-content {
 .full-back {
   background-color: #ff3333;
   color: #f6f6f6;
+}
+
+img.logo {
+  width: 100%;
+  border-radius: 0 8px 0 0;
+  padding: 0;
+  height: 100px;
 }
 
 .big-icon {
@@ -82,9 +91,4 @@ mat-card-content {
 
 .full-icon {
   color: #ff3333;
-}
-
-img.logo {
-  width: 300px;
-  height: 100px;
 }

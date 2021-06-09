@@ -22,7 +22,6 @@ export class PasswordAccountFormComponent implements OnInit {
 
   sendEmail() {
 
-    console.log(this.errorMessage);
     this.passwordService.getUserAccount(this.passwordService.passwordAccountForm.get('email').value)
       .subscribe((data: any) => {
         this.isLoginFailed = false;
