@@ -11,6 +11,7 @@ import {ErrorComponent} from './error/error.component';
 import {RegistrationUnsubscribeComponent} from './registration/registration-unsubscribe/registration-unsubscribe.component';
 import {RoleGuard} from './_guard/role.guard';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {ProjectListComponent} from './project/project-list/project-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
     }
   },
   {path: 'visitors', component: VisitorListComponent, canActivate: [AuthGuard]},
+  {path: 'projects', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'error', component: ErrorComponent},
   {
     path: 'password',

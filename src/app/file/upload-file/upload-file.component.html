@@ -1,0 +1,17 @@
+<mat-progress-bar mode="determinate" [value]="progress.percentage" *ngIf="currentFileUpload"></mat-progress-bar>
+
+<div>Vyberte obrázok: </div>
+<div class="file-upload">
+  <button mat-mini-fab color="primary" (click)="fileInput.click()">
+    <mat-icon>attach_file</mat-icon>
+  </button>
+  {{selectedFile ? selectedFile.name + ' (' + (selectedFile.size / 1024 | number: '1.0-0') + ' kB)' : "žiadny obrázok nebol vybratý" }}
+</div>
+
+<Br>
+
+<input hidden type="file" #fileInput (change)="selectFile($event)">
+<div>
+  <button mat-raised-button class="file-upload" color="primary" [disabled]="!selectedFile" (click)="upload(data.project.id)">Upload</button>
+  <button mat-raised-button class="file-upload" color="warn" [disabled]="!currentFileUpload" (click)="cancelFileUpload()">Cancel</button>
+</div>

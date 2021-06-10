@@ -40,7 +40,7 @@
             <th>Role</th>
           </tr>
           <tr *ngFor="let project of loggedUser.projects">
-            <td>{{project.project.description}}</td>
+            <td>{{project.project.description}} ({{project.project.shortName}})</td>
             <td>
               <mat-icon>{{project.project.active ? 'check' : 'close'}}</mat-icon>
             </td>
@@ -49,6 +49,12 @@
               <button mat-icon-button (click)="onEditProject(project.project)" mat-flat-button>
                 <mat-icon matTooltip="Edit project" matTooltipPosition="right">edit</mat-icon>
               </button>
+              <button mat-icon-button (click)="onAddImage(project.project)" mat-flat-button>
+                <mat-icon matTooltip="Add image" matTooltipPosition="right">file_upload</mat-icon>
+              </button>
+              <!--              <button mat-icon-button (click)="onShowImagesOnProject(project.project.id)" mat-flat-button>-->
+              <!--                <mat-icon matTooltip="Show images" matTooltipPosition="right">file_upload</mat-icon>-->
+              <!--              </button>-->
             </td>
           </tr>
         </table>
@@ -56,10 +62,9 @@
       <div>
         <button mat-stroked-button color="primary" (click)="onCreateProject()">Add new project</button>
       </div>
+      <!--      <div>-->
+      <!--        <app-file-list></app-file-list>-->
+      <!--      </div>-->
     </mat-tab>
   </mat-tab-group>
-
-</div>
-<div class="alert alert-danger" *ngIf="!isAuthorized">
-  {{errorMessage}}
 </div>

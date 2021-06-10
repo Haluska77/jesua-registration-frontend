@@ -1,16 +1,15 @@
 <h1 mat-dialog-title>Course :: {{data.action}}</h1>
 <div [formGroup]="eventService.eventForm">
-
   <input type="hidden" formControlName="id">
-  <input type="hidden" formControlName="userId">
+  <input type="text" formControlName="userId">
   <input type="hidden" formControlName="image">
   <div class="avatar">
-    Obrazok:&nbsp;<img class="avatar" src="../assets/projects/images/{{imageValue}}" (click)="onImageList(imageValue)">
+    Obrazok:&nbsp;<img class="avatar" [src]="s3Image" (click)="showImageList(myProjectValue, s3Image, imageValue)">
   </div>
   <mat-form-field appearance="fill">
     <mat-label>Project</mat-label>
-    <mat-select matInput formControlName="project" [ngModel]="myProjectValue">
-      <mat-option *ngFor="let project of myProject" [value]="project.id">
+    <mat-select formControlName="project" [compareWith]="compareFunction" (selectionChange)="onProjectChange()">
+      <mat-option *ngFor="let project of myProjects" [value]="project.id">
         {{project.shortName}}
       </mat-option>
     </mat-select>

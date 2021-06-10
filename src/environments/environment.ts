@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8083/'
+  baseUrl: 'http://localhost:8083/',
+  S3_KEY: 'jesua',
+  S3_SECRET: 'jesua123'
 };
 
 /*

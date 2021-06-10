@@ -1,10 +1,8 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-
-interface Images {
-  projectName: string;
-  image: string;
-}
+import {FileS3Service, Images} from '../../_services/file-s3.service';
+import {map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-event-image-list',
@@ -12,21 +10,39 @@ interface Images {
   styleUrls: ['./event-image-list.component.css']
 })
 
-export class EventImageListComponent {
+export class EventImageListComponent implements OnInit, OnDestroy {
 
-  constructor(public dialogRef: MatDialogRef<EventImageListComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: string
-  ) {}
+  constructor(
+    private s3Service: FileS3Service,
+    public imageListRef: MatDialogRef<EventImageListComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+  }
 
-  images: Images[] = [
-    {projectName: 'jesua', image: 'logo_jesua.png'},
-    {projectName: 'jesua', image: 'logo_jesua2.png'},
-    {projectName: 'Kalvarka', image: 'logo_kalvarka.png'},
-    {projectName: 'trihorky', image: 'no-image.png'}
+  private ngUnsubscribe = new Subject();
 
-  ];
+  s3Images: Images[] = [];
 
-  select(image: string): void {
-    this.dialogRef.close(image);
+  ngOnInit() {
+    this.s3Service.getPostersByProject(this.data.project)
+      .pipe(
+        map(data => data.response.body
+          .map(image => {
+            const s3Image = this.s3Service.getS3Image(this.data.project, image.contentId);
+            this.s3Images.push({imageValue: image.contentId, s3Value: s3Image});
+          })
+        ),
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe();
+  }
+
+  select(image: Images): void {
+    this.imageListRef.close(image);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

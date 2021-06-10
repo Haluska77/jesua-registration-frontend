@@ -31,6 +31,12 @@ export class ProjectService {
     return this.http.get(`${this.baseUrl}`, {params});
   }
 
+  getProjectByUser(control: string): Observable<any> {
+    const params = new HttpParams()
+      .set('userId', control);
+    return this.http.get(`${this.baseUrl}`, {params});
+  }
+
   getAllProjectList(): Observable<Project[]> {
     return this.http.get(`${this.baseUrl}`)
       .pipe(

@@ -7,6 +7,7 @@ import {map, takeWhile} from 'rxjs/operators';
 import {Project, ProjectService} from '../_services/project.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {FileS3Service} from "../_services/file-s3.service";
 
 export class EventDetail {
   event: Event;
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private homeService: HomeService,
               private projectService: ProjectService,
+              private s3Service: FileS3Service,
               public dialog: MatDialog) {
   }
 
@@ -73,6 +75,7 @@ export class HomeComponent implements OnInit {
             (item: Event) => {
               const eventDetail = new EventDetail();
               eventDetail.event = item;
+              eventDetail.event.image = this.s3Service.getS3Image(item.project.id, item.image);
               if (item.active < item.capacity) {
                 eventDetail.state = 'free';
                 eventDetail.availableCapacity = item.capacity - item.active;

@@ -1,0 +1,30 @@
+<table mat-table [dataSource]="s3Images">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell *matCellDef="let s3image"> {{s3image.imageValue}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef> Image</th>
+    <td mat-cell *matCellDef="let s3image"><img class="avatar" [src]="s3image.s3Value" (click)="preview(s3image)"></td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let s3image">
+      <button mat-icon-button color="accent" (click)="deleteFile(s3image)" mat-flat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+<!--  -->
+<!--  <div *ngFor="let s3image of s3Images">-->
+<!--    <img class="avatar" [src]="s3image.s3Value" (click)="preview(s3image)">-->
+<!--    <button mat-icon-button color="accent" (click)="deleteFile(s3image)" mat-flat-button>-->
+<!--      <mat-icon>delete</mat-icon>-->
+<!--    </button>-->
+
+<!--  </div>-->
+</table>
+Images

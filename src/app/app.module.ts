@@ -37,6 +37,9 @@ import {GdprDialogComponent} from './_dialog/gdpr-dialog/gdpr-dialog.component';
 import {EventImageListComponent} from './event/event-image-list/event-image-list.component';
 import {ProjectDialogFormComponent} from './project/project-dialog-form/project-dialog-form.component';
 import {EventFilterPipe} from './_pipe/event-filter.pipe';
+import {UploadFileComponent} from './file/upload-file/upload-file.component';
+import {FileListComponent} from './file/file-list/file-list.component';
+import {ProjectListComponent} from './project/project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import {EventFilterPipe} from './_pipe/event-filter.pipe';
     GdprDialogComponent,
     EventImageListComponent,
     ProjectDialogFormComponent,
-    EventFilterPipe
+    EventFilterPipe,
+    UploadFileComponent,
+    FileListComponent,
+    ProjectListComponent
   ],
     imports: [
         MaterialModule,
