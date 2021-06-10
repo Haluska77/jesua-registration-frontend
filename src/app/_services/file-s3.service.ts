@@ -28,8 +28,8 @@ export class FileS3Service {
   fileSizeLimit = 1024;
 
   s3 = new AWS.S3({
-    accessKeyId: 'jesua',
-    secretAccessKey: 'jesua123',
+    accessKeyId: process.env.S3_KEY || 'jesua',
+    secretAccessKey: process.env.S3_SECRET || 'jesua123',
     region: 'eu-west-3'
   });
 
