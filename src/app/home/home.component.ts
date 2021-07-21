@@ -7,13 +7,15 @@ import {map, takeWhile} from 'rxjs/operators';
 import {Project, ProjectService} from '../_services/project.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {FileS3Service} from "../_services/file-s3.service";
+import {FileS3Service} from '../_services/file-s3.service';
+import {SafeUrl} from '@angular/platform-browser';
 
 export class EventDetail {
   event: Event;
   state: string;
   availableCapacity: number;
   obsCapacity: Observable<number>;
+  imageUrl: SafeUrl;
 }
 
 interface Event {
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
   openSearch: boolean;
   dateFromSearch: string;
   dateToSearch: string;
-  filteredCount: any = { count: 0 };
+  filteredCount: any = {count: 0};
 
   constructor(private homeService: HomeService,
               private projectService: ProjectService,
@@ -75,7 +77,12 @@ export class HomeComponent implements OnInit {
             (item: Event) => {
               const eventDetail = new EventDetail();
               eventDetail.event = item;
-              eventDetail.event.image = this.s3Service.getS3Image(item.project.id, item.image);
+              if (item.image == null) {
+                eventDetail.imageUrl = this.s3Service.defaultImage;
+              } else {
+                this.s3Service.displayImage(item.image).subscribe(image => eventDetail.imageUrl = image);
+              }
+
               if (item.active < item.capacity) {
                 eventDetail.state = 'free';
                 eventDetail.availableCapacity = item.capacity - item.active;

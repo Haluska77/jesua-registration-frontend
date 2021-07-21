@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Course :: {{data.action}}</h1>
 <div [formGroup]="eventService.eventForm">
   <input type="hidden" formControlName="id">
-  <input type="text" formControlName="userId">
+  <input type="hidden" formControlName="userId">
   <input type="hidden" formControlName="image">
   <div class="avatar">
-    Obrazok:&nbsp;<img class="avatar" [src]="s3Image" (click)="showImageList(myProjectValue, s3Image, imageValue)">
+    Obrazok:&nbsp;<img class="avatar" [src]="imageUrl" (click)="showImageList(myProjectValue, imageUrl, imageValue)">
   </div>
   <mat-form-field appearance="fill">
     <mat-label>Project</mat-label>

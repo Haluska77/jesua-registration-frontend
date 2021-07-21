@@ -3,7 +3,6 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {TokenService} from './token.service';
 
 export class Project {
   id: number;
@@ -19,11 +18,8 @@ export class ProjectService {
 
   private baseUrl = environment.baseUrl + 'projects/';
 
-  constructor(private http: HttpClient,
-              private tokenService: TokenService) {
+  constructor(private http: HttpClient) {
   }
-
-  user = this.tokenService.getUser();
 
   getProjectByName(control: string): Observable<any> {
     const params = new HttpParams()
@@ -42,14 +38,18 @@ export class ProjectService {
       .pipe(
         map((data: any) => data.response.body
           .map(item => {
-              const project = new Project();
-              project.id = item.id;
-              project.shortName = item.shortName;
-              return project;
+              return this.createProjectFromItem(item);
             }
           )
         )
       );
+  }
+
+  createProjectFromItem(item: any): Project {
+    const project = new Project();
+    project.id = item.id;
+    project.shortName = item.shortName;
+    return project;
   }
 
   addProject(userId: any, project: any): Observable<object> {

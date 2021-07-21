@@ -19,17 +19,16 @@ export class FileListComponent implements OnDestroy {
   s3Images: Images[] = [];
 
   showFilesByProject(project: number): void {
-    this.s3Service.getPostersByProject(project)
+    this.s3Service.getPostersAllByProject(project)
       .pipe(
         map(data => data.response.body
           .map(image => {
-            const s3Image = this.s3Service.getS3Image(project, image.contentId);
-            this.s3Images.push({imageValue: image.contentId, s3Value: s3Image});
+            console.log(image);
           })
         ),
         takeUntil(this.ngUnsubscribe)
       )
-      .subscribe();
+      .subscribe(data => this.s3Images = data);
   }
 
   ngOnDestroy() {

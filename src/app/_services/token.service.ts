@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import {takeWhile} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {Project, ProjectService} from './project.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -13,15 +14,19 @@ const USER_KEY = 'auth-user';
 export class TokenService {
 
   isLoggedIn = false;
-  user: string;
-  avatar: string;
+  user = this.getUser();
   token = this.getToken();
+  userAvatar: string;
+  userProjectList: Project[];
+  activeUserProjectList: Project[];
   mins: number;
   secs: number;
   showAdminBoard = false;
   showModeratorBoard = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private projectService: ProjectService) {
+  }
 
   signOut(): void {
     sessionStorage.clear();
@@ -38,10 +43,20 @@ export class TokenService {
         this.isLoggedIn = true;
         this.observeTimeToExpiration(this.tokenExpirationDateTime(this.token), this.observeCurrentDateTime());
 
-        const user = this.getUser();
-        this.avatar = user.avatar;
-        this.showAdminBoard = user.role === 'ROLE_ADMIN';
-        this.showModeratorBoard = user.role === 'ROLE_MODERATOR';
+        this.userAvatar = this.user.avatar;
+        this.userProjectList = this.user.projects;
+
+        this.activeUserProjectList = this.user.projects
+          .filter(proj => proj.project.active === true)
+          .map(item => {
+            const project = new Project();
+            project.id = item.project.id;
+            project.shortName = item.project.shortName;
+            return project;
+          });
+
+        this.showAdminBoard = this.user.role === 'ROLE_ADMIN';
+        this.showModeratorBoard = this.user.role === 'ROLE_MODERATOR';
       }
     }
   }

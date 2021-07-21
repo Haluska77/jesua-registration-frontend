@@ -5,7 +5,6 @@ import {environment} from 'src/environments/environment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {TokenService} from './token.service';
-import {Project} from './project.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +19,10 @@ export class EventService {
               private tokenService: TokenService) {
   }
 
-  user = this.tokenService.getUser();
-  currentUser = this.user.id;
-  activeUserProjectList: any[] = this.user.projects
-    .filter(proj => proj.project.active === true)
-    .map(item => {
-      const project = new Project();
-      project.id = item.project.id;
-      project.shortName = item.project.shortName;
-      return project;
-    });
-
   eventForm = new FormGroup({
     id: new FormControl(),
-    userId: new FormControl(this.currentUser),
-    project: new FormControl(this.activeUserProjectList, [Validators.required]),
+    userId: new FormControl(),
+    project: new FormControl(null, [Validators.required]),
     description: new FormControl(null, [Validators.required]),
     startDate: new FormControl(null, [Validators.required]),
     open: new FormControl(),
@@ -48,7 +36,7 @@ export class EventService {
   }
 
   getEventListByProjects(): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + 'eventListByUserProject/' + this.currentUser);
+    return this.http.get(`${this.baseUrl}` + 'eventListByUserProject/' + this.tokenService.user.id);
   }
 
   createEvent(course: any): Observable<object> {
@@ -74,7 +62,7 @@ export class EventService {
       startDate: course.startDate,
       open: course.open,
       image: course.image,
-      projectId: course.project
+      projectId: course.project.id
     });
   }
 

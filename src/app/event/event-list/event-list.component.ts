@@ -6,6 +6,8 @@ import {MatTable} from '@angular/material/table';
 import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
 import {DialogService} from '../../_services/dialog.service';
 import {NotificationService} from '../../_services/notification.service';
+import {TokenService} from "../../_services/token.service";
+import {ProjectService} from "../../_services/project.service";
 
 
 @Component({
@@ -16,14 +18,17 @@ import {NotificationService} from '../../_services/notification.service';
 
 export class EventListComponent implements OnInit {
 
-  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
   constructor(
     public eventService: EventService,
+    private tokenService: TokenService,
+    private projectService: ProjectService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
     public eventDialogRef: MatDialogRef<EventDialogFormComponent>,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+  }
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -36,7 +41,7 @@ export class EventListComponent implements OnInit {
       stateSave: true,
       lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
       processing: true,
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json' }
+      language: {url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Slovak.json'}
 
     };
     this.eventService.getEventListByProjects().subscribe(
@@ -52,7 +57,7 @@ export class EventListComponent implements OnInit {
       disableClose: false,
       autoFocus: true,
       panelClass: 'myapp-dialog',
-      data: { action: title }
+      data: {action: title}
     });
 
     this.eventDialogRef.afterClosed().subscribe(
@@ -82,6 +87,6 @@ export class EventListComponent implements OnInit {
             );
         }
       }
-      );
+    );
   }
 }

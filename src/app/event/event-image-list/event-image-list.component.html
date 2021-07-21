@@ -1,6 +1,6 @@
 <mat-grid-list cols="4" rowHeight="80px">
-  <mat-grid-tile *ngFor="let s3image of s3Images">
-    <img class="avatar" [ngClass]="{'active' : s3image.imageValue==data.imageValue}" [src] = "s3image.s3Value" (click)="select(s3image)">
+  <mat-grid-tile *ngFor="let s3image of images">
+    <img class="avatar" [ngClass]="{'active' : s3image.imageValue==data.imageValue}" [src] = 's3image.imageUrl' (click)="select(s3image)">
   </mat-grid-tile>
 </mat-grid-list>
 

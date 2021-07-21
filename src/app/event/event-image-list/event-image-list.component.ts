@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FileS3Service, Images} from '../../_services/file-s3.service';
 import {map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-event-image-list',
@@ -15,23 +16,27 @@ export class EventImageListComponent implements OnInit, OnDestroy {
   constructor(
     private s3Service: FileS3Service,
     public imageListRef: MatDialogRef<EventImageListComponent>,
+    private sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
   private ngUnsubscribe = new Subject();
 
-  s3Images: Images[] = [];
+  image: Images;
+  images: Images[] = [];
 
   ngOnInit() {
-    this.s3Service.getPostersByProject(this.data.project)
+    this.s3Service.getPostersAllByProject(this.data.project)
       .pipe(
         map(data => data.response.body
-          .map(image => {
-            const s3Image = this.s3Service.getS3Image(this.data.project, image.contentId);
-            this.s3Images.push({imageValue: image.contentId, s3Value: s3Image});
-          })
-        ),
+          .map(response => {
+            this.image = new Images();
+            this.image.imageValue = response.contentId;
+            this.image.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.s3Service.getImageTypeBase64(response.fileType) + response.fileData);
+            this.images.push(this.image);
+            return this.images;
+          })),
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe();

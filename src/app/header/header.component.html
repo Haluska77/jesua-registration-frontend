@@ -13,7 +13,7 @@
     <div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <a mat-icon-button matTooltip="Login" color="base" *ngIf="!tokenService.isLoggedIn" [routerLink]="'/login'" routerLinkActive="active"><mat-icon>lock_outlined</mat-icon></a>
-        <a mat-button matTooltip="View profile" *ngIf="tokenService.isLoggedIn" [routerLink]="'/profile'"><img class="avatar" src="./assets/avatars/{{ tokenService.avatar }}"></a>
+        <a mat-button matTooltip="View profile" *ngIf="tokenService.isLoggedIn" [routerLink]="'/profile'"><img class="avatar" src="./assets/avatars/{{ tokenService.userAvatar }}"></a>
         <a mat-button *ngIf="tokenService.isLoggedIn" class="timer" [ngClass]="{'warn': tokenService.mins < 1}">{{tokenService.mins | number: '2.0'}}:{{tokenService.secs | number: '2.0'}}</a>
         <a mat-icon-button matTooltip="Logout" color="base" *ngIf="tokenService.isLoggedIn" (click)="tokenService.signOut()" routerLinkActive="active"><mat-icon>lock_open</mat-icon></a>
       </div>

@@ -7,6 +7,8 @@ import {EventImageListComponent} from '../event-image-list/event-image-list.comp
 import {Project, ProjectService} from '../../_services/project.service';
 import {FileS3Service} from '../../_services/file-s3.service';
 import {DialogService} from '../../_services/dialog.service';
+import {SafeUrl} from '@angular/platform-browser';
+import {TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-event-dialog-form',
@@ -20,11 +22,13 @@ export class EventDialogFormComponent implements OnInit {
   capacityWarning = false;
   imageListSub$: Subscription;
   imageValue: string;
-  s3Image: string;
+  imageUrl: SafeUrl;
   myProjects: Project[];
+
   myProjectValue: number;
 
   constructor(
+    private tokenService: TokenService,
     public eventService: EventService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
@@ -38,18 +42,30 @@ export class EventDialogFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.imageValue = this.eventService.eventForm.controls.image.value;
+
+    if (this.data.action === 'Add') {
+      this.eventService.eventForm.patchValue({userId: this.tokenService.user.id});
+    }
+
+    if (this.tokenService.user.role === 'ROLE_ADMIN') {
+      this.projectService.getAllProjectList()
+        .pipe()
+        .subscribe(data => {
+          this.myProjects = data;
+        });
+    } else {
+      this.myProjects = this.tokenService.activeUserProjectList;
+    }
+
     if (this.eventService.eventForm.controls.project.value != null) {
       this.myProjectValue = this.eventService.eventForm.controls.project.value.id;
     }
-    this.s3Image = this.s3Service.getS3Image(this.myProjectValue, this.imageValue);
 
-    this.myProjects = this.eventService.activeUserProjectList;
-
-    if (this.eventService.user.role === 'ROLE_ADMIN') {
-      this.projectService.getAllProjectList().subscribe(data => {
-        this.myProjects = data;
-      });
+    this.imageValue = this.eventService.eventForm.controls.image.value;
+    if (this.imageValue == null) {
+      this.imageUrl = this.s3Service.defaultImage;
+    } else {
+      this.s3Service.displayImage(this.imageValue).subscribe(data => this.imageUrl = data);
     }
   }
 
@@ -57,7 +73,7 @@ export class EventDialogFormComponent implements OnInit {
     return this.eventService.eventForm.controls;
   }
 
-  showImageList(project: number, s3image: string, imageValue: string): void {
+  showImageList(project: number, s3image: SafeUrl, imageValue: string): void {
     if (project === undefined) {
       this.dialogService.openErrorResponseDialog('Error', 'Vyberte projekt predtým ako vyberiete obrázok', null);
     } else {
@@ -72,18 +88,18 @@ export class EventDialogFormComponent implements OnInit {
 
       this.imageListSub$ = this.imageListRef.afterClosed().subscribe(
         image => {
-          this.s3Image = image.s3Value;
+          this.imageUrl = image.imageUrl;
           this.eventService.eventForm.patchValue({image: image.imageValue});
         }
       );
       this.imageListSub$ = this.imageListRef.backdropClick().subscribe(
         () => {
-          this.imageListRef.close({imageValue: this.imageValue, s3Value: this.s3Image});
+          this.imageListRef.close({imageValue: this.imageValue, imageUrl: this.imageUrl});
         }
       );
       this.imageListSub$ = this.imageListRef.keydownEvents().subscribe(
         () => {
-          this.imageListRef.close({imageValue: this.imageValue, s3Value: this.s3Image});
+          this.imageListRef.close({imageValue: this.imageValue, imageUrl: this.imageUrl});
         }
       );
     }
@@ -99,7 +115,7 @@ export class EventDialogFormComponent implements OnInit {
 
       } else {
         if (action === 'Update') {
-          this.eventService.updateEvent(this.eventService.eventForm.get('id').value, this.eventService.eventForm.value)
+          this.eventService.updateEvent(this.eventService.eventForm.controls.id.value, this.eventService.eventForm.value)
             .subscribe(() => {
               this.notificationService.success('Successfull', 'UPDATE');
             });
@@ -116,7 +132,7 @@ export class EventDialogFormComponent implements OnInit {
     this.capacityWarning = !this.capacityWarning;
   }
 
-  compareFunction(o1: any, o2: any): boolean {
+  compareFunction(o1: number, o2: Project): boolean {
     return o1 && o2 ? o1 === o2.id : false;
   }
 

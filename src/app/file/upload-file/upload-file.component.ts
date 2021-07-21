@@ -61,7 +61,7 @@ export class UploadFileComponent implements OnInit {
           'kB. <br> Nesmie byť väčší ako ' + this.s3Service.fileSizeLimit + 'kB', null);
       }
     } else {
-      this.dialogService.openErrorResponseDialog('Error', 'Vyberte obrázok', null);
+      this.dialogService.openErrorResponseDialog('Error', 'Vyberte súbor typu obrázok', null);
     }
   }
 

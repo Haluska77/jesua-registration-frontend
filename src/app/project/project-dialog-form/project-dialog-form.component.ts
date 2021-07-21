@@ -4,6 +4,7 @@ import {ProjectService} from '../../_services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectAsyncValidator} from '../../project-async-validator';
+import {TokenService} from "../../_services/token.service";
 
 @Component({
   selector: 'app-project-dialog-form',
@@ -14,6 +15,7 @@ export class ProjectDialogFormComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
+    private tokenService: TokenService,
     public projectService: ProjectService,
     private projectAsyncValidator: ProjectAsyncValidator,
     public dialogRef: MatDialogRef<ProjectDialogFormComponent>,
@@ -27,7 +29,7 @@ export class ProjectDialogFormComponent implements OnInit {
 
     this.projectForm = new FormGroup({
       id: new FormControl(''),
-      userId: new FormControl(this.projectService.user.id),
+      userId: new FormControl(this.tokenService.user.id),
       shortName: new FormControl('', {
           validators: [
             Validators.required,

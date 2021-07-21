@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import * as AWS from 'aws-sdk';
 import {HttpClient, HttpEvent} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {map} from 'rxjs/operators';
 
-export interface Images {
+export class Images {
   imageValue: string;
-  s3Value: string;
+  imageUrl: SafeUrl;
 }
 
 @Injectable({
@@ -15,39 +16,36 @@ export interface Images {
 
 export class FileS3Service {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private sanitizer: DomSanitizer) {
   }
 
-  private baseUrl = environment.baseUrl + 'file/';
+  private baseUrl = environment.baseUrl + 'poster/';
   defaultImage = '../assets/projects/images/no-image.png';
 
   enabledMimeTypes: string[] = [
-    'image/png', 'image/bmp', 'image/jpg', 'image/jpeg'
+    'image/png', 'image/jpg', 'image/jpeg'
   ];
 
   fileSizeLimit = 1024;
+  image: any;
+  imageType = 'image/PNG';
 
-  s3 = new AWS.S3({
-    accessKeyId: process.env.S3_KEY || 'jesua',
-    secretAccessKey: process.env.S3_SECRET || 'jesua123',
-    region: 'eu-west-3'
-  });
-
-  getS3Image(project: number, content: string): string {
-    const paramList = {
-      Bucket: 'jesua',
-      Key: project + '/' + content
-    };
-
-    if (content == null) {
-      return this.defaultImage;
-    }
-
-    return this.s3.getSignedUrl('getObject', paramList);
+  getImageTypeBase64(fileType: string): string {
+    return 'data:' + fileType + ';base64,';
   }
 
-  getPostersByProject(projectId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + '?projectId=' + projectId);
+  displayImage(image: string): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}` + image)
+      .pipe(map((data: any) => {
+          return this.sanitizer.bypassSecurityTrustUrl(this.getImageTypeBase64(this.imageType) + data.response.body);
+        })
+      );
+  }
+
+  getPostersAllByProject(projectId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + 'all?projectId=' + projectId);
   }
 
   isImage(file: File): boolean {
