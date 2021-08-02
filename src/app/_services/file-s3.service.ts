@@ -4,10 +4,29 @@ import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {map} from 'rxjs/operators';
+import {Project} from './project.service';
 
-export class Images {
+export class Image {
   imageValue: string;
   imageUrl: SafeUrl;
+}
+
+export class Poster {
+  id: number;
+  fileName: string;
+  contentId: string;
+  fileType: string;
+  project: Project;
+  created: string;
+  fileData: Blob;
+}
+
+export class PosterToDisplay {
+  fileName: string;
+  fileType: string;
+  created: string;
+  fileData: SafeUrl;
+  keyName: string;
 }
 
 @Injectable({
@@ -66,5 +85,9 @@ export class FileS3Service {
         reportProgress: true,
         observe: 'events',
       });
+  }
+
+  deleteFile(keyName: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}` + 'delete/' + keyName);
   }
 }

@@ -1,30 +1,40 @@
-<table mat-table [dataSource]="s3Images">
+<div class="container">
+  <table class="basic" mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="fileName">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let s3image"> {{s3image.fileName}}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name</th>
-    <td mat-cell *matCellDef="let s3image"> {{s3image.imageValue}}</td>
-  </ng-container>
+    <ng-container matColumnDef="fileType">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let s3image"> {{s3image.fileType}}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef> Image</th>
-    <td mat-cell *matCellDef="let s3image"><img class="avatar" [src]="s3image.s3Value" (click)="preview(s3image)"></td>
-  </ng-container>
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef>Created</th>
+      <td mat-cell *matCellDef="let s3image"> {{s3image.created | date: 'dd.MM.yyyy, hh:mm'}}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let s3image">
-      <button mat-icon-button color="accent" (click)="deleteFile(s3image)" mat-flat-button>
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-<!--  -->
-<!--  <div *ngFor="let s3image of s3Images">-->
-<!--    <img class="avatar" [src]="s3image.s3Value" (click)="preview(s3image)">-->
-<!--    <button mat-icon-button color="accent" (click)="deleteFile(s3image)" mat-flat-button>-->
-<!--      <mat-icon>delete</mat-icon>-->
-<!--    </button>-->
+    <ng-container matColumnDef="blob">
+      <th mat-header-cell *matHeaderCellDef>Image</th>
+      <td mat-cell *matCellDef="let s3image"><img class="avatar" [src]="s3image.fileData"></td>
+    </ng-container>
 
-<!--  </div>-->
-</table>
-Images
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let s3image">
+        <button mat-icon-button color="primary" (click)="deleteFile(s3image.keyName)" mat-flat-button matTooltip="Delete image" matTooltipPosition="right">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let s3image; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="dataSource.data.length === 0">No pictures found</div>
+  <div class="plus">
+    <button mat-fab (click)="onAddImage(currentProject)" color="primary" matTooltip="Add image" matTooltipPosition="right">
+      <mat-icon>add_a_photo</mat-icon>
+    </button>
+  </div>
+</div>

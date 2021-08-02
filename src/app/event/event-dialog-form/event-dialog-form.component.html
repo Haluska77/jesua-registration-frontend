@@ -2,10 +2,6 @@
 <div [formGroup]="eventService.eventForm">
   <input type="hidden" formControlName="id">
   <input type="hidden" formControlName="userId">
-  <input type="hidden" formControlName="image">
-  <div class="avatar">
-    Obrazok:&nbsp;<img class="avatar" [src]="imageUrl" (click)="showImageList(myProjectValue, imageUrl, imageValue)">
-  </div>
   <mat-form-field appearance="fill">
     <mat-label>Project</mat-label>
     <mat-select formControlName="project" [compareWith]="compareFunction" (selectionChange)="onProjectChange()">
@@ -15,6 +11,10 @@
     </mat-select>
     <mat-hint>Select assigned project</mat-hint>
   </mat-form-field>
+  <input type="hidden" formControlName="image">
+  <div class="avatar">
+    Obrazok:&nbsp;<img class="avatar" [src]="imageUrl" (click)="showImageList(myProjectValue, imageUrl, imageValue)">
+  </div>
   <mat-form-field appearance="fill">
     <mat-label>Miesto akcie</mat-label>
     <input matInput formControlName="description"/>

@@ -22,7 +22,7 @@
     <div class="flex-container">
       <div class="flex1 custom-switch">
         <input type="checkbox" class="custom-control-input" id="active{{user.id}}" [checked]="user.active"
-               (click)="makeActive(user.id, user.name)" [disabled]="user.id===loggedUser.id"/>
+               (click)="makeActive(user.id, user.name)" [disabled]="user.id===loggedUserId"/>
         <label class="custom-control-label pointer" for="active{{user.id}}">{{user.active ? 'Aktívny' :
           'Neaktívny'}}</label>
       </div>

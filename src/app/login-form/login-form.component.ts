@@ -34,7 +34,6 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
     if (this.tokenService.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenService.getUser().role;
       this.router.navigate(['/profile']);
     }
   }
@@ -47,7 +46,6 @@ export class LoginFormComponent implements OnInit {
         this.tokenService.saveUser(data.response.body);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenService.getUser().role;
         this.router.navigate(['/profile']);
         window.location.reload();
       },

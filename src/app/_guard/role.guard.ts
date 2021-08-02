@@ -13,7 +13,7 @@ export class RoleGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean{
     const entryRole = route.data.entryRole;
 
-    if (!this.tokenService.tokenExists() || this.tokenService.isTokenExpired() || this.tokenService.getUser().role !== entryRole) {
+    if (!this.tokenService.tokenExists() || this.tokenService.isTokenExpired() || this.tokenService.user.role !== entryRole) {
       this.router.navigate(['/home']);
       return false;
     }

@@ -1,1 +1,68 @@
-<p>project-list works!</p>
+<div class="container">
+  <table class="basic" mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+    <ng-container matColumnDef="shortName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let projectDetail">
+        <strong>{{projectDetail.project.shortName}}</strong>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let projectDetail"> {{projectDetail.project.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+      <td mat-cell *matCellDef="let projectDetail"> {{projectDetail.project.created | date: 'dd.MM.yyyy' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let projectDetail">
+        <mat-icon>{{projectDetail.project.active ? 'check' : 'close'}}</mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let projectDetail">
+        <button mat-icon-button color="primary" *ngIf="!(projectDetail.projectOwner || projectDetail.projectUser)"
+                (click)="askForJoin(projectDetail.project.id)" mat-flat-button>
+          <mat-icon matTooltip="Ask for join" matTooltipPosition="right">group_add</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" *ngIf="projectDetail.projectOwner"
+                (click)="onEditProject(projectDetail.project); expandedElement = projectDetail" mat-flat-button>
+          <mat-icon matTooltip="Edit project" matTooltipPosition="right">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let projectDetail" [attr.colspan]="displayedColumns.length">
+<!--        TODO set email font smaller -->
+        <div class="example-element-detail"
+             [@detailExpand]="projectDetail == expandedElement ? 'expanded' : 'collapsed'">
+          <mat-list *ngIf="projectDetail.projectOwner || projectDetail.projectUser">
+            <mat-list-item *ngFor="let user of projectDetail.users">
+              {{user.user.email}} ({{user.role}})
+            </mat-list-item>
+          </mat-list>
+          <div *ngIf="projectDetail.projectOwner || projectDetail.projectUser">
+            <button mat-icon-button mat-flat-button matTooltip="Pictures" color="primary" [routerLink]="projectDetail.project.id+'/images'"
+                    routerLinkActive="active">
+              <mat-icon>collections</mat-icon>
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let projectDetail; columns: displayedColumns;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === projectDetail"
+        (click)="expandedElement = expandedElement === projectDetail ? null : projectDetail">
+    </tr>
+    <tr mat-row *matRowDef="let projectDetail; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+  <div class="plus">
+    <button mat-fab (click)="onCreateProject()" color="primary">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
+</div>

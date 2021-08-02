@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../../custom-validators';
 import {UserAvatarListComponent} from '../user-avatar-list/user-avatar-list.component';
 import {Subscription} from 'rxjs';
-import {TokenService} from '../../_services/token.service';
+import {JwtUserDetail, TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-user-dialog-form',
@@ -33,7 +33,7 @@ export class UserDialogFormComponent implements OnInit {
   userForm: FormGroup;
   avatarValue: string;
   avatarSub$: Subscription;
-  loggedUser = this.tokenService.getUser();
+  loggedUser: JwtUserDetail = this.tokenService.user;
   roleList: Role[] = [];
 
   ngOnInit(): void {

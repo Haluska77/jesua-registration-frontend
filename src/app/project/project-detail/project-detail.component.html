@@ -1,0 +1,33 @@
+<div *ngIf="!errorMessage;else errorMessageDiv" class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{result?.project.description}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <div fxLayout="row">
+          <div>Created: {{result?.project.created | date: 'dd.MM.yyyy'}}</div>
+          <div>
+            <mat-icon>{{result?.project.active ? 'check' : 'close'}}</mat-icon>
+          </div>
+        </div>
+        <div>
+          <mat-list>
+            <mat-list-item *ngFor="let user of result?.users">
+              {{user.user.email}} ({{user.role}})
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button *ngIf="userIsProjectOwner" mat-icon-button (click)="onEditProject(result?.project)" mat-flat-button>
+        <mat-icon matTooltip="Edit project" matTooltipPosition="right">edit</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<ng-template #errorMessageDiv>
+  <div class="container">{{errorMessage}}</div>
+</ng-template>

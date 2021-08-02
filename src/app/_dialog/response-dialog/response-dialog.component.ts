@@ -20,7 +20,11 @@ export class ResponseDialogComponent implements OnInit {
   closeDialog(navigation: string) {
     this.dialogRef.close(false);
     if (navigation != null) {
-      this.router.navigate([navigation]);
+      if (navigation === '') {
+        window.location.reload();
+      } else {
+        this.router.navigate([navigation]);
+      }
     }
   }
 }

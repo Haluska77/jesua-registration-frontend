@@ -28,8 +28,6 @@ export class FollowerService {
     device: new FormControl(this.deviceDetector.userAgent)
   });
 
-  user = this.tokenService.getUser();
-
   getVisitorListByProjects(): Observable<any> {
     const userProjectsIds: number[] = this.tokenService.getUserProjectsIds();
     return this.http.get(`${this.baseUrl}` + '?projects=' + userProjectsIds);

@@ -3,10 +3,30 @@ import {Router} from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import {takeWhile} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Project, ProjectService} from './project.service';
+import {Project} from './project.service';
+import {ProjectRole} from './user-project.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
+
+export interface JwtUserDetail {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  active: boolean;
+  role: string;
+  token: string;
+  created: string;
+  projects: JwtProjects[];
+}
+
+export interface JwtProjects {
+  user: JwtUserDetail;
+  project: Project;
+  role: ProjectRole;
+  created: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +34,7 @@ const USER_KEY = 'auth-user';
 export class TokenService {
 
   isLoggedIn = false;
-  user = this.getUser();
+  user: JwtUserDetail = this.getUser();
   token = this.getToken();
   userAvatar: string;
   userProjectList: Project[];
@@ -24,8 +44,7 @@ export class TokenService {
   showAdminBoard = false;
   showModeratorBoard = false;
 
-  constructor(private router: Router,
-              private projectService: ProjectService) {
+  constructor(private router: Router) {
   }
 
   signOut(): void {
@@ -44,16 +63,11 @@ export class TokenService {
         this.observeTimeToExpiration(this.tokenExpirationDateTime(this.token), this.observeCurrentDateTime());
 
         this.userAvatar = this.user.avatar;
-        this.userProjectList = this.user.projects;
+        this.userProjectList = this.user.projects
+          .map(userProject => userProject.project);
 
-        this.activeUserProjectList = this.user.projects
-          .filter(proj => proj.project.active === true)
-          .map(item => {
-            const project = new Project();
-            project.id = item.project.id;
-            project.shortName = item.project.shortName;
-            return project;
-          });
+        this.activeUserProjectList = this.userProjectList
+          .filter(proj => proj.active === true);
 
         this.showAdminBoard = this.user.role === 'ROLE_ADMIN';
         this.showModeratorBoard = this.user.role === 'ROLE_MODERATOR';
@@ -114,15 +128,11 @@ export class TokenService {
     sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(): any {
+  public getUser(): JwtUserDetail {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
 
-  public getUserProjects(): any[] {
-    return this.getUser().projects;
-  }
-
   public getUserProjectsIds(): number[] {
-    return this.getUserProjects().map((item: any) => item.project.id);
+    return this.user.projects.map((item: any) => item.project.id);
   }
 }

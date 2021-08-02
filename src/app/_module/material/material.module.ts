@@ -21,6 +21,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -47,7 +51,11 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatListModule,
+    MatDividerModule
   ],
   exports: [
     CommonModule,
@@ -72,7 +80,11 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatListModule,
+    MatDividerModule
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

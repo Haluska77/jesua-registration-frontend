@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, Optional} from '@angular/core';
 import {FileS3Service} from '../../_services/file-s3.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {HttpEventType} from '@angular/common/http';
@@ -12,7 +12,7 @@ import {SpinnerService} from '../../_services/spinner.service';
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.css']
 })
-export class UploadFileComponent implements OnInit {
+export class UploadFileComponent implements OnInit, OnDestroy {
 
   selectedFiles: FileList;
   progress: { percentage: number } = {percentage: 0};
@@ -50,7 +50,7 @@ export class UploadFileComponent implements OnInit {
               this.progress.percentage = Math.round(100 * event.loaded / event.total);
             } else if (event.type === HttpEventType.Response) {
               this.dialogRef.close(false);
-              this.dialogService.openSuccessResponseDialog('Úspešné', 'Obrázok bol úspešne odoslaný', null);
+              this.dialogService.openSuccessResponseDialog('Úspešné', 'Obrázok bol úspešne odoslaný', '');
             }
             this.selectedFile = undefined;
             this.selectedFiles = undefined;
