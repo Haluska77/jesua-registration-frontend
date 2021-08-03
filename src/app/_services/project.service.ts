@@ -7,6 +7,9 @@ import {map} from 'rxjs/operators';
 export class Project {
   id: number;
   shortName: string;
+  description: string;
+  created: string;
+  active: boolean;
 }
 
 @Injectable({
@@ -36,20 +39,8 @@ export class ProjectService {
   getAllProjectList(): Observable<Project[]> {
     return this.http.get(`${this.baseUrl}`)
       .pipe(
-        map((data: any) => data.response.body
-          .map(item => {
-              return this.createProjectFromItem(item);
-            }
-          )
-        )
+        map((data: any) => data.response.body)
       );
-  }
-
-  createProjectFromItem(item: any): Project {
-    const project = new Project();
-    project.id = item.id;
-    project.shortName = item.shortName;
-    return project;
   }
 
   addProject(userId: any, project: any): Observable<object> {

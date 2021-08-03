@@ -1,46 +1,65 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, takeUntil} from 'rxjs/operators';
-import {FileS3Service, Images} from '../../_services/file-s3.service';
+import {FileS3Service, Poster, PosterToDisplay} from '../../_services/file-s3.service';
 import {Subject} from 'rxjs';
+import {MatTableDataSource} from '@angular/material/table';
+import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {DialogService} from '../../_services/dialog.service';
+import {DialogComponentService} from '../../_services/dialog-component.service';
 
 @Component({
   selector: 'app-file-list',
   templateUrl: './file-list.component.html',
   styleUrls: ['./file-list.component.css']
 })
-export class FileListComponent implements OnDestroy {
+export class FileListComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private s3Service: FileS3Service
-  ) {
+  constructor(private s3Service: FileS3Service,
+              private sanitizer: DomSanitizer,
+              private dialogService: DialogService,
+              private dialogComponentService: DialogComponentService,
+              private route: ActivatedRoute) {
   }
 
-  private ngUnsubscribe = new Subject();
-  s3Images: Images[] = [];
+  ngUnsubscribe$ = new Subject();
+  displayedColumns: string[] = ['fileName', 'fileType', 'created', 'blob', 'action'];
+  dataSource = new MatTableDataSource<PosterToDisplay>();
+  currentProject: number;
 
-  showFilesByProject(project: number): void {
-    this.s3Service.getPostersAllByProject(project)
+  ngOnInit(): void {
+    this.route.params.subscribe(param => this.currentProject = param.projectId);
+
+    this.s3Service.getPostersAllByProject(this.currentProject)
       .pipe(
         map(data => data.response.body
-          .map(image => {
-            console.log(image);
+          .map((response: Poster) => {
+            const posterToDisplay = new PosterToDisplay();
+            posterToDisplay.fileName = response.fileName;
+            posterToDisplay.fileType = response.fileType;
+            posterToDisplay.created = response.created;
+            posterToDisplay.fileData = this.sanitizer.bypassSecurityTrustResourceUrl(this.s3Service.getImageTypeBase64(response.fileType) + response.fileData);
+            posterToDisplay.keyName = response.contentId;
+            return posterToDisplay;
           })
         ),
-        takeUntil(this.ngUnsubscribe)
-      )
-      .subscribe(data => this.s3Images = data);
+        takeUntil(this.ngUnsubscribe$))
+      .subscribe(data => this.dataSource.data = data);
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
-  preview(s3image: Images) {
-
+  deleteFile(keyName: string): void {
+    // TODO add confirmation dialog YES/NO
+    this.s3Service.deleteFile(keyName).subscribe(data => {
+      this.dialogService.openWideSuccessResponseDialog('Zmazaný', data.response.message, '');
+    });
   }
 
-  deleteFile(s3image: Images) {
-
+  onAddImage(project: number): void {
+    this.dialogComponentService.openUploadFileComponent(project);
   }
 }

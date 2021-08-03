@@ -40,6 +40,7 @@ import {EventFilterPipe} from './_pipe/event-filter.pipe';
 import {UploadFileComponent} from './file/upload-file/upload-file.component';
 import {FileListComponent} from './file/file-list/file-list.component';
 import {ProjectListComponent} from './project/project-list/project-list.component';
+import {ProjectDetailComponent} from './project/project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {ProjectListComponent} from './project/project-list/project-list.componen
     EventFilterPipe,
     UploadFileComponent,
     FileListComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ProjectDetailComponent
   ],
     imports: [
         MaterialModule,

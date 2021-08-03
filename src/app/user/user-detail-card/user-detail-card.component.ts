@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
 import {DialogService} from '../../_services/dialog.service';
 import {LoginService} from '../../_services/login.service';
-import {MatDialog} from '@angular/material/dialog';
 import {TokenService} from '../../_services/token.service';
+import {DialogComponentService} from "../../_services/dialog-component.service";
 
 @Component({
   selector: 'app-user-detail-card',
@@ -13,30 +12,20 @@ import {TokenService} from '../../_services/token.service';
 export class UserDetailCardComponent implements OnInit {
   @Input() user: any;
 
-  loggedUser: any;
+  loggedUserId: string;
 
   constructor(    private loginService: LoginService,
                   private dialogService: DialogService,
-                  private token: TokenService,
-                  private dialog: MatDialog) {
+                  private tokenService: TokenService,
+                  private dialogComponentService: DialogComponentService) {
   }
 
   ngOnInit(): void {
-    this.loggedUser = this.token.getUser();
-  }
-
-  openDialog(title: string, user: any) {
-    this.dialog.open(UserDialogFormComponent, {
-      width: '400px',
-      disableClose: false,
-      autoFocus: true,
-      panelClass: 'myapp-dialog',
-      data: {action: title, user}
-    });
+    this.loggedUserId = this.tokenService.user.id;
   }
 
   onEdit(row: any): void {
-    this.openDialog('Update', row);
+    this.dialogComponentService.openUserDialogComponent('Update', row);
   }
 
   makeActive(id: number, userName: string): void {

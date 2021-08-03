@@ -23,7 +23,7 @@
     <mat-label>Description</mat-label>
     <input matInput formControlName="description"/>
     <mat-hint align="end">
-      {{f.description.value.length}} / 60
+      {{f.description?.value?.length || 0}} / 60
     </mat-hint>
     <mat-error *ngIf="f.description.touched && f.description.errors?.required">Description is required</mat-error>
     <mat-error *ngIf="f.description.touched && f.description.errors?.minlength">Description must have at least

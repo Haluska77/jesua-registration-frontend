@@ -4,7 +4,7 @@ import {ProjectService} from '../../_services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectAsyncValidator} from '../../project-async-validator';
-import {TokenService} from "../../_services/token.service";
+import {TokenService} from '../../_services/token.service';
 
 @Component({
   selector: 'app-project-dialog-form',

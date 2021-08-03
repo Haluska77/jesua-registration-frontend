@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
 import {DialogService} from '../../_services/dialog.service';
 import {LoginService} from '../../_services/login.service';
 import {NotificationService} from '../../_services/notification.service';
-import {UserDialogFormComponent} from '../user-dialog-form/user-dialog-form.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {DialogComponentService} from '../../_services/dialog-component.service';
 
 @Component({
   selector: 'app-user-list',
@@ -18,7 +17,7 @@ export class UserListComponent implements OnInit {
     private loginService: LoginService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialogComponentService: DialogComponentService
   ) {
   }
 
@@ -29,18 +28,8 @@ export class UserListComponent implements OnInit {
       .pipe(map(data => data.response.body));
   }
 
-  openDialog(title: string, user: any) {
-    this.dialog.open(UserDialogFormComponent, {
-      width: '400px',
-      disableClose: false,
-      autoFocus: true,
-      panelClass: 'myapp-dialog',
-      data: {action: title, user}
-    });
-  }
-
   onCreate(): void {
-    this.openDialog('Add', null);
+    this.dialogComponentService.openUserDialogComponent('Add', null);
   }
 
   // currently not invoked from web

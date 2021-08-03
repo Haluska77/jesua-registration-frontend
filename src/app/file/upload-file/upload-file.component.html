@@ -12,6 +12,6 @@
 
 <input hidden type="file" #fileInput (change)="selectFile($event)">
 <div>
-  <button mat-raised-button class="file-upload" color="primary" [disabled]="!selectedFile" (click)="upload(data.project.id)">Upload</button>
+  <button mat-raised-button class="file-upload" color="primary" [disabled]="!selectedFile" (click)="upload(data.project)">Upload</button>
   <button mat-raised-button class="file-upload" color="warn" [disabled]="!currentFileUpload" (click)="cancelFileUpload()">Cancel</button>
 </div>

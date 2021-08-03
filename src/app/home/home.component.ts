@@ -41,16 +41,16 @@ interface Event {
 })
 export class HomeComponent implements OnInit {
 
-  projectList$: Observable<Project[]>;
   events: EventDetail[];
   projectSearch: number;
   openSearch: boolean;
   dateFromSearch: string;
   dateToSearch: string;
   filteredCount: any = {count: 0};
+  projectList$: Observable<Project[]>;
 
   constructor(private homeService: HomeService,
-              private projectService: ProjectService,
+              public projectService: ProjectService,
               private s3Service: FileS3Service,
               public dialog: MatDialog) {
   }
@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.projectList$ = this.projectService.getAllProjectList();
 
     this.homeService.getStatistics()

@@ -32,7 +32,7 @@ export class EventFilterPipe implements PipeTransform {
       });
     }
 
-    filteredCount.count = events.length;
+    filteredCount.count = events?.length;
 
     return events;
   }

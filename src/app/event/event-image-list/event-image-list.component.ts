@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FileS3Service, Images} from '../../_services/file-s3.service';
+import {FileS3Service, Image, Poster} from '../../_services/file-s3.service';
 import {map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -23,15 +23,15 @@ export class EventImageListComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  image: Images;
-  images: Images[] = [];
+  image: Image;
+  images: Image[] = [];
 
   ngOnInit() {
     this.s3Service.getPostersAllByProject(this.data.project)
       .pipe(
         map(data => data.response.body
-          .map(response => {
-            this.image = new Images();
+          .map((response: Poster) => {
+            this.image = new Image();
             this.image.imageValue = response.contentId;
             this.image.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.s3Service.getImageTypeBase64(response.fileType) + response.fileData);
             this.images.push(this.image);
@@ -42,7 +42,7 @@ export class EventImageListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  select(image: Images): void {
+  select(image: Image): void {
     this.imageListRef.close(image);
   }
 
