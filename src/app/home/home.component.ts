@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../_services/home.service';
 import {MatDialog} from '@angular/material/dialog';
-import {RegistrationDialogFormComponent} from '../registration/registration-dialog-form/registration-dialog-form.component';
 import {interval, Observable} from 'rxjs';
 import {map, takeWhile} from 'rxjs/operators';
 import {Project, ProjectService} from '../_services/project.service';
@@ -53,17 +52,6 @@ export class HomeComponent implements OnInit {
               public projectService: ProjectService,
               private s3Service: FileS3Service,
               public dialog: MatDialog) {
-  }
-
-  onCreate(course: any): void {
-    this.dialog.open(RegistrationDialogFormComponent, {
-      width: '400px',
-      disableClose: false,
-      autoFocus: true,
-      panelClass: 'myapp-dialog',
-      data: {course}
-    });
-
   }
 
   ngOnInit(): void {

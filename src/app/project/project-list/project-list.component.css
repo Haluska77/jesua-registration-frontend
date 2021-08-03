@@ -23,8 +23,7 @@ tr.example-detail-row {
   display: flex;
 
 }
-.example-element-detail .mat-list .mat-list-base .mat-list-item .mat-list-item-content{
-  background-color: #00AB5E;
+mat-list-item.mat-list-item{
   font-size: small;
 }
 

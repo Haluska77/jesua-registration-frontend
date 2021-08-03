@@ -35,7 +35,6 @@
     </ng-container>
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let projectDetail" [attr.colspan]="displayedColumns.length">
-<!--        TODO set email font smaller -->
         <div class="example-element-detail"
              [@detailExpand]="projectDetail == expandedElement ? 'expanded' : 'collapsed'">
           <mat-list *ngIf="projectDetail.projectOwner || projectDetail.projectUser">

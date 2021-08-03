@@ -23,7 +23,7 @@ export class FileListComponent implements OnInit, OnDestroy {
   }
 
   ngUnsubscribe$ = new Subject();
-  displayedColumns: string[] = ['fileName', 'fileType', 'created', 'blob', 'action'];
+  displayedColumns: string[] = ['fileName', 'blob', 'action'];
   dataSource = new MatTableDataSource<PosterToDisplay>();
   currentProject: number;
 
@@ -53,10 +53,15 @@ export class FileListComponent implements OnInit, OnDestroy {
   }
 
   deleteFile(keyName: string): void {
-    // TODO add confirmation dialog YES/NO
-    this.s3Service.deleteFile(keyName).subscribe(data => {
-      this.dialogService.openWideSuccessResponseDialog('Zmazaný', data.response.message, '');
-    });
+    this.dialogService.openConfirmDialog('Are you sure to delete image?')
+      .afterClosed().subscribe(response => {
+        if (response) {
+          this.s3Service.deleteFile(keyName).subscribe(data => {
+            this.dialogService.openWideSuccessResponseDialog('Zmazaný', data.response.message, '');
+          });
+        }
+      }
+    );
   }
 
   onAddImage(project: number): void {
