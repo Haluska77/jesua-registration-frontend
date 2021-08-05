@@ -6,8 +6,8 @@ import {MatTable} from '@angular/material/table';
 import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
 import {DialogService} from '../../_services/dialog.service';
 import {NotificationService} from '../../_services/notification.service';
-import {TokenService} from "../../_services/token.service";
-import {ProjectService} from "../../_services/project.service";
+import {TokenService} from '../../_services/token.service';
+import {ProjectService} from '../../_services/project.service';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class EventListComponent implements OnInit {
 
   events: Observable<any[]>;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.dtOptions = {
       pageLength: 5,
       stateSave: true,
@@ -51,7 +51,7 @@ export class EventListComponent implements OnInit {
       });
   }
 
-  openDialog(title: string) {
+  openDialog(title: string): void {
     this.eventDialogRef = this.dialog.open(EventDialogFormComponent, {
       width: '400px',
       disableClose: false,
@@ -67,16 +67,16 @@ export class EventListComponent implements OnInit {
     );
   }
 
-  onCreate() {
+  onCreate(): void {
     this.openDialog('Add');
   }
 
-  onEdit(row: any) {
+  onEdit(row: any): void {
     this.eventService.fillEvent(row);
     this.openDialog('Update');
   }
 
-  onDelete(id: number) {
+  onDelete(id: number): void {
     this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
       .afterClosed().subscribe(response => {
         if (response) {

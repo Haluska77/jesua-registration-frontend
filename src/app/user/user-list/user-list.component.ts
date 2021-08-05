@@ -23,7 +23,7 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<any>;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.users$ = this.loginService.getUsers()
       .pipe(map(data => data.response.body));
   }
@@ -35,13 +35,14 @@ export class UserListComponent implements OnInit {
   // currently not invoked from web
   onDelete(id: number): void {
     this.dialogService.openConfirmDialog('Are you sure to delete id: \'' + id + '\' record?')
-      .afterClosed().subscribe(() => {
-        // delete user from DB
-        this.loginService.deleteUser(id)
-          .subscribe(() => {
-              this.notificationService.success('Successfull', 'DELETE');
-            }
-          );
+      .afterClosed().subscribe(response => {
+        if (response) {
+          this.loginService.deleteUser(id)
+            .subscribe(() => {
+                this.notificationService.success('Successfull', 'DELETE');
+              }
+            );
+        }
       }
     );
   }
