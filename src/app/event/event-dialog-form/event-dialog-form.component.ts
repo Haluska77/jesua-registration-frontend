@@ -6,9 +6,10 @@ import {Subscription} from 'rxjs';
 import {EventImageListComponent} from '../event-image-list/event-image-list.component';
 import {Project, ProjectService} from '../../_services/project.service';
 import {FileS3Service} from '../../_services/file-s3.service';
-import {DialogService} from '../../_services/dialog.service';
+import {DialogService, FormAction} from '../../_services/dialog.service';
 import {SafeUrl} from '@angular/platform-browser';
 import {TokenService} from '../../_services/token.service';
+import { UserRole } from 'src/app/_services/login.service';
 
 @Component({
   selector: 'app-event-dialog-form',
@@ -43,11 +44,11 @@ export class EventDialogFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.data.action === 'Add') {
+    if (this.data.action === FormAction.ADD) {
       this.eventService.eventForm.patchValue({userId: this.tokenService.user.id});
     }
 
-    if (this.tokenService.user.role === 'ROLE_ADMIN') {
+    if (this.tokenService.user.role === UserRole.ROLE_ADMIN) {
       this.projectService.getAllProjectList()
         .pipe()
         .subscribe(data => {
@@ -107,14 +108,14 @@ export class EventDialogFormComponent implements OnInit {
 
   onSubmit(action: string) {
     if (this.eventService.eventForm.valid) {
-      if (action === 'Add') {
+      if (action === FormAction.ADD) {
         this.eventService.createEvent(this.eventService.eventForm.value)
           .subscribe(() => {
             this.notificationService.success('Successfull', 'INSERT');
           });
 
       } else {
-        if (action === 'Update') {
+        if (action === FormAction.UPDATE) {
           this.eventService.updateEvent(this.eventService.eventForm.controls.id.value, this.eventService.eventForm.value)
             .subscribe(() => {
               this.notificationService.success('Successfull', 'UPDATE');

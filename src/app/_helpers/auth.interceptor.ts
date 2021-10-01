@@ -21,8 +21,7 @@ import {DialogService} from '../_services/dialog.service';
 
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private token: TokenService,
-              private router: Router,
+  constructor(private tokenService: TokenService,
               private spinnerService: SpinnerService,
               private dialogService: DialogService) {
   }
@@ -30,9 +29,13 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<any> {
 
     let authReq = httpRequest;
-    const token = this.token.getToken();
+    const token = this.tokenService.getToken();
     if (token != null) {
-      authReq = httpRequest.clone({headers: httpRequest.headers.set('Authorization', 'Bearer ' + token)});
+      authReq = httpRequest.clone(
+        {setHeaders: {
+          Authorization: 'Bearer ' + this.tokenService.getToken()
+        }}
+        );
     }
 
     this.spinnerService.show();

@@ -8,6 +8,7 @@ import {TokenService} from '../../_services/token.service';
 import {map} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DialogComponentService} from '../../_services/dialog-component.service';
+import { FormAction } from 'src/app/_services/dialog.service';
 
 @Component({
   selector: 'app-project-list',
@@ -82,10 +83,10 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   onCreateProject(): void {
-    this.dialogComponentService.openProjectDialogComponent('Add', null);
+    this.dialogComponentService.openProjectDialogComponent(FormAction.ADD, null);
   }
 
   onEditProject(project: Project): void {
-    this.dialogComponentService.openProjectDialogComponent('Update', project);
+    this.dialogComponentService.openProjectDialogComponent(FormAction.UPDATE, project);
   }
 }

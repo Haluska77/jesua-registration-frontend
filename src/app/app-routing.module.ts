@@ -15,6 +15,8 @@ import {FileListComponent} from './file/file-list/file-list.component';
 import {AuthGuard} from './_guard/auth.guard';
 import {RoleGuard} from './_guard/role.guard';
 import {ProjectGuard} from './_guard/project.guard';
+import { CallbackComponent } from './callback/callback.component';
+import { UserRole } from './_services/login.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -25,7 +27,7 @@ const routes: Routes = [
   {path: 'login', component: LoginFormComponent},
   {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UserListComponent, canActivate: [RoleGuard],
-    data: {entryRole: 'ROLE_ADMIN'}
+    data: {entryRole: UserRole.ROLE_ADMIN}
   },
   {path: 'visitors', component: VisitorListComponent, canActivate: [AuthGuard]},
   {path: 'projects', component: ProjectListComponent, canActivate: [AuthGuard]},
@@ -35,6 +37,7 @@ const routes: Routes = [
   {path: 'password',
     loadChildren: () => import('./password/password.module').then(mod => mod.PasswordModule),
   },
+  {path: 'callback', component: CallbackComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}];
 

@@ -4,7 +4,7 @@ import {Observable, Subject} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatTable} from '@angular/material/table';
 import {EventDialogFormComponent} from '../event-dialog-form/event-dialog-form.component';
-import {DialogService} from '../../_services/dialog.service';
+import {DialogService, FormAction} from '../../_services/dialog.service';
 import {NotificationService} from '../../_services/notification.service';
 import {TokenService} from '../../_services/token.service';
 import {ProjectService} from '../../_services/project.service';
@@ -68,12 +68,12 @@ export class EventListComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.openDialog('Add');
+    this.openDialog(FormAction.ADD);
   }
 
   onEdit(row: any): void {
     this.eventService.fillEvent(row);
-    this.openDialog('Update');
+    this.openDialog(FormAction.UPDATE);
   }
 
   onDelete(id: number): void {

@@ -35,3 +35,13 @@ color: #6f634d;
 a {
 color: #6f634d;
 }
+
+.google-button {
+text-align: center;
+}
+
+img.google-signin {
+  margin: auto auto;
+  display: block;
+  cursor: pointer;
+}

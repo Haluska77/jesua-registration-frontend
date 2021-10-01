@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Project} from '../../_services/project.service';
 import {TokenService} from '../../_services/token.service';
 import {tap} from 'rxjs/operators';
-import {DialogService} from '../../_services/dialog.service';
+import {DialogService, FormAction} from '../../_services/dialog.service';
 import {DialogComponentService} from '../../_services/dialog-component.service';
 
 @Component({
@@ -47,6 +47,6 @@ export class ProjectDetailComponent implements OnInit {
 
 
   onEditProject(project: Project): void {
-    this.dialogComponentService.openProjectDialogComponent('Update', project);
+    this.dialogComponentService.openProjectDialogComponent(FormAction.UPDATE, project);
   }
 }

@@ -1,11 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface Role {
   value: any;
   viewValue: string;
+}
+
+export enum UserRole {
+  ROLE_ADMIN = 'ROLE_ADMIN',
+  ROLE_MODERATOR = 'ROLE_MODERATOR',
+  ROLE_USER = 'ROLE_USER'
 }
 
 @Injectable({
@@ -20,9 +26,9 @@ export class LoginService {
   }
 
   roles: Role[] = [
-    {value: 'ROLE_ADMIN', viewValue: 'ADMIN'},
-    {value: 'ROLE_MODERATOR', viewValue: 'MODERATOR'},
-    {value: 'ROLE_USER', viewValue: 'USER'}
+    { value: UserRole.ROLE_ADMIN, viewValue: 'ADMIN' },
+    { value: UserRole.ROLE_MODERATOR, viewValue: 'MODERATOR' },
+    { value: UserRole.ROLE_USER, viewValue: 'USER' }
   ];
 
   signIn(login: object): Observable<object> {
@@ -57,7 +63,7 @@ export class LoginService {
   makeActive(id: number): Observable<any> {
     const params = new HttpParams()
       .set('userId', String(id));
-    return this.http.get(`${this.baseUrl}` + 'makeActive', {params});
+    return this.http.get(`${this.baseUrl}` + 'makeActive', { params });
   }
 
   // currently not available in backend

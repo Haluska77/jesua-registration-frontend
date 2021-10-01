@@ -5,9 +5,11 @@ import {takeWhile} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Project} from './project.service';
 import {ProjectRole} from './user-project.service';
+import { UserRole } from './login.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
+export const DEFAULT_AVATAR = '001-default.svg';
 
 export interface JwtUserDetail {
   id: string;
@@ -48,7 +50,7 @@ export class TokenService {
   }
 
   signOut(): void {
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/home']).then(() => {
       window.location.reload();
     });
@@ -62,15 +64,15 @@ export class TokenService {
         this.isLoggedIn = true;
         this.observeTimeToExpiration(this.tokenExpirationDateTime(this.token), this.observeCurrentDateTime());
 
-        this.userAvatar = this.user.avatar;
+        this.userAvatar = this.getUserAvatar();
         this.userProjectList = this.user.projects
           .map(userProject => userProject.project);
 
         this.activeUserProjectList = this.userProjectList
           .filter(proj => proj.active === true);
 
-        this.showAdminBoard = this.user.role === 'ROLE_ADMIN';
-        this.showModeratorBoard = this.user.role === 'ROLE_MODERATOR';
+        this.showAdminBoard = this.user.role === UserRole.ROLE_ADMIN;
+        this.showModeratorBoard = this.user.role === UserRole.ROLE_MODERATOR;
       }
     }
   }
@@ -115,24 +117,28 @@ export class TokenService {
   }
 
   public saveToken(token: string): void {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.setItem(TOKEN_KEY, token);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY, token);
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   public saveUser(user): void {
-    sessionStorage.removeItem(USER_KEY);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    localStorage.removeItem(USER_KEY);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): JwtUserDetail {
-    return JSON.parse(sessionStorage.getItem(USER_KEY));
+    return JSON.parse(localStorage.getItem(USER_KEY));
   }
 
   public getUserProjectsIds(): number[] {
     return this.user.projects.map((item: any) => item.project.id);
+  }
+  
+  public getUserAvatar(): string {
+    return !!this.user.avatar ? this.user.avatar : DEFAULT_AVATAR;
   }
 }

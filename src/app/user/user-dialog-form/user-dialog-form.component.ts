@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginService, Role} from '../../_services/login.service';
+import {LoginService, Role, UserRole} from '../../_services/login.service';
 import {NotificationService} from '../../_services/notification.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../../custom-validators';
 import {UserAvatarListComponent} from '../user-avatar-list/user-avatar-list.component';
 import {Subscription} from 'rxjs';
 import {JwtUserDetail, TokenService} from '../../_services/token.service';
+import { FormAction } from 'src/app/_services/dialog.service';
 
 @Component({
   selector: 'app-user-dialog-form',
@@ -58,7 +59,7 @@ export class UserDialogFormComponent implements OnInit {
       active: ['']
     });
 
-    if (this.loggedUser.role === 'ROLE_ADMIN') {
+    if (this.loggedUser.role === UserRole.ROLE_ADMIN) {
       this.roleList = this.loginService.roles;
     } else {
       const myRole = this.loginService.roles.filter(a => a.value === formUser.user.role)[0];
@@ -68,17 +69,17 @@ export class UserDialogFormComponent implements OnInit {
     this.avatarValue = this.userForm.controls.avatar.value;
 
     // update
-    if (formUser.action === 'Update') {
+    if (formUser.action === FormAction.UPDATE) {
       this.userForm.controls.email.disable();
       this.userForm.controls.password.disable();
 
       // MODERATOR user is not able to change his role and active
-      if (this.loggedUser.role === 'ROLE_MODERATOR') {
+      if (this.loggedUser.role === UserRole.ROLE_MODERATOR) {
         this.userForm.controls.active.disable();
       }
 
       // to prevent deactive current ADMIN user
-      if (formUser.user.role === 'ROLE_ADMIN' && formUser.user.id === this.loggedUser.id) {
+      if (formUser.user.role === UserRole.ROLE_ADMIN && formUser.user.id === this.loggedUser.id) {
         this.userForm.setControl('active', this.formBuilder.control({value: '', disabled: true}));
       }
       this.userForm.patchValue(formUser.user);
@@ -120,14 +121,14 @@ export class UserDialogFormComponent implements OnInit {
 
   onSubmit(action: string): void {
     if (this.userForm.valid) {
-      if (action === 'Add') {
+      if (action === FormAction.ADD) {
         this.loginService.signUp(this.userForm.value)
           .subscribe(() => {
               this.notificationService.success('Successful', 'INSERT');
             });
 
       } else {
-        if (action === 'Update') {
+        if (action === FormAction.UPDATE) {
           this.loginService.updateUser(this.userForm.get('id').value, this.userForm.value)
             .subscribe(data => {
               this.notificationService.success('Successful', 'UPDATE');

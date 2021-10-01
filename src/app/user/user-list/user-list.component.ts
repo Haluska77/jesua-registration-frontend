@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DialogService} from '../../_services/dialog.service';
+import {DialogService, FormAction} from '../../_services/dialog.service';
 import {LoginService} from '../../_services/login.service';
 import {NotificationService} from '../../_services/notification.service';
 import {Observable} from 'rxjs';
@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.dialogComponentService.openUserDialogComponent('Add', null);
+    this.dialogComponentService.openUserDialogComponent(FormAction.ADD, null);
   }
 
   // currently not invoked from web

@@ -41,6 +41,7 @@ import {UploadFileComponent} from './file/upload-file/upload-file.component';
 import {FileListComponent} from './file/file-list/file-list.component';
 import {ProjectListComponent} from './project/project-list/project-list.component';
 import {ProjectDetailComponent} from './project/project-detail/project-detail.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {ProjectDetailComponent} from './project/project-detail/project-detail.co
     UploadFileComponent,
     FileListComponent,
     ProjectListComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    CallbackComponent
   ],
     imports: [
         MaterialModule,

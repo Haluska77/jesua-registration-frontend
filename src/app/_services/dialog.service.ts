@@ -3,9 +3,15 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../_dialog/confirm-dialog/confirm-dialog.component';
 import {ResponseDialogComponent} from '../_dialog/response-dialog/response-dialog.component';
 
+export enum FormAction {
+  ADD = 'Add',
+  UPDATE = 'Update'
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class DialogService {
 
   constructor(private dialog: MatDialog) { }

@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectAsyncValidator} from '../../project-async-validator';
 import {TokenService} from '../../_services/token.service';
+import { FormAction } from 'src/app/_services/dialog.service';
 
 @Component({
   selector: 'app-project-dialog-form',
@@ -44,11 +45,11 @@ export class ProjectDialogFormComponent implements OnInit {
       active: new FormControl(true)
     });
 
-    if (this.data.action === 'Add') {
+    if (this.data.action === FormAction.ADD) {
       this.projectForm.controls.shortName.setAsyncValidators(this.projectAsyncValidator.duplicateShortName());
     }
 
-    if (this.data.action === 'Update') {
+    if (this.data.action === FormAction.UPDATE) {
       this.projectForm.controls.shortName.disable();
       this.projectForm.patchValue(this.data.project);
     }
@@ -60,14 +61,14 @@ export class ProjectDialogFormComponent implements OnInit {
   }
 
   onSubmit(action: string) {
-    if (action === 'Add') {
+    if (action === FormAction.ADD) {
       this.projectService.addProject(this.projectForm.controls.userId.value, this.projectForm.value)
         .subscribe(() => {
             this.notificationService.success('Successful', 'INSERT');
           });
 
     } else {
-      if (action === 'Update') {
+      if (action === FormAction.UPDATE) {
         this.projectService.updateProject(this.projectForm.controls.id.value, this.projectForm.value)
           .subscribe(() => {
             this.notificationService.success('Successful', 'UPDATE');

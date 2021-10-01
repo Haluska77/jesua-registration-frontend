@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DialogService} from '../../_services/dialog.service';
+import {DialogService, FormAction} from '../../_services/dialog.service';
 import {LoginService} from '../../_services/login.service';
-import {TokenService} from '../../_services/token.service';
+import {DEFAULT_AVATAR, TokenService} from '../../_services/token.service';
 import {DialogComponentService} from "../../_services/dialog-component.service";
 
 @Component({
@@ -13,6 +13,7 @@ export class UserDetailCardComponent implements OnInit {
   @Input() user: any;
 
   loggedUserId: string;
+  defaultAvatar = DEFAULT_AVATAR;
 
   constructor(    private loginService: LoginService,
                   private dialogService: DialogService,
@@ -25,7 +26,7 @@ export class UserDetailCardComponent implements OnInit {
   }
 
   onEdit(row: any): void {
-    this.dialogComponentService.openUserDialogComponent('Update', row);
+    this.dialogComponentService.openUserDialogComponent(FormAction.UPDATE, row);
   }
 
   makeActive(id: number, userName: string): void {

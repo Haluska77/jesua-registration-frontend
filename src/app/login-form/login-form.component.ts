@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../_services/login.service';
 import {Router} from '@angular/router';
 import {TokenService} from '../_services/token.service';
+import { OauthService } from '../_services/oauth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,6 +15,7 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private tokenService: TokenService,
+    private oauthService: OauthService,
     private router: Router) { }
 
 
@@ -46,13 +48,19 @@ export class LoginFormComponent implements OnInit {
         this.tokenService.saveUser(data.response.body);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.router.navigate(['/profile']);
-        window.location.reload();
+        this.router.navigate(['/profile'])
+        .then(() => {
+          window.location.reload();
+        });
       },
       (err) => {
         this.isLoginFailed = true;
         this.errorMessage = err.error.error.message;
       }
     );
+  }
+
+  googleSignIn() {
+    window.open(this.oauthService.baseUrl + this.oauthService.authorizationEndpoint, '_self');
   }
 }

@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ProjectService} from '../../_services/project.service';
 import {FileListComponent} from '../../file/file-list/file-list.component';
 import {DialogComponentService} from '../../_services/dialog-component.service';
+import { FormAction } from 'src/app/_services/dialog.service';
 
 @Component({
   selector: 'app-profile',
@@ -36,15 +37,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   onEditUser(user: any) {
-    this.dialogComponentService.openUserDialogComponent('Update', user);
+    this.dialogComponentService.openUserDialogComponent(FormAction.UPDATE, user);
   }
 
   onCreateProject(): void {
-    this.dialogComponentService.openProjectDialogComponent('Add', null);
+    this.dialogComponentService.openProjectDialogComponent(FormAction.ADD, null);
   }
 
   onEditProject(project: any): void {
-    this.dialogComponentService.openProjectDialogComponent('Update', project);
+    this.dialogComponentService.openProjectDialogComponent(FormAction.UPDATE, project);
   }
 
   onAddImage(project: number): void {
