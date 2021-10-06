@@ -14,6 +14,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {SpinnerService} from '../_services/spinner.service';
 import {DialogService} from '../_services/dialog.service';
+import { OauthService } from '../_services/oauth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private tokenService: TokenService,
               private spinnerService: SpinnerService,
-              private dialogService: DialogService) {
+              private oauthService: OauthService,
+              private dialogService: DialogService,
+              private router: Router) {
   }
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<any> {
@@ -52,6 +55,9 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((error: any) => {
           // let errorMsg = '';
           if (error instanceof HttpErrorResponse) {
+            if (error.status === 401 && error.url.includes(this.oauthService.tokenEndpoint)) {
+              this.router.navigate(['login'])
+            }
             // handle HttpErrorResponse individually in component
             // if (error instanceof ErrorEvent) {
             //   console.log('this is client side error');

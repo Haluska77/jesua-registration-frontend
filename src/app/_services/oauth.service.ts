@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
 
 @Injectable({
@@ -11,7 +10,7 @@ export class OauthService {
 
   baseUrl = environment.baseUrl;
   authorizationEndpoint = 'oauth2/authorization/google';
-  private tokenEndpoint = 'login/oauth2/code/google';
+  tokenEndpoint = 'login/oauth2/code/google';
   private userInfoEndpoint = 'oauth2/user';
 
   constructor(private http: HttpClient) { }

@@ -13,8 +13,6 @@ export class GlobalErrorHandlerService implements ErrorHandler{
 
   handleError(error: Error | HttpErrorResponse) {
     const router = this.injector.get(Router);
-    console.error('An error occurred:', error.message);
-    console.error(error);
     router.navigate(["/error"]);
  }
 }
