@@ -55,7 +55,7 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((error: any) => {
           // let errorMsg = '';
           if (error instanceof HttpErrorResponse) {
-            if (error.status === 401 && error.url.includes(this.oauthService.tokenEndpoint)) {
+            if (error.status === 401) {
               this.router.navigate(['login'])
             }
             // handle HttpErrorResponse individually in component

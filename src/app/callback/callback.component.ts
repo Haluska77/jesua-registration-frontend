@@ -19,9 +19,9 @@ export class CallbackComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(p => {
-      this.oauthService.getOauthToken(p.code, p.state).subscribe((data: any) => {
-        this.tokenService.saveToken(data.accessToken);
+    this.route.queryParams.subscribe(
+      p=> {
+        this.tokenService.saveToken(p.token);
         this.oauthService.getOauthUser().subscribe((data: any) => {
           this.tokenService.saveToken(data.response.body.token);
           this.tokenService.saveUser(data.response.body);
@@ -31,10 +31,9 @@ export class CallbackComponent implements OnInit {
             });
         }, error => {
           this.dialogService.openErrorResponseDialog('Error', error.error.error.message, 'login');
+          this.tokenService.signOut();
         });
-      });
-
-    })
+      }
+    )
   }
-
 }

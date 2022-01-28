@@ -10,24 +10,10 @@ export class OauthService {
 
   baseUrl = environment.baseUrl;
   authorizationEndpoint = 'oauth2/authorization/google';
-  tokenEndpoint = 'login/oauth2/code/google';
   private userInfoEndpoint = 'oauth2/user';
 
   constructor(private http: HttpClient) { }
 
-  
-  getGoogleAuthorization(): Observable<object> {    
-    return this.http.get(this.baseUrl + this.authorizationEndpoint);
-  }
-
-  getOauthToken(code, state): Observable<object> {
-    const params = new HttpParams()
-    .set("code", code)
-    .set("state", state);
-    
-    return this.http.get(this.baseUrl + this.tokenEndpoint, {params});
-  }
-    
   getOauthUser(): Observable<object> {
     return this.http.get(this.baseUrl + this.userInfoEndpoint);
     // .pipe(
