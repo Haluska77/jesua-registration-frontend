@@ -2,11 +2,11 @@
   "name": "frontend-ui",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "ng build --aot --prod --env=${environment}",
+    "heroku-postbuild": "ng build --prod",
     "ng": "ng",
     "start": "node server.js",
     "start-local": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
