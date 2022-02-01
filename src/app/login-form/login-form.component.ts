@@ -4,6 +4,7 @@ import {LoginService} from '../_services/login.service';
 import {Router} from '@angular/router';
 import {TokenService} from '../_services/token.service';
 import { OauthService } from '../_services/oauth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-form',
@@ -27,6 +28,7 @@ export class LoginFormComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   hidePassword = true;
+  baseUrl = environment.baseUrl;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),

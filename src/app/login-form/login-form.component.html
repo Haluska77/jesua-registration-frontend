@@ -1,7 +1,7 @@
 <div class="card" fxLayout="row" fxLayoutAlign="center stretch">
   <div class="card-left" fxFlex="55%">
     <div class="card-header">
-      <h3>Sign In</h3>
+      <h3>Sign In</h3>{{baseUrl}}
     </div>
     <div class="card-body">
       <form [formGroup]="loginForm" (submit)="signin()" *ngIf="!isLoggedIn">
