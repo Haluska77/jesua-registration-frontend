@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   hidePassword = true;
-  baseUrl = environment.baseUrl;
+  isProduction = environment.production;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
