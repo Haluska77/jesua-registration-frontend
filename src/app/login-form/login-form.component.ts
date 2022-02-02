@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../_services/login.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TokenService} from '../_services/token.service';
 import { OauthService } from '../_services/oauth.service';
 import { environment } from 'src/environments/environment';
+import { filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -17,7 +18,8 @@ export class LoginFormComponent implements OnInit {
     private loginService: LoginService,
     private tokenService: TokenService,
     private oauthService: OauthService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
 
   get f() { return this.loginForm.controls; }
@@ -39,6 +41,25 @@ export class LoginFormComponent implements OnInit {
     if (this.tokenService.getToken()) {
       this.isLoggedIn = true;
       this.router.navigate(['/profile']);
+    } else {
+      this.route.queryParams
+      .pipe(
+        filter(item => item.token))
+      .subscribe(
+        params=> {
+          this.tokenService.saveToken(params.token);
+          this.oauthService.getOauthUser().subscribe((data: any) => {
+            this.tokenService.saveToken(data.response.body.token);
+            this.tokenService.saveUser(data.response.body);
+            this.router.navigate(['/profile'])
+              .then(() => {
+                window.location.reload();
+              });
+          }, error => {
+            this.tokenService.signOut();
+          });
+        }
+      )
     }
   }
 
